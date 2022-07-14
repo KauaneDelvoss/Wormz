@@ -1,23 +1,30 @@
 <template>
   <div class="login-wormz">
-    <v-row class="d-fluid flex-row">
-      <v-col cols="6" class="m-5 d-flex flex-column">
-        <div class="box-input d-flex flex-column align-center">
+    <v-row class="d-fluid flex-row" style="height: 100vh;">
+      <v-col cols="5" class="m-5 d-flex flex-column justify-center">
+        <div class="box-input d-flex flex-column align-center" style="gap:3vh;">
+          <div class="titulo">
+            Cadastro
+          </div>
           <v-text-field
-            style="width: 80%"
+            color="#E8E5AE"
+            style="width: 70%"
             v-model="inputEmail"
             label="E-mail"
           ></v-text-field>
-          <v-text-field
-            style="width: 80%"
+          <v-text-field 
+            color="#E8E5AE"
+            style="width: 70%"
             v-model="inputSenha"
             label="Senha"
           ></v-text-field>
-          <v-text-field
-            style="width: 80%"
+          <v-text-field 
+
+            style="width: 70%"
             v-model="inputConfirmarSenha"
             label="Confirme a Senha"
           ></v-text-field>
+          <btnWormz :nome="'Prosseguir'"></btnWormz>
         </div>
       </v-col>
       <v-col cols="6 m-5 mb-6 d-flex flex-column">
@@ -31,9 +38,10 @@
 
 <script>
 import titleWormz from "../components/titleWormz.vue";
+import btnWormz from "../components/basic/btnWormz.vue";
 export default {
   name: "HomeWormz",
-  components: { titleWormz },
+  components: { titleWormz, btnWormz },
   methods: {},
 };
 </script>
@@ -57,5 +65,11 @@ export default {
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.titulo{
+  font-family: "Libre Baskerville", serif;
+  font-size: 5vh;
+  color: #e8e5ae;
 }
 </style>
