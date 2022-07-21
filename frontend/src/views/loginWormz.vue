@@ -4,27 +4,20 @@
       <v-col cols="5" class="m-5 d-flex flex-column justify-center">
         <div class="box-input d-flex flex-column align-center" style="gap:3vh;">
           <div class="titulo">
-            Cadastro
+            Login
           </div>
-          <v-text-field
+          <div class="forms" v-for="(item, i) in this.items" :key="i" style="width: 70%;">
+            <v-text-field
             color="#E8E5AE"
-            style="width: 70%"
-            v-model="inputEmail"
-            label="E-mail"
+            v-model=item.vmodel
+            :label="item.label"
           ></v-text-field>
-          <v-text-field 
-            color="#E8E5AE"
-            style="width: 70%"
-            v-model="inputSenha"
-            label="Senha"
-          ></v-text-field>
-          <v-text-field 
-
-            style="width: 70%"
-            v-model="inputConfirmarSenha"
-            label="Confirme a Senha"
-          ></v-text-field>
-          <btnWormz :nome="'Prosseguir'"></btnWormz>
+          </div>
+          <div class="lembrar-senha">
+            Não lembro minha senha
+          </div>
+          <btnWormz :nome="'Entrar'" @click="irPara()"></btnWormz>
+          <btnWormz :nome="'Próximo'" @click="irPara()"></btnWormz>
         </div>
       </v-col>
       <v-col cols="6 m-5 mb-6 d-flex flex-column">
@@ -37,12 +30,25 @@
 </template>
 
 <script>
-import titleWormz from "../components/titleWormz.vue";
+import titleWormz from "../components/basic/titleWormz.vue";
 import btnWormz from "../components/basic/btnWormz.vue";
 export default {
   name: "HomeWormz",
   components: { titleWormz, btnWormz },
-  methods: {},
+  data(){
+    return{
+      roll: 0,
+      items: [
+        {vmodel: "", label: 'E-mail'},
+        {vmodel: "", label: 'Senha'},
+        ]
+    }
+  },
+  methods: {
+    irPara(){
+      this.roll += 1;
+    }
+  },
 };
 </script>
 
@@ -71,5 +77,11 @@ export default {
   font-family: "Libre Baskerville", serif;
   font-size: 5vh;
   color: #e8e5ae;
+}
+
+.lembrar-senha{
+  font-size: 1.5vh;
+  color: #e8e5ae;
+  text-decoration: underline;
 }
 </style>

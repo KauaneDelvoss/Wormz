@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import ImgBackground from "../components/ImgBackground.vue";
+import ImgBackground from "../components/basic/ImgBackground.vue";
 export default {
   components: { ImgBackground },
 };
