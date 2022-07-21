@@ -8,6 +8,7 @@
           </div>
           <div class="forms" v-for="(item, i) in this.items" :key="i" style="width: 70%;">
             <v-text-field
+            dark
             color="#E8E5AE"
             v-model=item.vmodel
             :label="item.label"
@@ -16,11 +17,21 @@
           <div class="lembrar-senha">
             Não lembro minha senha
           </div>
-          <btnWormz :nome="'Entrar'" @click="irPara()"></btnWormz>
-          <btnWormz :nome="'Próximo'" @click="irPara()"></btnWormz>
+          <btnWormz :nome="'Entrar'" @click="irPara('home')"></btnWormz>
+
+          <v-row class="box-google d-flex align-center my-2" style="width: 70%; gap: 20px;">
+            <v-divider color="#e8e5ae"></v-divider>
+            <v-img class="img-google" src="@/assets/Group 4.png"></v-img>
+            <v-divider color="#e8e5ae"></v-divider>
+          </v-row>
+          <v-row class="box-google d-flex align-center justify-center my-2" style="width: 70%; gap: 20px;">
+            <div class="lembrar-senha">Não tenho cadastro: </div>
+            <btnWormz :nome="'Cadastrar'" @click="irPara('cadastro')"></btnWormz>
+          </v-row>
+
         </div>
       </v-col>
-      <v-col cols="6 m-5 mb-6 d-flex flex-column">
+      <v-col cols="6 m-5 mb-6 d-flex flex-column mobile-hide">
         <div class="box-title d-flex flex-column align-end">
           <titleWormz class="title-wormz"></titleWormz>
         </div>
@@ -45,14 +56,20 @@ export default {
     }
   },
   methods: {
-    irPara(){
-      this.roll += 1;
+    irPara(local){
+      this.$router.push({
+        path: '/' + local,
+      })
     }
   },
 };
 </script>
 
 <style scoped>
+@media only screen and (max-width: 400px) {
+    .mobile-hide{ display: none !important; }
+    }
+
 .login-wormz {
   height: 100vh;
   width: 100vw;
@@ -83,5 +100,10 @@ export default {
   font-size: 1.5vh;
   color: #e8e5ae;
   text-decoration: underline;
+}
+
+.img-google{
+  height: 8vh;
+  max-width: 8vh;
 }
 </style>
