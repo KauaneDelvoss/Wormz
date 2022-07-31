@@ -1,10 +1,21 @@
 <template>
-  <button class="btnWormz" type="button">{{nome}}</button>
+  <button class="btnWormz" type="button" @click="irPara(path)">{{nome}}</button>
 </template>
 
 <script>
 export default {
-    props:{nome:String}
+    props:{nome:String, path:String},
+    methods:{
+      irPara(path){
+        if(path){
+          this.$router.push({
+            path: '/' + path
+          })
+        } else {
+          this.$emit('sliderCount')
+        }
+      }
+    }
 }
 </script>
 

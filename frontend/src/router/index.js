@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import HomeWormz from '../views/HomeWormz.vue'
 import searchBib from '../views/SearchBib'
 import login from '../views/loginWormz.vue'
-import cadastro from '../views/cadastroWormz.vue'
+import cadastro from '../views/cadastro/cadastroWormz.vue'
 
 Vue.use(VueRouter)
 

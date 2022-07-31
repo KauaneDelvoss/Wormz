@@ -6,18 +6,27 @@
           <div class="titulo">
             Login
           </div>
-          <div class="forms" v-for="(item, i) in this.items" :key="i" style="width: 70%;">
-            <v-text-field
+         <v-text-field
+            style="width: 70%;"
             dark
             color="#E8E5AE"
-            v-model=item.vmodel
-            :label="item.label"
+            v-model=userEmail
+            label="E-mail"
           ></v-text-field>
-          </div>
+         <v-text-field
+            style="width: 70%;"
+            dark
+            color="#E8E5AE"
+            v-model=userPassword
+            label="Senha"
+            :type="show ? 'text' : 'password'"
+            :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
+            @click:append="show = !show"
+          ></v-text-field>
           <div class="lembrar-senha">
             Não lembro minha senha
           </div>
-          <btnWormz :nome="'Entrar'" @click="irPara('home')"></btnWormz>
+          <btnWormz :nome="'Entrar'" :path="'searchBib'"></btnWormz>
 
           <v-row class="box-google d-flex align-center my-2" style="width: 70%; gap: 20px;">
             <v-divider color="#e8e5ae"></v-divider>
@@ -26,7 +35,7 @@
           </v-row>
           <v-row class="box-google d-flex align-center justify-center my-2" style="width: 70%; gap: 20px;">
             <div class="lembrar-senha">Não tenho cadastro: </div>
-            <btnWormz :nome="'Cadastrar'" @click="irPara('cadastro')"></btnWormz>
+            <btnWormz :nome="'Cadastrar'" :path="'cadastro'"></btnWormz>
           </v-row>
 
         </div>
@@ -49,10 +58,9 @@ export default {
   data(){
     return{
       roll: 0,
-      items: [
-        {vmodel: "", label: 'E-mail'},
-        {vmodel: "", label: 'Senha'},
-        ]
+      userEmail: '',
+      userPassword: '',
+      show: false,
     }
   },
   methods: {
