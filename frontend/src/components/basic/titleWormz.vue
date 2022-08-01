@@ -19,22 +19,3 @@
 export default {
 }
 </script>
-
-<style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300&family=Encode+Sans&family=Libre+Baskerville&display=swap");
-
-.h1{
-    font-family: "Libre Baskerville", serif;
-  font-size: 13vh;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  color: #e8e5ae;
-}
-
-.subtitulo{
-  font-family: "Encode Sans", sans-serif;
-  font-size: 2vh;
-  color: #e8e5ae;
-
-}
-
-</style>

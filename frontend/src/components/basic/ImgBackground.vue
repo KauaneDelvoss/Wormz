@@ -1,5 +1,5 @@
 <template>
-  <v-img id="img" src="@/assets/image 2.png">
+  <v-img id="img" src="@/assets/images/image 2.png">
   <slot></slot>
   </v-img>
 </template>

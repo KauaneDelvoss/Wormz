@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wormz">
+  <div class="app login-wormz">
     <v-row class="d-fluid flex-row" style="height: 100vh;">
       <v-col cols="5" class="m-5 d-flex flex-column justify-center">
         <div class="box-input d-flex flex-column align-center" style="gap:3vh;">
@@ -23,7 +23,7 @@
             :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
             @click:append="show = !show"
           ></v-text-field>
-          <div class="lembrar-senha">
+          <div class="subtitulo-minimo">
             Não lembro minha senha
           </div>
           <btnWormz :nome="'Entrar'" :path="'searchBib'"></btnWormz>
@@ -34,7 +34,7 @@
             <v-divider color="#e8e5ae"></v-divider>
           </v-row>
           <v-row class="box-google d-flex align-center justify-center my-2" style="width: 70%; gap: 20px;">
-            <div class="lembrar-senha">Não tenho cadastro: </div>
+            <div class="subtitulo-minimo">Não tenho cadastro: </div>
             <btnWormz :nome="'Cadastrar'" :path="'cadastro'"></btnWormz>
           </v-row>
 
@@ -73,45 +73,28 @@ export default {
 };
 </script>
 
-<style scoped>
-@media only screen and (max-width: 400px) {
-    .mobile-hide{ display: none !important; }
-    }
+<style lang="sass" scoped>
+@use '@/assets/sass/variables'
+@use '@/assets/sass/mixins'
+.login-wormz 
+  height: 100vh
+  width: 100vw
+  background-color: variables.$bg-color
+  background-image: url("../assets/images/blobblue.png")
+  background-position: right
+  background-repeat: no-repeat
+  background-size: 100vh
 
-.login-wormz {
-  height: 100vh;
-  width: 100vw;
-  background-color: #22273c;
-  background-image: url("../assets/blobblue.png");
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: 100vh;
-}
+.title-wormz 
+  transform: scale(0.7)
 
-.title-wormz {
-  transform: scale(0.7);
-}
+.box-title 
+  position: absolute
+  bottom: 0
+  right: 0
 
-.box-title {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
+.img-google
+  height: 8vh
+  max-width: 8vh
 
-.titulo{
-  font-family: "Libre Baskerville", serif;
-  font-size: 5vh;
-  color: #e8e5ae;
-}
-
-.lembrar-senha{
-  font-size: 1.5vh;
-  color: #e8e5ae;
-  text-decoration: underline;
-}
-
-.img-google{
-  height: 8vh;
-  max-width: 8vh;
-}
 </style>

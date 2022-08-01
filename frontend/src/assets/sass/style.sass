@@ -1,0 +1,33 @@
+@use 'variables'
+@use 'mixins'
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300&family=Encode+Sans&family=Libre+Baskerville&display=swap")
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap')
+
+// Configurações de Texto
+.h1
+    font-family: "Libre Baskerville", serif
+    font-size: 12vh
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+    color: variables.$primary-color
+
+.titulo
+    font-family: "Libre Baskerville", serif
+    font-size: 5vh
+    color: variables.$primary-color
+
+.subtitulo-minimo
+    font-size: 1.6vh
+    color: variables.$primary-color
+    text-decoration: underline
+
+    &:hover
+        font-weight: bold
+        cursor: pointer
+
+.subtitulo
+    font-family: "Encode Sans", sans-serif
+    font-size: 2vh
+    color: variables.$primary-color
+
+.app
+    @include mixins.container

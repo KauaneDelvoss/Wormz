@@ -1,6 +1,7 @@
 <template>
   <div class="cadastro-wormz">
-    <v-row class="d-fluid flex-row" style="height: 100vh">
+    <NavigationDrawer />
+    <v-row class="app d-fluid flex-row" style="height: 100vh">
       <v-col cols="5" class="m-5 d-flex flex-column justify-center">
         <div class="titulo d-flex flex-column align-center">Cadastro</div>
         <div v-if="sliderValue == 0">
@@ -47,9 +48,10 @@ import SecondSlider from "@/views/cadastro/SecondSlider.vue";
 import ThirdSlider from "@/views/cadastro/ThirdSlider.vue";
 import titleWormz from "@/components/basic/titleWormz.vue";
 import btnWormz from "@/components/basic/btnWormz.vue";
+import NavigationDrawer from "@/components/NavigationDrawer.vue";
 
 export default {
-  components: { FirstSlider, SecondSlider, ThirdSlider, titleWormz, btnWormz },
+  components: { FirstSlider, SecondSlider, ThirdSlider, titleWormz, btnWormz, NavigationDrawer },
   data() {
     return {
       sliderValue: 0,
@@ -105,10 +107,11 @@ export default {
   height: 100vh;
   width: 100vw;
   background-color: #22273c;
-  background-image: url("@/assets/blobblue.png");
+  background-image: url("@/assets/images/blobblue.png");
   background-position: right;
   background-repeat: no-repeat;
   background-size: 100vh;
+  overflow: hidden;
 }
 
 .title-wormz {

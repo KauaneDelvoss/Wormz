@@ -19,10 +19,17 @@ export default {
 }
 </script>
 
-<style scoped>
-.btnWormz{
-  background: #E8E5AE;
-  border-radius: 20px;
-  padding: 0.5vw 1.2vw;
-}
+<style lang="sass" scoped>
+@use '@/assets/sass/_variables.sass'
+
+.btnWormz
+  background: variables.$primary-color
+  border-radius: 20px
+  padding: 0.5vw 1.2vw
+
+  &:hover
+    background: transparent
+    border: 1px solid variables.$primary-color
+    color: variables.$primary-color
+    transition: 00.5s
 </style>
