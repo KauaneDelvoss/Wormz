@@ -3,7 +3,7 @@
     <ImgBackground class="app">
       <router-view></router-view>
       <titleWormz style="height: 100vh;" class="d-flex align-center">
-        <v-img width='8vh' @click="irPara('login')" src="../assets/Group 4.png" class="mt-10 align-self-center img-hover"></v-img>
+        <btnWormz :path="'login'" :nome="'Entrar'" class="mt-10 align-self-center"></btnWormz>
       </titleWormz>
     </ImgBackground>
   </v-app>
@@ -12,9 +12,10 @@
 <script>
 import ImgBackground from "../components/basic/ImgBackground.vue"
 import titleWormz from "../components/basic/titleWormz.vue"
+import btnWormz from "../components/basic/btnWormz.vue"
 export default {
   name: "HomeWormz",
-  components: { ImgBackground, titleWormz },
+  components: { ImgBackground, titleWormz, btnWormz },
    methods: {
     irPara(local){
       this.$router.push({

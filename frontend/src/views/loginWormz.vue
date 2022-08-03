@@ -30,7 +30,7 @@
 
           <v-row class="box-google d-flex align-center my-2" style="width: 70%; gap: 20px;">
             <v-divider color="#e8e5ae"></v-divider>
-            <v-img class="img-google" src="@/assets/Group 4.png"></v-img>
+            <v-img class="img-google" src="@/assets/images/Group 4.png"></v-img>
             <v-divider color="#e8e5ae"></v-divider>
           </v-row>
           <v-row class="box-google d-flex align-center justify-center my-2" style="width: 70%; gap: 20px;">

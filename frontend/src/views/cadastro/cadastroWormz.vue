@@ -103,6 +103,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .cadastro-wormz {
   height: 100vh;
   width: 100vw;
