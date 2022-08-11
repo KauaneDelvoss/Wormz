@@ -1,14 +1,16 @@
 <template>
   <div class="navigation-drawer d-flex align-center">
-    <v-row class="list-wrapper d-flex align-center margin-left-page teste2">
-      <div v-for="(item, n) in items" :key="n" class="d-flex teste mr-5">
-        <div v-if="activeItem == n" class="page-box">
+    <v-row class="list-wrapper d-flex align-center margin-left-page">
+      <div v-for="(item, n) in items" :key="n" class="d-flex list-for mr-5" @click="transitionMaker(n, item.path)">
+        <div v-if="activeItem == n" class="d-flex flex-grow-1">
+          <div class="d-flex page-box">
             <div class="subtitulo list-item-box">
-                {{ item.toUpperCase() }}
+                {{ item.name.toUpperCase() }}
             </div>
+          </div>
         </div>
         <div v-else class="subtitulo list-item">
-          {{ item.toUpperCase() }}
+          {{ item.name.toUpperCase() }}
         </div>
       </div>
     </v-row>
@@ -24,18 +26,34 @@
 
 <script>
 export default {
+  props:{ numActive: Number },
     data(){
         return{
-            items: ['Home', 'Login'],
-            activeItem: 1
+            activeItem: this.numActive,
+            transition: '',
+            items: [
+              { name: 'Home', path: '/home' },
+              { name: 'Login', path: '/login' },
+              { name: 'Explorar', path: '/searchBib'},
+              { name: 'Biblioteca', path: '/userBib' },
+              { name: 'Quizz', path: '/quizz' },
+            ]
         }
     },
-    mounted(){
-      this.showPageBox();
-    },
     methods:{
-      showPageBox(){
-
+      transitionMaker(n, path){
+        if (n != this.activeItem){
+          this.transition = ''
+          this.activeItem = n
+        
+          setTimeout(() =>
+          {
+              return this.$router.push({
+                path: path
+              });
+            }, 200
+          )
+        }
       }
     }
 };
@@ -45,32 +63,32 @@ export default {
 @use '@/assets/sass/style.sass'
 @use '@/assets/sass/variables'
 
-.teste
+.list-for
   width: 7%
   height: 100%
+  cursor: pointer
 
-.teste2
+.list-wrapper
   height: 100%
+  overflow: hidden
 
 .navigation-drawer 
   width: 100vw
-  height: 7vh
+  height: 6vh
   background-color: #434c6d
 
 .v-icon-item
   color: variables.$primary-color
 
 .divider-item
-  top: 7vh
+  top: 6vh
   width: 100vw
   color: variables.$primary-color
   position: absolute
 
 .page-box
-  z-index: 0
   background-color: variables.$primary-color
   opacity: 50%
-  display: flex
   justify-content: center
   margin-top: 10px
   border-radius: 10% 10% 0 0
@@ -78,11 +96,23 @@ export default {
 
 .list-item-box
   opacity: 100%
-  z-index: 2
   color: variables.$bg-color
-  align-self: center
 
-.list-item
+.list-item, .list-item-box
   align-self: center
   justify-self: center
+
+.page-marker-enter-ative, .page-marker-leave-ative
+  transition: opacity 0.8s ease
+
+.page-marker-enter-from
+  transition: opacity 0.3s ease-out
+  transform: translateY(-50px)
+
+.page-marker-leave-to
+  transition: opacity 0.3s ease-out
+  
+  opacity: 0
+  transform: translateY(50px)
+
 </style>

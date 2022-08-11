@@ -1,6 +1,6 @@
 <template>
   <div class="cadastro-wormz">
-    <NavigationDrawer />
+    <NavigationDrawer :numActive="1" />
     <v-row class="app d-fluid flex-row" style="height: 100vh">
       <v-col cols="5" class="m-5 d-flex flex-column justify-center">
         <div class="titulo d-flex flex-column align-center">Cadastro</div>
@@ -57,7 +57,7 @@ export default {
       sliderValue: 0,
       active: false,
       transition: "",
-    };
+      };
   },
   methods: {
     next() {

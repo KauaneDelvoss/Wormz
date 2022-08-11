@@ -1,6 +1,7 @@
 <template>
-  <div class="app login-wormz">
-    <v-row class="d-fluid flex-row" style="height: 100vh;">
+  <div class="login-wormz">
+    <NavigationDrawer :numActive="1" />
+    <v-row class="app d-fluid flex-row" style="height: 100vh;">
       <v-col cols="5" class="m-5 d-flex flex-column justify-center">
         <div class="box-input d-flex flex-column align-center" style="gap:3vh;">
           <div class="titulo">
@@ -52,16 +53,17 @@
 <script>
 import titleWormz from "../components/basic/titleWormz.vue";
 import btnWormz from "../components/basic/btnWormz.vue";
+import NavigationDrawer from "../components/NavigationDrawer.vue"
 export default {
   name: "HomeWormz",
-  components: { titleWormz, btnWormz },
+  components: { titleWormz, btnWormz, NavigationDrawer },
   data(){
     return{
       roll: 0,
       userEmail: '',
       userPassword: '',
       show: false,
-    }
+      }
   },
   methods: {
     irPara(local){
@@ -84,6 +86,7 @@ export default {
   background-position: right
   background-repeat: no-repeat
   background-size: 100vh
+  overflow: hidden
 
 .title-wormz 
   transform: scale(0.7)
