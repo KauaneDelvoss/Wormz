@@ -1,6 +1,5 @@
 <template>
   <div class="cadastro-wormz">
-    <NavigationDrawer :numActive="1" />
     <v-row class="app d-fluid flex-row" style="height: 100vh">
       <v-col cols="5" class="m-5 d-flex flex-column justify-center">
         <div class="titulo d-flex flex-column align-center">Cadastro</div>
@@ -26,7 +25,7 @@
             <ThirdSlider>
               <v-row style="gap: 2vw">
                 <btnWormz :nome="'Anterior'" @sliderCount="prev()" />
-                <btnWormz :nome="'Concluir'" :path="'searchBib'" />
+                <btnWormz :nome="'Concluir'" :path="'loginWormz'" />
               </v-row>
             </ThirdSlider>
           </transition>
@@ -43,15 +42,12 @@
 </template>
 
 <script>
-import FirstSlider from "@/views/cadastro/FirstSlider.vue";
-import SecondSlider from "@/views/cadastro/SecondSlider.vue";
-import ThirdSlider from "@/views/cadastro/ThirdSlider.vue";
-import titleWormz from "@/components/basic/titleWormz.vue";
-import btnWormz from "@/components/basic/btnWormz.vue";
-import NavigationDrawer from "@/components/NavigationDrawer.vue";
+import FirstSlider from '@/pages/cadastro/FirstSlider.vue'
+import SecondSlider from '@/pages/cadastro/SecondSlider.vue'
+import ThirdSlider from '@/pages/cadastro/ThirdSlider.vue'
 
 export default {
-  components: { FirstSlider, SecondSlider, ThirdSlider, titleWormz, btnWormz, NavigationDrawer },
+  components: { FirstSlider, SecondSlider, ThirdSlider },
   data() {
     return {
       sliderValue: 0,
@@ -94,10 +90,8 @@ export default {
       return prevIndex >= 0 ? prevIndex : 3 - 1;
     },
   },
-  mounted: {
-    mounted() {
+  mounted() {
       this.goToIndex(this.sliderValue);
-    },
   },
 };
 </script>
@@ -105,13 +99,13 @@ export default {
 <style lang="scss" scoped>
 
 .cadastro-wormz {
-  height: 100vh;
+  height: $template-height;
   width: 100vw;
   background-color: #22273c;
   background-image: url("@/assets/images/blobblue.png");
   background-position: right;
   background-repeat: no-repeat;
-  background-size: 100vh;
+  background-size: $template-height;
   overflow: hidden;
 }
 

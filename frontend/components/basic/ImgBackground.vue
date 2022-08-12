@@ -1,5 +1,5 @@
 <template>
-  <v-img id="img" src="@/assets/images/image 2.png">
+  <v-img id="img" src="/background.png">
   <slot></slot>
   </v-img>
 </template>
@@ -10,13 +10,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 #img {
-  height: 100vh;
+  height: $template-height;
   background-size: cover;
   background-repeat: no-repeat;
-  overflow-y: hidden;
+  overflow: hidden;
 
 }
 
