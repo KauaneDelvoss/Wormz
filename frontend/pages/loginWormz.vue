@@ -73,7 +73,7 @@ export default {
 <style lang="scss" scoped>
 
 .login-wormz {
-  height: $template-height;
+  min-height: $template-height;
   width: 100vw;
   background-color: $bg-color;
   background-image: url("../assets/images/blobblue.png");

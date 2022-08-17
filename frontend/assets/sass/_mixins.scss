@@ -4,3 +4,15 @@
     margin: 0 auto;
     padding: 1.5rem 0;
 }
+
+@mixin hide_mobile_xl{
+    @media (max-width: variables.$phone_xl) {
+        display: none;
+    }
+}
+
+@mixin hide_mobile_l{
+    @media (max-width: variables.$phone_l) {
+        display: none;
+    }
+}

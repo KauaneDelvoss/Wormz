@@ -10,6 +10,7 @@
 </template>
 
 <script>
+
 export default {
   name: "HomeWormz",
   methods: {
@@ -24,10 +25,9 @@ export default {
 
 
 
-<style scoped>
+<style lang="scss" scoped>
 template{
     overflow:hidden;
-    
 }
 
 .img-hover{
