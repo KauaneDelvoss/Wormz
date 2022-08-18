@@ -25,7 +25,7 @@
             <ThirdSlider>
               <v-row style="gap: 2vw">
                 <btnWormz :nome="'Anterior'" @sliderCount="prev()" />
-                <btnWormz :nome="'Concluir'" :path="'loginWormz'" />
+                <btnWormz :nome="'Concluir'" :path="'https://github.com/KauaneDelvoss/Wormz.gitloginWormz'" />
               </v-row>
             </ThirdSlider>
           </transition>

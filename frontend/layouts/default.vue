@@ -1,9 +1,15 @@
 <template>
     <v-app class="default-app">
-        <NavigationDrawer />
+        <NavigationDrawer  />
         <Nuxt />
     </v-app>
 </template>
+
+<script>
+export default {
+}
+
+</script>
 
 <style lang="sass" scoped>
 .default-app

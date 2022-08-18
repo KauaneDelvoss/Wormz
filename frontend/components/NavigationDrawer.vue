@@ -4,18 +4,18 @@
       <div v-for="(item, n) in items" :key="n" class="d-flex list-for mr-7" @click="transitionMaker(item.path)">
         <div v-if="item.path == pageActive" class="d-flex flex-grow-1">
           <div class="d-flex page-box">
-            <div class="subtitulo list-item-box">
+            <div class="header-title list-item-box">
                 {{ item.name.toUpperCase() }}
             </div>
           </div>
         </div>
-        <div v-else class="subtitulo list-item">
+        <div v-else class="header-title list-item">
           {{ item.name.toUpperCase() }}
         </div>
       </div>
     </div>
     <div class="icon-wrapper d-flex flex-row align-center margin-right-page">
-      <div class="subtitulo list-item perfil">
+      <div class="header-title list-item perfil">
           PERFIL
       </div>
       <v-icon class="v-icon-item">mdi-chevron-down</v-icon>
@@ -40,15 +40,16 @@ export default {
         }
     },
     mounted() {
-      const route = this.$router.currentRoute.fullPath
+      let route = this.$router.currentRoute.path
       this.pageActive = route
     },
+
     methods:{
       transitionMaker(path){
         
         if (path != this.pageActive){
-          this.transition = ''
           this.pageActive = path
+          this.transition = ''
         
           setTimeout(() =>
           {

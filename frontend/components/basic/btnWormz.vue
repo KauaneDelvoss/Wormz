@@ -13,6 +13,7 @@ export default {
         this.$router.push({
           path: "/" + path,
         });
+        this.$store.commit('ALTER_CURRENT_PATH', path)
       } else {
         this.$emit("sliderCount");
       }

@@ -1,7 +1,7 @@
 <template>
   <v-app class="login-wormz">
     <v-row class="app flex-row" style="height: 100vh;">
-      <v-col cols="5" class="m-5 d-flex flex-column justify-center">
+      <v-col class="m-5 d-flex flex-column justify-center col-default">
         <div class="box-input d-flex flex-column align-center" style="gap:3vh;">
           <div class="titulo">
             Login
@@ -40,8 +40,8 @@
 
         </div>
       </v-col>
-      <v-col cols="6" class="m-5 mb-6 d-flex flex-column mobile-hide">
-        <div class="box-title d-flex flex-column align-end">
+      <v-col class="m-5 mb-6 d-flex flex-column mobile-hide col-default">
+        <div class="box-title d-flex flex-column align-end hide-mobile-xl">
           <titleWormz class="title-wormz"></titleWormz>
         </div>
       </v-col>
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+@include breakpoints;
 .login-wormz {
   min-height: $template-height;
   width: 100vw;
@@ -97,5 +97,6 @@ export default {
   height: 8vh;
   max-width: 8vh;
 }
+
 
 </style>

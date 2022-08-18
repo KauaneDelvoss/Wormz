@@ -5,14 +5,24 @@
     padding: 1.5rem 0;
 }
 
-@mixin hide_mobile_xl{
-    @media (max-width: variables.$phone_xl) {
-        display: none;
+@mixin breakpoints{
+    @media (max-width: $tablet_xl) {
+        .hide-mobile-xl{
+          display: none !important
+        }
+        .col-default{
+            columns: 0 !important; 
+            flex-basis: auto !important;
+        }
+      }
+    @media (max-width: variables.$phone_l){
+        .hide-mobile-l{
+            display: none !important
+        }
+        .col-default{
+            columns: 0 !important;
+            flex-basis: auto !important;
+        }
     }
-}
-
-@mixin hide_mobile_l{
-    @media (max-width: variables.$phone_l) {
-        display: none;
-    }
+  
 }

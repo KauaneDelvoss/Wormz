@@ -23,10 +23,20 @@
   cursor: pointer;
 }
 
+.header-title {
+  color: #E8E5AE;
+  font-family: "Encode Sans", serif;
+  font-size: 1.6vh;
+}
+
 .subtitulo {
   font-family: "Encode Sans", sans-serif;
   font-size: 2vh;
   color: #E8E5AE;
+}
+
+.col-default {
+  columns: 6;
 }
 
 .app {
