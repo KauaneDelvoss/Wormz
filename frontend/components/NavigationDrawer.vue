@@ -1,6 +1,9 @@
 <template>
   <div class="navigation-drawer d-flex align-center">
-    <div class="list-wrapper d-flex flex-grow-1 flex-row margin-left-page align-center">
+    <div class="margin-left-page hide-desktop">
+      <v-icon class="v-icon-item" @click="$emit('activeToggle', !toggleBar)">mdi-view-headline</v-icon>
+    </div>
+    <div class="list-wrapper d-flex flex-grow-1 flex-row margin-left-page align-center hide-mobile-l">
       <div v-for="(item, n) in items" :key="n" class="d-flex list-for mr-7" @click="transitionMaker(item.path)">
         <div v-if="item.path == pageActive" class="d-flex flex-grow-1">
           <div class="d-flex page-box">
@@ -14,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="icon-wrapper d-flex flex-row align-center margin-right-page">
+    <div class="icon-wrapper d-flex flex-row align-center margin-right-page hide-mobile-l">
       <div class="header-title list-item perfil">
           PERFIL
       </div>
@@ -26,6 +29,7 @@
 
 <script>
 export default {
+  props: {activeToggleBar: Boolean}  ,
     data(){
         return{
             pageActive: '',
@@ -36,12 +40,15 @@ export default {
               { name: 'Explorar', path: '/SearchBib'},
               { name: 'Biblioteca', path: '/userBib' },
               { name: 'Quizz', path: '/quizz' },
-            ]
+            ],
+            toggleBar: false
         }
     },
     mounted() {
       let route = this.$router.currentRoute.path
       this.pageActive = route
+
+      this.toggleBar = this.activeToggleBar
     },
 
     methods:{
@@ -59,12 +66,18 @@ export default {
             }, 200
           )
         }
+      },
+    },
+    watch: {
+      '$route' (to, from){
+        this.pageActive = to.path
       }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@include breakpoints;
 
 .list-for{
   height: 100%;

@@ -18,7 +18,7 @@ export default {
         this.$emit("sliderCount");
       }
     },
-  },
+  }
 };
 </script>
 
