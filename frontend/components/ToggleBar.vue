@@ -1,8 +1,8 @@
 <template>
   <transition name="slide-fade">
   <div class="toggle-bar">
-    <div class="list-wrapper subtitulo-minimo margin-left-page mt-5">
-      HOME
+    <div v-for="(item, index) in items" :key="index" @click="changeRoute(item.path)" class="list-wrapper subtitulo-minimo margin-left-page mt-5">
+      {{ item.name.toUpperCase() }}
     </div>
   </div>
   </transition>
@@ -10,7 +10,24 @@
 
 <script>
 export default {
-
+  data(){
+    return {
+      items: [
+              { name: 'Home', path: '/HomeWormz' },
+              { name: 'Login', path: '/loginWormz' },
+              { name: 'Explorar', path: '/SearchBib'},
+              { name: 'Biblioteca', path: '/userBib' },
+              { name: 'Quizz', path: '/quizz' },
+            ],
+    }
+  },
+  methods:{
+    changeRoute(path){
+      this.$router.push({
+        path: path
+      })
+    }
+  }
 }
 </script>
 

@@ -27,8 +27,9 @@ export default {
 .btnWormz{
   background: $primary-color;
   border-radius: 20px;
-  padding: 0.5vw 1.2vw;
+  padding: 0.6vh 1.4vh;
   color: black;
+  font-size: 1.5vh;
 
   &:hover{
     background: transparent;

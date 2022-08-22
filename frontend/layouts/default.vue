@@ -4,7 +4,7 @@
       :activeToggleBar="activeToggleBar"
       @activeToggle="activeToggleBar = !activeToggleBar"
     />
-    <ToggleBar v-if="activeToggleBar" />
+    <ToggleBar v-if="activeToggleBar" class="hide-desktop" />
     <Nuxt />
   </v-app>
 </template>
@@ -20,6 +20,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@use '~/assets/sass/mixins'
+
 .default-app
     position: relative
     overflow: hidden

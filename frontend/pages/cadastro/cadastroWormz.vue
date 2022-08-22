@@ -1,7 +1,7 @@
 <template>
   <div class="cadastro-wormz">
     <v-row class="app d-fluid flex-row" style="height: 100vh">
-      <v-col cols="5" class="m-5 d-flex flex-column justify-center">
+      <v-col class="m-5 d-flex flex-column justify-center col-default">
         <div class="titulo d-flex flex-column align-center">Cadastro</div>
         <div v-if="sliderValue == 0">
           <transition :name="transition">
@@ -32,7 +32,7 @@
         </div>
       </v-col>
 
-      <v-col cols="6 m-5 mb-6 d-flex flex-column mobile-hide">
+      <v-col cols="6" class="m-5 mb-6 d-flex flex-column hide-mobile-xl">
         <div class="box-title d-flex flex-column align-end">
           <titleWormz class="title-wormz"></titleWormz>
         </div>
@@ -97,6 +97,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@include breakpoints;
 
 .cadastro-wormz {
   height: $template-height;

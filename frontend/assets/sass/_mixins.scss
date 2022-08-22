@@ -6,7 +6,7 @@
 }
 
 @mixin breakpoints{
-    @media (max-width: $tablet_xl) {
+    @media (max-width: variables.$tablet_xl) {
         .hide-mobile-xl{
           display: none !important
         }
@@ -22,6 +22,9 @@
         .col-default{
             columns: 0 !important;
             flex-basis: auto !important;
+        }
+        .h1{
+            font-size: 20vw;
         }
     }
     @media (min-width: variables.$phone_l){

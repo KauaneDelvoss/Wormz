@@ -26,6 +26,7 @@ export default {
 
 
 <style lang="scss" scoped>
+
 template{
     overflow:hidden;
 }
