@@ -1,6 +1,6 @@
 <template>
   <button class="btnWormz" type="button" @click="irPara(path)">
-    {{ nome }}
+    {{ nome.toUpperCase() }}
   </button>
 </template>
 
@@ -23,13 +23,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .btnWormz{
   background: $primary-color;
   border-radius: 20px;
   padding: 0.6vh 1.4vh;
   color: black;
   font-size: 1.5vh;
+  font-family: "Encode Sans", sans-serif;
 
   &:hover{
     background: transparent;

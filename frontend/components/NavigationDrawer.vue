@@ -18,11 +18,13 @@
       </div>
     </div>
     <div class="icon-wrapper d-flex flex-row align-center margin-right-page hide-mobile-l">
-      <div class="header-title list-item perfil">
+      <div class="header-title list-item perfil" @click="showProfile()">
           PERFIL
       </div>
-      <v-icon class="v-icon-item">mdi-chevron-down</v-icon>
+      <v-icon class="v-icon-item" @click="show = !show">mdi-chevron-down</v-icon>
     </div>
+
+    <div class="box-show" v-if="show">OI</div> <!-- vc esta aqui -->
     <hr class="divider-item" />
   </div>
 </template>
@@ -41,7 +43,8 @@ export default {
               { name: 'Biblioteca', path: '/userBib' },
               { name: 'Quizz', path: '/quizz' },
             ],
-            toggleBar: false
+            toggleBar: false,
+            show: false,
         }
     },
     mounted() {
@@ -125,6 +128,5 @@ export default {
   align-self: center;
   justify-self: center;
 }
-
 
 </style>

@@ -6,6 +6,7 @@ $bg-color: #22273C; // Azul escuro
 
 // Variáveis de comprimento
 
+$distance-margin: calc(((100vw * 0.41) - (100vw * 0.41 * 0.7))/2);
 $container-width: 1170px;
 $header-height: 6vh;
 $template-height: calc(100vh - $header-height);
