@@ -1,6 +1,8 @@
 <template>
   <v-app class="search-bib">
-        <v-row>
+    <v-container fluid>
+
+        <v-row class="mobile-profile">
           <v-col class="ms-md-12 d-flex flex-column align-center col-default">
             <div class="d-flex flex-column">
               <div class="h1">Wormz</div>
@@ -38,11 +40,12 @@
         <div class="margin-left-page margin-right-page">
           <div class="h3 mt-10 mb-2">Destaques</div>
           <v-row>
-            <v-col cols="12" class="ps-5 pe-5">
+            <v-col cols="12">
                 <BooksCarousel />
             </v-col>
           </v-row>
         </div>
+    </v-container>
   </v-app>
 </template>
 

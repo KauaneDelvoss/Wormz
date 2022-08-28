@@ -15,6 +15,11 @@
 <script>
 import { mapState } from 'vuex';
 export default {
+    data(){
+        return{
+            scroll: 0,
+        }
+    },
     computed: {
         ...mapState("search_books", ["books"])
     },
@@ -24,26 +29,33 @@ export default {
             const width = sliders.getBoundingClientRect().width
             sliders.scroll({
                 top: 0,
-                left: - width,
+                left: (this.scroll-width),
                 behavior: 'smooth'
             })
+            this.scroll-=width
+            if (this.scroll < 0){
+                this.scroll = 0
+            }
         },
         scrollToRight(){
             const sliders = document.querySelector(".carousel-wrapper");
             const width = sliders.getBoundingClientRect().width
-            console.log(width)
+            const width_box = (document.querySelector(".box-books").getBoundingClientRect().width)*(document.querySelectorAll('.box-books').length)
             sliders.scroll({
                 top: 0,
-                left: width,
+                left:(this.scroll += width),
                 behavior: 'smooth'
             })
-            
-    }
+            this.scroll += width
+            if (this.scroll > width_box){
+                this.scroll = 0
+            }
+    }   
     }
 }
 </script>
 
-<style>
+<style scoped>
 .carousel-wrapper{
     max-width: 100vw;
     overflow-x: hidden;

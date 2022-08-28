@@ -5,7 +5,7 @@
             dark
             color="#E8E5AE"
             v-model="userPais"
-            label="País"
+            label="País (opcional)"
             :items="paises"
           ></v-autocomplete>
          <v-autocomplete
@@ -13,7 +13,7 @@
             dark
             color="#E8E5AE"
             v-model="userEstado"
-            label="Estado"
+            label="Estado (opcional)"
             type="text"
             :items="estados"
           ></v-autocomplete>
@@ -22,7 +22,7 @@
             dark
             color="#E8E5AE"
             v-model="userCidade"
-            label="Cidade"
+            label="Cidade (opcional)"
             type="text"
             :items="cidades"
           ></v-autocomplete>

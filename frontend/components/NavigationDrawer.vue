@@ -156,6 +156,7 @@ export default {
 
 .dropdown-item:hover{
   text-decoration: underline;
+  cursor: pointer;
 }
 
 </style>
