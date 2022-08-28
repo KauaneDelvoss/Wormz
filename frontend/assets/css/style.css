@@ -16,6 +16,11 @@
   color: #E8E5AE;
 }
 
+.bookshelf-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .titulo {
   font-family: "Libre Baskerville", serif;
   font-size: 5vh;
@@ -46,6 +51,10 @@
 
 .col-default {
   columns: 6;
+}
+
+.v-icon-item {
+  color: #E8E5AE !important;
 }
 
 .app {

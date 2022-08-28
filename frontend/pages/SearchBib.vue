@@ -1,7 +1,5 @@
 <template>
   <v-app class="search-bib">
-    <ImgBackground>
-      <div class="app">
         <v-row>
           <v-col class="ms-md-12 d-flex flex-column align-center col-default">
             <div class="d-flex flex-column">
@@ -38,15 +36,13 @@
         </div>
 
         <div class="margin-left-page margin-right-page">
-          <div class="h3 margin-left-page mt-10 mb-2">Destaques</div>
-          <v-row class="justify-center">
-            <div v-for="(book, i) in books" :key="i" class="box-books">
-              <CardBooks :book="book" class="mt-5 ms-2" />
-            </div>
+          <div class="h3 mt-10 mb-2">Destaques</div>
+          <v-row>
+            <v-col cols="12" class="ps-5 pe-5">
+                <BooksCarousel />
+            </v-col>
           </v-row>
         </div>
-      </div>
-    </ImgBackground>
   </v-app>
 </template>
 
@@ -68,6 +64,11 @@ export default {
 
 template {
   overflow-x: hidden;
+}
+
+.search-bib{
+  background-color: $bg-color;
+  max-width: 100vw;
 }
 
 #form-area {

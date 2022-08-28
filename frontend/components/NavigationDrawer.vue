@@ -17,14 +17,26 @@
         </div>
       </div>
     </div>
-    <div class="icon-wrapper d-flex flex-row align-center margin-right-page hide-mobile-l">
-      <div class="header-title list-item perfil" @click="showProfile()">
-          PERFIL
+    <div class="icon-wrapper d-flex flex-row align-center justify-center margin-right-page hide-mobile-l">
+      <div class="dropdown">
+        <div class="header-title list-item perfil" @click="show = !show">
+            PERFIL
+          <v-icon class="v-icon-item">mdi-chevron-down</v-icon>
+        </div>
       </div>
-      <v-icon class="v-icon-item" @click="show = !show">mdi-chevron-down</v-icon>
+      <div v-if="show" class="dropdown-content">
+        <div class="mb-3 d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, transitionMaker('/PerfilEstatico')">ACESSAR PERFIL
+          <v-icon small class="v-icon-item ms-2">mdi-menu-right</v-icon>
+        </div>
+        <div class="mb-3 d-flex dropdown-item flex-row align-center header-title justify-between">CONFIGURAÇÕES
+          <v-icon small class="v-icon-item ms-2">mdi-nut</v-icon>
+        </div>
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between">LOG-OUT
+          <v-icon small class="v-icon-item ms-2">mdi-logout-variant</v-icon>
+        </div>
+      </div>
     </div>
 
-    <div class="box-show" v-if="show">OI</div> <!-- vc esta aqui -->
     <hr class="divider-item" />
   </div>
 </template>
@@ -127,6 +139,23 @@ export default {
 .list-item, .list-item-box{
   align-self: center;
   justify-self: center;
+}
+
+.dropdown{
+  cursor: pointer;
+}
+
+.dropdown-content{
+  position: absolute;
+  z-index: 1;
+  top: $header-height;
+  min-width: 100px;
+  background-color: $secondary-color;
+  padding: 10px;
+}
+
+.dropdown-item:hover{
+  text-decoration: underline;
 }
 
 </style>
