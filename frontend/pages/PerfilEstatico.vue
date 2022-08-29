@@ -51,13 +51,13 @@
           </div>
           <div class="box-books">
             <div class="h3 bookshelf-name margin-left-page mt-5">Favoritos</div>
-            <BooksCarousel />
+            <BooksCarousel class="mx-7" />
           </div>
         </div>
 
         <div v-if="active == 1">
           <div class="h3 bookshelf-name margin-left-page mt-5">Favoritos</div>
-          <BooksCarousel /> <!-- erro ! (não aceita mais de um uso na pg)-->
+          <BooksCarousel  /> <!-- erro ! (não aceita mais de um uso na pg)-->
           <div class="h3 bookshelf-name margin-left-page mt-5">Dark Vibes</div>
           <BooksCarousel />
         </div>

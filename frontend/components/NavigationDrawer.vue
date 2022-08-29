@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <hr class="divider-item" />
+    <v-divider class="divider-item" />
   </div>
 </template>
 
@@ -117,7 +117,8 @@ export default {
 .divider-item{
   top: $header-height;
   width: 100vw;
-  color: $primary-color;
+  border-color: $primary-color;
+  z-index: 1;
   position: absolute;
 }
 

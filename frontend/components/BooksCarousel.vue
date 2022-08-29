@@ -25,8 +25,8 @@ export default {
     },
     methods:{
         scrollToLeft(){
-            const sliders = document.querySelector(".carousel-wrapper");
-            const width = sliders.getBoundingClientRect().width
+            let sliders = document.querySelector(".carousel-wrapper");
+            let width = sliders.getBoundingClientRect().width
             sliders.scroll({
                 top: 0,
                 left: (this.scroll-width),
@@ -38,12 +38,12 @@ export default {
             }
         },
         scrollToRight(){
-            const sliders = document.querySelector(".carousel-wrapper");
-            const width = sliders.getBoundingClientRect().width
-            const width_box = (document.querySelector(".box-books").getBoundingClientRect().width)*(document.querySelectorAll('.box-books').length)
+            let sliders = document.querySelector(".carousel-wrapper");
+            let width = sliders.getBoundingClientRect().width
+            let width_box = (document.querySelector(".box-books").getBoundingClientRect().width)*(document.querySelectorAll('.box-books').length)
             sliders.scroll({
                 top: 0,
-                left:(this.scroll += width),
+                left:(this.scroll + width),
                 behavior: 'smooth'
             })
             this.scroll += width
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style scoped>
-.carousel-wrapper{
+.carousel-wrapper {
     max-width: 100vw;
     overflow-x: hidden;
     gap: 10px;
