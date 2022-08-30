@@ -7,7 +7,7 @@
     <!-- livros.volumeInfo.imageLinks.thumbnail !-->
     <div v-for="(item, index) in livros" :key="index">
         {{item.volumeInfo.title}}
-        {{item.volumeInfo.imageLinks.thumbnail}}
+        <div v-if="imgs[index]">{{ imgs }}</div>
     </div>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
             api_key: 'AIzaSyDb8Cue7PCPcACj9eba6p82EDDLHwXDNLk',
             url: 'https://www.googleapis.com/books/v1/volumes?q=',
             url_search: '',
-            livros: '',
+            livros: {},
+            imgs: []
         }
     },
     mounted(){
@@ -34,9 +35,13 @@ export default {
     },
 
     async GET_URL(){
-        let dataItems = (await this.$axios.$get(this.url_search)).items
-        this.livros = dataItems
-        console.log(this.livros)
+        let dataItems = await this.$axios.$get(this.url_search)
+        this.livros = dataItems.items
+
+        for (let i = 0; i<dataItems.items.length; i++){
+            this.imgs.push(dataItems.items[i].volumeInfo.imageLinks.thumbnail)
+            console.log(this.imgs)
+        }
     },
     }
 }
