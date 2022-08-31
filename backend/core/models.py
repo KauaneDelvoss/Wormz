@@ -9,7 +9,7 @@ class User(models.Model):
     # codbookshelf
     name_user = models.CharField(max_length=100)  # not null
     nickname = models.CharField(max_length=50)  # not null unique
-    password = models.IntegerField(max_length=10)  # not null -> tem que mudar no modelo
+    password = models.IntegerField  # not null -> tem que mudar no modelo
     email = models.EmailField(max_length=50)  # not null
     admin = models.BooleanField(default=False)
     genre_pref = models.CharField(max_length=50)
