@@ -13,15 +13,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 export default {
+    props: { books: Object },
     data(){
         return{
             scroll: 0,
         }
-    },
-    computed: {
-        ...mapState("search_books", ["books"])
     },
     methods:{
         scrollToLeft(){

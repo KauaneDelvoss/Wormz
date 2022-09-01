@@ -1,14 +1,22 @@
 <template>
-  <v-card
-    class="mx-auto book"
-    max-width="200"
-    max-height="350"
-  >
-      <v-img :src="book.href">
+  <v-card class="mx-auto book" height="30vh">
+    <v-img
+      v-if="
+        book.volumeInfo.imageLinks
+          ? book.volumeInfo.imageLinks.thumbnail
+          : false
+      "
+      :src="book.volumeInfo.imageLinks.thumbnail"
+      height="30vh"
+    >
       <div class="fill-height bottom-gradient">
         <div class="card-icon ps-3 pt-3">
-          <v-icon v-if="book.liked" @click="likeBook(book.id)" class="icon">mdi-cards-heart-outline</v-icon>
-          <v-icon v-else class="icon" @click="likeBook(book.id)">mdi-cards-heart</v-icon>
+          <v-icon v-if="book.liked" @click="likeBook(book.id)" class="icon"
+            >mdi-cards-heart-outline</v-icon
+          >
+          <v-icon v-else class="icon" @click="likeBook(book.id)"
+            >mdi-cards-heart</v-icon
+          >
         </div>
 
         <v-card-actions>
@@ -22,27 +30,27 @@
           </v-btn>
         </v-card-actions>
       </div>
-      </v-img>
+    </v-img>
+
+    <div v-else class="not-found"></div>
 
     <v-expand-transition>
       <v-card
         v-if="reveal"
         class="transition-fast-in-fast-out v-card--reveal book"
-        style="height: 100%;"
+        style="height: 100%"
       >
         <v-card-text>
-        <div>{{ book.author }}</div>
-        <div class="text-h4 text--primary">
-          {{ book.name }}
-        </div>
-        <p>{{ book.date }}</p>
-      </v-card-text>
+          <div v-for="item in book.volumeInfo.authors" :key="item">
+            {{ item }}
+          </div>
+          <div class="header-title text--primary">
+            {{ book.volumeInfo.title }}
+          </div>
+          <p>{{ book.volumeInfo.publishedDate }}</p>
+        </v-card-text>
         <v-card-actions class="pt-0">
-          <v-btn
-            text
-            class="v-card-show"
-            @click="reveal = false"
-          >
+          <v-btn text class="v-card-show" @click="reveal = false">
             Fechar
           </v-btn>
         </v-card-actions>
@@ -52,25 +60,24 @@
 </template>
 
 <script>
-
-  export default {
-    props: { book: Object },
-    data: () => ({
-      reveal: false,
-    }),
-    methods:{
-      likeBook(id){
-        this.$store.commit('search_books/LIKE_BOOK', id)
-      }
-    }
-  }
+export default {
+  props: { book: Object },
+  data: () => ({
+    reveal: false,
+  }),
+  methods: {
+    likeBook(id) {
+      this.$store.commit("search_books/LIKE_BOOK", id);
+    },
+  },
+};
 </script>
 
 <style lang="sass" scoped>
 @use '~/assets/sass/variables'
 
-.bottom-gradient 
-    background-image: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.3) 100%)
+.bottom-gradient
+  background-image: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.3) 100%)
 
 .book
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
@@ -86,7 +93,6 @@
 .icon
   color: variables.$primary-color
 
-  
 .v-card-show
   position: absolute
   bottom: 0
@@ -96,11 +102,12 @@
   border-radius: 0 20px 20px 0
   text-decoration: underline
 
-.v-card--reveal 
+.v-card--reveal
   bottom: 0
   opacity: 1 !important
   position: absolute
   width: 100%
 
-  
+  .not-found
+    background-color: variables.$primary-color
 </style>

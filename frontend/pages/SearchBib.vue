@@ -20,6 +20,8 @@
             name="form-container"
             placeholder="Blade Runner..."
             id="form-area"
+            v-model="searchField"
+            @keyup="search()"
             
           />
           <div class="icon-search d-flex flex-column">
@@ -37,14 +39,22 @@
           >
         </div>
 
-        <div class="margin-left-page margin-right-page">
-          <div class="h3 mt-10 mb-2">Destaques</div>
+        <div v-if="searchField.length > 0" class="margin-left-page margin-right-page">
+          <div class="h3 mt-10 mb-2">Resultados da sua pesquisa: </div>
           <v-row>
             <v-col cols="12">
-                <BooksCarousel />
+                <BooksCarousel :books="books" />
             </v-col>
           </v-row>
         </div>
+
+        <!--
+          <div class="margin-left-page margin-right-page static-data">
+            <div class="h3 mt-10 mb-2">Destaques em ficção científica:
+              <BooksCarousel :books="searchStatic()" />
+            </div>
+          </div>
+        !-->
     </v-container>
   </v-app>
 </template>
@@ -55,10 +65,31 @@ import ImgBackground from "@/components/basic/ImgBackground.vue";
 import { mapState } from "vuex";
 
 export default {
-  components: { ImgBackground, CardBooks },
-  computed: {
-    ...mapState("search_books", ["books"]),
+  data(){
+    return{
+      searchField: ''
+    }
   },
+  components: { ImgBackground, CardBooks },
+  methods: {
+    search(){
+      this.$store.commit(
+      "google_books/MAKE_URL_SEARCH",
+      this.searchField
+    );
+    this.$store.dispatch("google_books/GET_URL");
+    }
+  },
+  computed: {
+    ...mapState("google_books", ["books"]),
+
+    // NECESSÁRIO GETTER !
+    //seacrhStatic(){
+      //this.$store.commit("google_books/MAKE_URL_SEARCH", "Phillip K Dick")
+      //this.$store.dispatch("google_books/GET_URL");
+      //return 
+    //}
+  }
 };
 </script>
 

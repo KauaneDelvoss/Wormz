@@ -1,52 +1,49 @@
 <template>
   <div class="teste">
-    {{this.api_key}} <br />
+    {{ this.api_key }} <br />
     {{ this.url }} <br />
-    {{this.url_search}}   <br />
+    {{ this.url_search }} <br />
 
     <!-- livros.volumeInfo.imageLinks.thumbnail !-->
-    <div v-for="(item, index) in livros" :key="index">
-        {{item.volumeInfo.title}}
-        <div v-if="imgs[index]">{{ imgs }}</div>
+    <div v-for="(item, index) in books" :key="index">
+      <v-img
+        v-if="
+          (item.volumeInfo.imageLinks
+            ? item.volumeInfo.imageLinks.thumbnail
+            : false) != false
+        "
+        :src="item.volumeInfo.imageLinks.thumbnail"
+        max-width="200px"
+      ></v-img>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import { mapState } from "vuex";
 export default {
-    data(){
-        return{
-            api_key: 'AIzaSyDb8Cue7PCPcACj9eba6p82EDDLHwXDNLk',
-            url: 'https://www.googleapis.com/books/v1/volumes?q=',
-            url_search: '',
-            livros: {},
-            imgs: []
-        }
-    },
-    mounted(){
-        this.MAKE_URL_SEARCH('O Retrato de Dorian Gray')
-        this.GET_URL()
-    },
-    methods:{
-        MAKE_URL_SEARCH(payload){
-        this.url_search = this.url + payload + "&key=" + this.api_key
-        console.log(this.url_search)
-    },
-
-    async GET_URL(){
-        let dataItems = await this.$axios.$get(this.url_search)
-        this.livros = dataItems.items
-
-        for (let i = 0; i<dataItems.items.length; i++){
-            this.imgs.push(dataItems.items[i].volumeInfo.imageLinks.thumbnail)
-            console.log(this.imgs)
-        }
-    },
-    }
-}
+  data() {
+    return {
+      api_key: "AIzaSyDb8Cue7PCPcACj9eba6p82EDDLHwXDNLk",
+      url: "https://www.googleapis.com/books/v1/volumes?q=",
+      url_search: "",
+      livros: {},
+      loadState: false,
+    };
+  },
+  mounted() {
+    this.$store.commit(
+      "google_books/MAKE_URL_SEARCH",
+      "O Retrato de Dorian Gray"
+    );
+    this.$store.dispatch("google_books/GET_URL");
+    console.log(this.books[0])
+  },
+  computed: {
+    ...mapState("google_books", ["books"]),
+  },
+};
 </script>
 
 <style>
-
 </style>
