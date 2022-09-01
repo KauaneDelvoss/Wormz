@@ -24,9 +24,6 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      api_key: "AIzaSyDb8Cue7PCPcACj9eba6p82EDDLHwXDNLk",
-      url: "https://www.googleapis.com/books/v1/volumes?q=",
-      url_search: "",
       livros: {},
       loadState: false,
     };

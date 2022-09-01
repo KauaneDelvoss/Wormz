@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto book" height="30vh">
+  <v-card class="mx-auto book" width="9vw" height="28vh">
     <v-img
       v-if="
         book.volumeInfo.imageLinks
@@ -7,7 +7,8 @@
           : false
       "
       :src="book.volumeInfo.imageLinks.thumbnail"
-      height="30vh"
+      height="28vh"
+      aspect-ratio="1.7"
     >
       <div class="fill-height bottom-gradient">
         <div class="card-icon ps-3 pt-3">

@@ -25,12 +25,10 @@
         </div>
       </div>
       <div v-if="show" class="dropdown-content">
-        <div class="mb-3 d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, transitionMaker('/PerfilEstatico')">ACESSAR PERFIL
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, transitionMaker('/PerfilEstatico')">ACESSAR PERFIL
           <v-icon small class="v-icon-item ms-2">mdi-menu-right</v-icon>
         </div>
-        <div class="mb-3 d-flex dropdown-item flex-row align-center header-title justify-between">CONFIGURAÇÕES
-          <v-icon small class="v-icon-item ms-2">mdi-nut</v-icon>
-        </div>
+        <configUser class="mb-1 mt-3"></configUser>
         <div class="d-flex dropdown-item flex-row align-center header-title justify-between">LOG-OUT
           <v-icon small class="v-icon-item ms-2">mdi-logout-variant</v-icon>
         </div>
@@ -42,8 +40,10 @@
 </template>
 
 <script>
+import ConfigUser from '~/components/ConfigUser'
 export default {
   props: {activeToggleBar: Boolean}  ,
+  components: {ConfigUser},
     data(){
         return{
             pageActive: '',
@@ -57,6 +57,7 @@ export default {
             ],
             toggleBar: false,
             show: false,
+            showConfig: false,
         }
     },
     mounted() {
