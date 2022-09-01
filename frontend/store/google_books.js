@@ -7,7 +7,7 @@ export const state = () => ({
 
 export const mutations = {
     MAKE_URL_SEARCH(state, payload){
-        state.url_search = state.url + payload + "&key=" + state.api_key
+        state.url_search = state.url + payload + "&maxResults=40" + "&key=" + state.api_key 
         console.log(state.url_search)
     },
 
