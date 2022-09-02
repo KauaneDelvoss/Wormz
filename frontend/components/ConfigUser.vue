@@ -1,6 +1,12 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="55vw">
+    <v-dialog
+      transition="dialog-bottom-transition"
+      v-model="dialog"
+      class="dialog"
+      persistent
+      max-width="55vw"
+    >
       <template v-slot:activator="{ on, attrs }">
         <div
           class="
@@ -28,29 +34,37 @@
             <v-row class="d-flex justify-center">
               <v-col cols="4">
                 <div
-                  v-for="item in configs"
-                  :key="item"
+                  v-for="(item, index) in configs"
+                  :key="index"
                   class="actions-config subtitulo my-10"
-                  @click="activeConfig = item"
+                  @click="activeConfig = index"
                 >
                   {{ item }}
                 </div>
               </v-col>
-              <v-col cols="5">
-                  <div v-if="activeConfig = configs[0]">
-                    <user />
-                  </div>
-                  <!-- continua -->
+              <v-col cols="8">
+                <div v-if="activeConfig == 0">
+                  <user />
+                </div>
+                <!-- continua -->
               </v-col>
             </v-row>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false, saveConfig()">
+          <v-btn
+            class="dropdown-item"
+            text
+            @click="(dialog = false), clearInput()"
+          >
             Close
           </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false, clearInput()">
+          <v-btn
+            class="dropdown-item"
+            text
+            @click="(dialog = false), saveConfig()"
+          >
             Save
           </v-btn>
         </v-card-actions>
@@ -67,16 +81,13 @@ export default {
     return {
       dialog: false,
       configs: ["Perfil", "Estantes", "Google Books"],
-      activeConfig: "Perfil",
+      activeConfig: 0,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.template{
-    overflow-y: hidden;
-}
 .dropdown-item:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -97,5 +108,7 @@ export default {
 .actions-config {
   cursor: pointer;
 }
-
+.actions-config:hover {
+  text-decoration: underline;
+}
 </style>

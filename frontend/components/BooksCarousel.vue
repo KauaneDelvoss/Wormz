@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    props: { books: Object },
+    props: { books: Object || Array },
     data(){
         return{
             scroll: 0,
