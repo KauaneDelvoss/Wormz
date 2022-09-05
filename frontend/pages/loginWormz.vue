@@ -10,14 +10,14 @@
             style="width: 70%;"
             dark
             color="#E8E5AE"
-            v-model=userEmail
-            label="E-mail"
+            v-model=user.username
+            label="Nickname"
           ></v-text-field>
          <v-text-field
             style="width: 70%;"
             dark
             color="#E8E5AE"
-            v-model=userPassword
+            v-model=user.password
             label="Senha"
             :type="show ? 'text' : 'password'"
             :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
@@ -26,7 +26,9 @@
           <div class="subtitulo-minimo">
             Não lembro minha senha
           </div>
-          <btnWormz :nome="'Entrar'" :path="'SearchBib'"></btnWormz>
+          <button class="btnWormz" type="button" @click="submitLogin">
+              ENTRAR
+            </button>
 
           <v-row class="box-google d-flex align-center my-2" style="width: 70%; gap: 20px;">
             <v-divider color="#e8e5ae"></v-divider>
@@ -35,7 +37,9 @@
           </v-row>
           <v-row class="box-google d-flex align-center justify-center my-2" style="width: 70%; gap: 20px;">
             <div class="subtitulo-minimo">Não tenho cadastro: </div>
-            <btnWormz :nome="'Cadastrar'" :path="'cadastro/cadastroWormz'"></btnWormz>
+            <button class="btnWormz" type="button" @click="submitSignIn">
+              CADASTRAR
+            </button>
           </v-row>
 
         </div>
@@ -55,15 +59,25 @@ export default {
   data(){
     return{
       roll: 0,
-      userEmail: '',
-      userPassword: '',
       show: false,
+      user: ''
       }
   },
   methods: {
     irPara(local){
       this.$router.push({
         path: '/' + local,
+      })
+    },
+    submitLogin(){
+      console.log('oi')
+      // this.$router.push({
+        // path: 'cadastro/cadastroWormz'
+      // })
+    },
+    submitSignIn(){
+      this.$router.push({
+        path: '/cadastro/cadastroWormz'
       })
     }
   },

@@ -57,6 +57,21 @@
   color: #E8E5AE !important;
 }
 
+.btnWormz {
+  background: #E8E5AE;
+  border-radius: 20px;
+  padding: 0.6vh 1.4vh;
+  color: black;
+  font-size: 1.5vh;
+  font-family: "Encode Sans", sans-serif;
+}
+.btnWormz:hover {
+  background: transparent;
+  border: 1px solid #E8E5AE;
+  color: #E8E5AE;
+  transition: 0.5s;
+}
+
 .app {
   margin: 0 auto;
   padding: 1.5rem 0;
