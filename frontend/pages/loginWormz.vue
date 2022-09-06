@@ -10,14 +10,14 @@
             style="width: 70%;"
             dark
             color="#E8E5AE"
-            v-model=userEmail
-            label="E-mail"
+            v-model=user.username
+            label="Nickname"
           ></v-text-field>
          <v-text-field
             style="width: 70%;"
             dark
             color="#E8E5AE"
-            v-model=userPassword
+            v-model=user.password
             label="Senha"
             :type="show ? 'text' : 'password'"
             :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
@@ -26,7 +26,9 @@
           <div class="subtitulo-minimo">
             Não lembro minha senha
           </div>
-          <btnWormz :nome="'Entrar'" :path="'SearchBib'"></btnWormz>
+          <button class="btnWormz" type="button" @click="submitLogin">
+              ENTRAR
+            </button>
 
           <v-row class="box-google d-flex align-center my-2" style="width: 70%; gap: 20px;">
             <v-divider color="#e8e5ae"></v-divider>
@@ -35,7 +37,9 @@
           </v-row>
           <v-row class="box-google d-flex align-center justify-center my-2" style="width: 70%; gap: 20px;">
             <div class="subtitulo-minimo">Não tenho cadastro: </div>
-            <btnWormz :nome="'Cadastrar'" :path="'cadastro/cadastroWormz'"></btnWormz>
+            <button class="btnWormz" type="button" @click="submitSignIn">
+              CADASTRAR
+            </button>
           </v-row>
 
         </div>
@@ -46,27 +50,64 @@
         </div>
       </v-col>
     </v-row>
+
+    <v-snackbar v-model="loginMessage" timeout="2000" :color="loginColor">
+      {{ loginText }}
+      <template v-slot:action="{attrs}">
+        <v-btn color="black" text v-bind="attrs" @click="loginMessage = false">
+          Fechar
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 
 export default {
   data(){
     return{
       roll: 0,
-      userEmail: '',
-      userPassword: '',
       show: false,
+      user: {},
+      loginMessage: false,
+      loginColor: '',
+      loginText: ''
       }
   },
   methods: {
+    ...mapActions('auth', ['LOGIN', 'LOGOUT']),
     irPara(local){
       this.$router.push({
         path: '/' + local,
       })
+    },
+    async submitLogin(){
+      try {
+        await this.LOGIN(this.user)
+
+        this.loginMessage=true
+        this.loginText="Login realizado com sucesso"
+        this.loginColor="sucess"
+
+        setTimeout(() => {
+          this.$router.push({
+            path: '/SearchBib'
+          })
+        }, 1000)
+      } catch(e) {
+        this.loginMessage=true
+        this.loginText="Falha na autenticação"
+        this.loginColor="error"
+      }
+    },
+    submitSignIn(){
+      this.$router.push({
+        path: '/cadastro/cadastroWormz'
+      })
     }
-  },
+  }
 };
 </script>
 
@@ -75,11 +116,11 @@ export default {
 .login-wormz {
   min-height: $template-height;
   width: 100vw;
-  background-color: $bg-color;
-  background-image: url("../assets/images/blobblue.png");
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: $template-height;
+  background-color: $bg-color !important;
+  background-image: url("../assets/images/blobblue.png") !important;
+  background-position: right !important;
+  background-repeat: no-repeat !important;
+  background-size: $template-height !important;
   overflow: hidden;
 }
 

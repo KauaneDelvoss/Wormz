@@ -70,6 +70,7 @@ export default {
       searchField: ''
     }
   },
+  middleware: 'auth',
   components: { ImgBackground, CardBooks },
   methods: {
     search(){
@@ -101,7 +102,7 @@ template {
 }
 
 .search-bib{
-  background-color: $bg-color;
+  background-color: $bg-color !important;
   max-width: 100vw;
 }
 
