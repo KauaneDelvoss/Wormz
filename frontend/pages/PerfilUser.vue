@@ -111,6 +111,7 @@ export default {
       active: 0,
     };
   },
+  middleware: 'auth',
 };
 </script>
 
@@ -149,7 +150,7 @@ export default {
 }
 
 .profile {
-  background-color: $bg-color;
+  background-color: $bg-color !important;
   min-height: 100vh;
 }
 

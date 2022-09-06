@@ -13,7 +13,7 @@ export default {
   data(){
     return {
       items: [
-              { name: 'Home', path: '/HomeWormz' },
+              { name: 'Home', path: '/' },
               { name: 'Login', path: '/loginWormz' },
               { name: 'Explorar', path: '/SearchBib'},
               { name: 'Biblioteca', path: '/userBib' },

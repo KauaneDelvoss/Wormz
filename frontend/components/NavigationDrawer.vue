@@ -25,11 +25,11 @@
         </div>
       </div>
       <div v-if="show" class="dropdown-content">
-        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, transitionMaker('/PerfilEstatico')">ACESSAR PERFIL
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, transitionMaker('/PerfilUser')">ACESSAR PERFIL
           <v-icon small class="v-icon-item ms-2">mdi-menu-right</v-icon>
         </div>
         <configUser class="mb-1 mt-3"></configUser>
-        <div class="d-flex dropdown-item flex-row align-center header-title justify-between">LOG-OUT
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="logOut">LOG-OUT
           <v-icon small class="v-icon-item ms-2">mdi-logout-variant</v-icon>
         </div>
       </div>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import ConfigUser from '~/components/ConfigUser'
 export default {
   props: {activeToggleBar: Boolean}  ,
@@ -49,7 +50,7 @@ export default {
             pageActive: '',
             transition: '',
             items: [
-              { name: 'Home', path: '/HomeWormz' },
+              { name: 'Home', path: '/' },
               { name: 'Login', path: '/loginWormz' },
               { name: 'Explorar', path: '/SearchBib'},
               { name: 'Biblioteca', path: '/userBib' },
@@ -68,6 +69,7 @@ export default {
     },
 
     methods:{
+      ...mapActions('auth', ['LOGOUT']),
       transitionMaker(path){
         
         if (path != this.pageActive){
@@ -83,6 +85,12 @@ export default {
           )
         }
       },
+      logOut(){
+        this.LOGOUT()
+        this.$router.push({
+          path: '/loginWormz'
+        })
+      }
     },
     watch: {
       '$route' (to, from){

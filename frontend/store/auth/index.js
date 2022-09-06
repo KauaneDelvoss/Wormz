@@ -15,10 +15,17 @@ export const mutations = {
 }
 
 export const actions = {
-    LOGIN( { commit }, user){
-        commit('SET_LOGIN_INFO', user)
+    async LOGIN( { commit }, user){
+        try{
+            const userInfo = await this.$authServiceLogin.login(user)
+            commit('SET_LOGIN_INFO', user)
+            return Promise.resolve(userInfo)
+        } catch(e) {
+            commit('SET_LOGOUT')
+            return Promise.reject(e)
+        }
     },
-    logout({commit}){
-        commit('SET_LOGOUT',  user )
+    LOGOUT({commit}){
+        commit('SET_LOGOUT')
     }
 }

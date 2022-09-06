@@ -50,37 +50,64 @@
         </div>
       </v-col>
     </v-row>
+
+    <v-snackbar v-model="loginMessage" timeout="2000" :color="loginColor">
+      {{ loginText }}
+      <template v-slot:action="{attrs}">
+        <v-btn color="black" text v-bind="attrs" @click="loginMessage = false">
+          Fechar
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 
 export default {
   data(){
     return{
       roll: 0,
       show: false,
-      user: ''
+      user: {},
+      loginMessage: false,
+      loginColor: '',
+      loginText: ''
       }
   },
   methods: {
+    ...mapActions('auth', ['LOGIN', 'LOGOUT']),
     irPara(local){
       this.$router.push({
         path: '/' + local,
       })
     },
-    submitLogin(){
-      console.log('oi')
-      // this.$router.push({
-        // path: 'cadastro/cadastroWormz'
-      // })
+    async submitLogin(){
+      try {
+        await this.LOGIN(this.user)
+
+        this.loginMessage=true
+        this.loginText="Login realizado com sucesso"
+        this.loginColor="sucess"
+
+        setTimeout(() => {
+          this.$router.push({
+            path: '/SearchBib'
+          })
+        }, 1000)
+      } catch(e) {
+        this.loginMessage=true
+        this.loginText="Falha na autenticação"
+        this.loginColor="error"
+      }
     },
     submitSignIn(){
       this.$router.push({
         path: '/cadastro/cadastroWormz'
       })
     }
-  },
+  }
 };
 </script>
 
@@ -89,11 +116,11 @@ export default {
 .login-wormz {
   min-height: $template-height;
   width: 100vw;
-  background-color: $bg-color;
-  background-image: url("../assets/images/blobblue.png");
-  background-position: right;
-  background-repeat: no-repeat;
-  background-size: $template-height;
+  background-color: $bg-color !important;
+  background-image: url("../assets/images/blobblue.png") !important;
+  background-position: right !important;
+  background-repeat: no-repeat !important;
+  background-size: $template-height !important;
   overflow: hidden;
 }
 
