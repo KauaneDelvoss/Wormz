@@ -2,17 +2,16 @@ from django.db import models
 
 # Create your models here.
 
-
 class User(models.Model):
     # coduser
     # codadress
     # codbookshelf
-    name_user = models.CharField(max_length=100)  # not null
+    # name_user = models.CharField(max_length=100)  # not null
     nickname = models.CharField(max_length=50)  # not null unique
-    password = models.IntegerField  # not null -> tem que mudar no modelo
-    email = models.EmailField(max_length=50)  # not null
-    admin = models.BooleanField(default=False)
-    genre_pref = models.CharField(max_length=50)
+    #password = models.CharField(max_length=15)  # not null -> tem que mudar no modelo
+    #email = models.EmailField(max_length=50)  # not null
+    #admin = models.BooleanField(default=False)
+    #genre_pref = models.CharField(max_length=50, null=True)
     user_biography = models.TextField(max_length=2000)
 
     created_at = models.DateTimeField(auto_now_add=True)

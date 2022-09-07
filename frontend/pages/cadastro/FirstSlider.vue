@@ -4,30 +4,27 @@
             style="width: 70%;"
             dark
             color="#E8E5AE"
-            v-model=userEmail
+            v-model=resultFirstForm.username
+            label="Nickname"
+          ></v-text-field>
+         <v-text-field
+            style="width: 70%;"
+            dark
+            color="#E8E5AE"
+            v-model="resultFirstForm.email"
             label="E-mail"
           ></v-text-field>
          <v-text-field
             style="width: 70%;"
             dark
             color="#E8E5AE"
-            v-model="userPassword"
+            v-model="resultFirstForm.password"
             label="Senha"
             :type="show ? 'text' : 'password'"
             :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
             @click:append="show = !show"
           ></v-text-field>
-         <v-text-field
-            style="width: 70%;"
-            dark
-            color="#E8E5AE"
-            v-model="passwordConfirmation"
-            label="Senha"
-            :type="showConfirmation ? 'text' : 'password'"
-            :append-icon="showConfirmation ? 'mdi-eye-off' : 'mdi-eye'"
-            @click:append="showConfirmation = !showConfirmation"
-          ></v-text-field>
-          <slot></slot>
+          <button type="button" class="btnWormz" @click="$emit('resultFirstForm', resultFirstForm)">PRÓXIMO</button>
         </div>
          
 </template>
@@ -36,13 +33,11 @@
 export default {
     data(){
       return{
-        userEmail: '',
-        userPassword: '',
-        passwordConfirmation: '',
+        resultFirstForm: {},
         show: false,
         showConfirmation: false,
       }
-    },
+    }
 }
 </script>
 

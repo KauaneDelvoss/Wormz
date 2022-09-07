@@ -21,7 +21,8 @@
       <div class="dropdown">
         <div class="header-title list-item perfil" @click="show = !show">
             PERFIL
-          <v-icon class="v-icon-item">mdi-chevron-down</v-icon>
+          <v-icon v-if="!show" class="v-icon-item">mdi-chevron-down</v-icon>
+          <v-icon v-if="show" class="v-icon-item">mdi-chevron-up</v-icon>
         </div>
       </div>
       <div v-if="show" class="dropdown-content">

@@ -104,7 +104,7 @@ export default {
     },
     submitSignIn(){
       this.$router.push({
-        path: '/cadastro/cadastroWormz'
+        path: '/cadastroUser'
       })
     }
   }
