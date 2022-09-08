@@ -20,7 +20,12 @@
     <div class="icon-wrapper d-flex flex-row align-center justify-center margin-right-page hide-mobile-l">
       <div class="dropdown">
         <div class="header-title list-item perfil" @click="show = !show">
+          <span v-if="user.username">
+            OLÁ, {{ user.username.toUpperCase() }}
+          </span>
+          <span v-else>
             PERFIL
+          </span>
           <v-icon v-if="!show" class="v-icon-item">mdi-chevron-down</v-icon>
           <v-icon v-if="show" class="v-icon-item">mdi-chevron-up</v-icon>
         </div>
@@ -41,7 +46,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import ConfigUser from '~/components/ConfigUser'
 export default {
   props: {activeToggleBar: Boolean}  ,
@@ -97,6 +102,9 @@ export default {
       '$route' (to, from){
         this.pageActive = to.path
       }
+    },
+    computed: {
+      ...mapState('auth', ['user'])
     }
 };
 </script>

@@ -44,7 +44,7 @@
               </v-col>
               <v-col cols="8">
                 <div v-if="activeConfig == 0">
-                  <user />
+                  <user @fechar="dialog = false" />
                 </div>
                 <!-- continua -->
               </v-col>

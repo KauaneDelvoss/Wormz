@@ -70,7 +70,7 @@
     </div>
     <div class="box-config-user d-flex flex-row align-center">
       <div class="header-title ms-3">Deletar Perfil</div>
-      <button class="btnWormz special mt-5 ms-3" type="button" @click="deleteUser">DELETAR</button>
+      <button class="btnWormz special mt-5 ms-3" type="button" @click="deleteUser(), $emit('fechar')">DELETAR</button>
     </div>
   </div>
 </template>

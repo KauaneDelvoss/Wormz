@@ -10,9 +10,15 @@
             cols="auto"
             class="d-flex flex-column justify-center col-mobile"
           >
-            <div class="h1 mobile">Usuário</div>
+            <div class="h1 mobile">{{ user.username }}</div>
             <div
               class="local-wrapper d-flex flex-row mt-n5"
+              style="opacity: 90%"
+            >
+              <div class="h3 ms-3">{{user.first_name}}{{user.last_name}}</div>
+            </div>
+            <div
+              class="local-wrapper d-flex flex-row mt-3"
               style="opacity: 90%"
             >
               <v-icon class="v-icon-item">mdi-google-maps</v-icon>
@@ -40,13 +46,9 @@
       <v-col cols="9" class="col-mobile-content">
         <div v-if="active == 0">
           <div class="margin-left-page div-mobile-content" style="max-width: 40vw">
-            <div class="h3">Título da biografia</div>
+            <div class="h3">Biografia</div>
             <div class="subtitulo mt-5">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget a a
-              ac, fermentum, id amet, sagittis. Urna justo fermentum in nascetur
-              elementum ornare. Phasellus blandit proin molestie elit, etiam et
-              in duis purus. In quis placerat nisl aliquam ullamcorper tristique
-              a, suspendisse velit.
+              {{ user.user_biography }}
             </div>
           </div>
           <div class="box-books">
@@ -104,6 +106,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -112,6 +115,9 @@ export default {
     };
   },
   middleware: 'auth',
+  computed: {
+    ...mapState('auth', ['user'])
+  }
 };
 </script>
 

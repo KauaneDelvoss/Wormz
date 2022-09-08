@@ -18,7 +18,9 @@ export const mutations = {
 
 export const actions = {
     GET_URL({state, commit}){
-            this.$axios.$get(state.url_search)
+            this.$axios.$get(state.url_search, {headers: {
+                'Authorization': ''
+            }})
             .then(res => { 
                 commit('COMMIT_URL',  res.items)
             })
