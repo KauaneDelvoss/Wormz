@@ -1,12 +1,13 @@
+from email.policy import default
 from django.db import models
 
 # Create your models here.
 
 class User(models.Model):
-    # coduser
     # codadress
     # codbookshelf
     # name_user = models.CharField(max_length=100)  # not null
+    cod_user = models.IntegerField(default=0)
     nickname = models.CharField(max_length=50)  # not null unique
     #password = models.CharField(max_length=15)  # not null -> tem que mudar no modelo
     #email = models.EmailField(max_length=50)  # not null

@@ -34,27 +34,38 @@ export const mutations = {
         if(process.client){
             localStorage.clear()
         }
-    }
+    },
 }
 
 export const actions = {
     async LOGIN( { commit }, user){
         try{
+            const getFormData = object => Object.keys(object).reduce((formData, key) => {
+                formData.append(key, object[key]);
+                return formData;
+            }, new FormData());
+
             const userInfo = await this.$authServiceLogin.login(user)
             user.token = userInfo.access
+            
+            const userResponse = (await this.$axios.post('/get/user', getFormData({'username': user.username }), {headers: {'Content-Type': 'multipart/form-data'}})).data
+            user.id = userResponse.id
+            user.first_name = userResponse.first_name
+            user.last_name = userResponse.last_name
+
             commit('SET_LOGIN_INFO', user)
             return Promise.resolve(userInfo)
         } catch(e) {
-            commit('SET_LOGOUT')
+            dispatch('LOGOUT')
             return Promise.reject(e)
         }
     },
 
-    LOGOUT({commit}){
+    async LOGOUT({commit}){
         commit('SET_LOGOUT')
     },
 
-    SIGN_UP_USER({commit, dispatch}, formData, formUser){
+    SIGN_UP_USER({ commit, dispatch, state }, formData){
         const getFormData = object => Object.keys(object).reduce((formData, key) => {
             formData.append(key, object[key]);
             return formData;
@@ -68,19 +79,14 @@ export const actions = {
                 dispatch('LOGIN', { "username": formData.username, "password": formData.password }).then(response => {
                     if(response){
                         commit('INITIALIZE_STORE')
-                        dispatch('SIGN_UP_BIO', formUser)
+                    } else {
+                        state.user = {}
+                        state.loggedIn = false
                     }
                 })
             } else {
                 alert(response.data)
             }
-        })
-
-    },
-
-    SIGN_UP_BIO(formUser){
-        this.$axios.post('/users/', formUser).then(response => {
-            console.log(response)
         })
     }
 }

@@ -56,16 +56,9 @@
           <v-btn
             class="dropdown-item"
             text
-            @click="(dialog = false), clearInput()"
+            @click="(dialog = false)"
           >
             Close
-          </v-btn>
-          <v-btn
-            class="dropdown-item"
-            text
-            @click="(dialog = false), saveConfig()"
-          >
-            Save
           </v-btn>
         </v-card-actions>
       </v-card>

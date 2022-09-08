@@ -26,7 +26,9 @@
                 <button
                   type="button"
                   class="btnWormz"
-                  @click="SIGN_UP_USER(formData, formUser)"
+                  @click="SIGN_UP_USER(formData), 
+                  //SIGN_UP_BIO(formUser), 
+                  goTo()"
                 >
                   CONCLUIR
                 </button>
@@ -63,21 +65,24 @@ export default {
     };
   },
   methods: {
-    ...mapActions("auth", ["SIGN_UP_USER"]),
+    ...mapActions("auth", ["SIGN_UP_USER", "SIGN_UP_BIO"]),
 
     setResult(e) {
       this.formData["username"] = e.username;
-      this.formUser["nickname"] = e.username
       this.formData["password"] = e.password;
       this.formData["email"] = e.email;
       this.next();
     },
 
-    setSecondResult(e){
-      this.formData["first_name"] = e.first_name
-      this.formData["last_name"] = e.last_name
-      this.formUser["user_biography"] = e.user_biography
-      this.next()
+    setSecondResult(e) {
+      this.formData["first_name"] = e.first_name;
+      this.formData["last_name"] = e.last_name;
+      this.formData["user_biography"] = e.user_biography;
+      this.next();
+    },
+
+    goTo(){
+      this.$router.push({path: '/SearchBib'})
     },
 
     next() {
