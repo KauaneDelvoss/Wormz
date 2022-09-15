@@ -42,9 +42,14 @@ def cadastro(request):
 def getUser(request):
     username = request.POST.get("username")
     user = UserDjangoAuth.objects.get(username = username)
+    perfil = User.objects.get(nickname = username)
+    
     serializers = UserAuthSerializer(user)
+    data = serializers.data
 
-    json = JSONRenderer().render(serializers.data)
+    data.update(user_biography = perfil.user_biography)
+
+    json = JSONRenderer().render(data)
     return HttpResponse(json, content_type="text/json-comment-filtered")
 
 def updateUser(request):

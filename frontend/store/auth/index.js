@@ -52,6 +52,7 @@ export const actions = {
             user.id = userResponse.id
             user.first_name = userResponse.first_name
             user.last_name = userResponse.last_name
+            user.user_biography = userResponse.user_biography
 
             commit('SET_LOGIN_INFO', user)
             return Promise.resolve(userInfo)

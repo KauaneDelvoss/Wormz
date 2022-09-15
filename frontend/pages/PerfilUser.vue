@@ -15,7 +15,7 @@
               class="local-wrapper d-flex flex-row mt-n5"
               style="opacity: 90%"
             >
-              <div class="h3 ms-3">{{user.first_name}}{{user.last_name}}</div>
+              <div class="h3 ms-3">{{user.first_name}} {{user.last_name}}</div>
             </div>
             <div
               class="local-wrapper d-flex flex-row mt-3"
@@ -47,7 +47,7 @@
         <div v-if="active == 0">
           <div class="margin-left-page div-mobile-content" style="max-width: 40vw">
             <div class="h3">Biografia</div>
-            <div class="subtitulo mt-5">
+            <div class="header-title mt-5">
               {{ user.user_biography }}
             </div>
           </div>

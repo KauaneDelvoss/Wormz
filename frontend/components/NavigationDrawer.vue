@@ -19,12 +19,9 @@
     </div>
     <div class="icon-wrapper d-flex flex-row align-center justify-center margin-right-page hide-mobile-l">
       <div class="dropdown">
-        <div class="header-title list-item perfil" @click="show = !show">
-          <span v-if="user.username">
+        <div v-if="user.username" class="header-title list-item perfil" @click="show = !show">
+          <span>
             OLÁ, {{ user.username.toUpperCase() }}
-          </span>
-          <span v-else>
-            PERFIL
           </span>
           <v-icon v-if="!show" class="v-icon-item">mdi-chevron-down</v-icon>
           <v-icon v-if="show" class="v-icon-item">mdi-chevron-up</v-icon>
@@ -35,7 +32,7 @@
           <v-icon small class="v-icon-item ms-2">mdi-menu-right</v-icon>
         </div>
         <configUser class="mb-1 mt-3"></configUser>
-        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="logOut">LOG-OUT
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, logOut()">LOG-OUT
           <v-icon small class="v-icon-item ms-2">mdi-logout-variant</v-icon>
         </div>
       </div>
