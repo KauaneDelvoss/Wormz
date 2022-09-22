@@ -24,5 +24,18 @@ export const actions = {
             .then(res => { 
                 commit('COMMIT_URL',  res.items)
             })
-        }
+        },
+
+    GET_BOOKS({state}, payload){
+        const url_search = state.url + payload + "&maxResults=40" + "&key=" + state.api_key 
+    
+        this.$axios.$get(url_search, {headers: {
+            'Authorization': ''
+        }})
+        .then(res => { 
+            console.log(res.items)
+            return res.items
+        })
+        
+    }
 }

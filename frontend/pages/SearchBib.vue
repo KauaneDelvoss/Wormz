@@ -21,7 +21,7 @@
             placeholder="Blade Runner..."
             id="form-area"
             v-model="searchField"
-            @keyup.enter="search()"
+            @keyup="search(searchField)"
             
           />
           <div class="icon-search d-flex flex-column">
@@ -40,21 +40,31 @@
         </div>
 
         <div v-if="searchField.length > 0" class="margin-left-page margin-right-page">
-          <div class="h3 mt-10 mb-2">Resultados da sua pesquisa: </div>
+          <div class="h3 mt-10 mb-8">Resultados da sua pesquisa: </div>
           <v-row>
-            <v-col cols="12">
-                <BooksCarousel :books="books" />
-            </v-col>
+            <div class="margin-left-page margin-right-page d-flex flex-wrap justify-center" style="gap: 2vw ;">
+              <div v-for="book in books" :key="book">
+                <CardBooks :book="book" class="book" />
+              </div>
+            </div>
           </v-row>
+          <!-- <v-row>
+            <v-col cols="12">
+                <div v-for="book in books" :key="book">
+                  <CardBooks :book="book" />
+                </div>
+            </v-col>
+          </v-row> -->
         </div>
 
-        <!--
-          <div class="margin-left-page margin-right-page static-data">
-            <div class="h3 mt-10 mb-2">Destaques em ficção científica:
-              <BooksCarousel :books="searchStatic()" />
+        <div v-else class="margin-left-page margin-right-page">
+            <div class="margin-left-page margin-right-page static-data">
+              <div class="h3 mt-10 mb-2">Destaques:
+                <BooksCarousel :books="search_getter('science fiction')" />
+              </div>
             </div>
-          </div>
-        !-->
+        </div>
+
     </v-container>
   </v-app>
 </template>
@@ -67,22 +77,29 @@ import { mapState } from "vuex";
 export default {
   data(){
     return{
-      searchField: ''
+      searchField: '',
+      mode: ''
     }
   },
   middleware: 'auth',
   components: { ImgBackground, CardBooks },
   methods: {
-    search(){
+    search(item){
       this.$store.commit(
       "google_books/MAKE_URL_SEARCH",
-      this.searchField
+      item
     );
     this.$store.dispatch("google_books/GET_URL");
+    },
+
+    search_getter(item){
+      this.search(item)
+      return this.books
     }
+    
   },
   computed: {
-    ...mapState("google_books", ["books"]),
+    ...mapState("google_books", ["books"])
 
     // NECESSÁRIO GETTER !
     //seacrhStatic(){
@@ -99,6 +116,12 @@ export default {
 
 template {
   overflow-x: hidden;
+}
+
+.book:hover {
+  transform: scale(1.2);
+  transition: all 0.2s;
+  z-index: 1;
 }
 
 .search-bib{

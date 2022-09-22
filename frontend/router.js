@@ -6,7 +6,7 @@ import loginWormz from '~/pages/loginWormz'
 import PerfilUser from '~/pages/PerfilUser'
 import SearchBib from '~/pages/SearchBib'
 import cadastroUser from '~/pages/cadastro/cadastroWormz'
-import UserBib from '~/pages/UserBib'
+import UserBib from '~/pages/bib/default'
 
 Vue.use(Router)
 
@@ -37,7 +37,7 @@ export function createRouter() {
       {
         path: '/userBib',
         component: UserBib
-      }
+      },
     ]
   })
 }
