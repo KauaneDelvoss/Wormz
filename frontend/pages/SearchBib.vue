@@ -2,7 +2,7 @@
   <v-app class="search-bib">
     <v-container fluid>
 
-        <v-row class="mobile-profile">
+        <v-row class="mobile-profile mt-5">
           <v-col class="ms-md-12 d-flex flex-column align-center col-default">
             <div class="d-flex flex-column">
               <div class="h1">Wormz</div>

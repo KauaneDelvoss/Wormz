@@ -119,10 +119,12 @@ export default {
 }
 
 .navigation-drawer{
+  top: 0;
   width: 100vw;
-  min-height: $header-height;
-  max-height: $header-height;
+  height: $header-height;
   background-color: #434c6d;
+  position: fixed;
+  z-index: 2;
 }
 
 .v-icon-item{

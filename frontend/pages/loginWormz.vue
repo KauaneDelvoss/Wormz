@@ -1,6 +1,6 @@
 <template>
   <v-app class="login-wormz">
-    <v-row class="app flex-row" style="height: 100vh;">
+    <v-row class="app flex-row mt-5" style="height: 100vh;">
       <v-col class="m-5 d-flex flex-column justify-center col-default">
         <div class="box-input d-flex flex-column align-center" style="gap:3vh;">
           <div class="titulo">
