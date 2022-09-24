@@ -26,10 +26,16 @@
         .h1{
             font-size: 20vw;
         }
+        .h3{
+            font-size: 4vw
+        }
     }
     @media (min-width: variables.$phone_l){
         .hide-desktop{
             display: none !important;
+        }
+        .h3{
+            font-size: 4vh
         }
     }
 }

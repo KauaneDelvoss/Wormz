@@ -7,6 +7,7 @@ import PerfilUser from '~/pages/PerfilUser'
 import SearchBib from '~/pages/SearchBib'
 import cadastroUser from '~/pages/cadastro/cadastroWormz'
 import UserBib from '~/pages/bib/default'
+import bookshelfView from '~/pages/bib/_bookshelf'
 
 Vue.use(Router)
 
@@ -36,8 +37,12 @@ export function createRouter() {
       },
       {
         path: '/userBib',
-        component: UserBib
+        component: UserBib,
       },
+      { 
+        path: '/userBib/bookshelf/:id?',
+        component: bookshelfView,
+      }
     ]
   })
 }
