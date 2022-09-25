@@ -23,9 +23,6 @@
         .h1{
             font-size: 9vh !important
         }
-        .h3{
-            font-size: 3vh
-        }
       }
     @media (max-width: variables.$phone_l){
         .hide-mobile-l{
@@ -38,16 +35,10 @@
         .h1{
             font-size: 9vh !important
         }
-        .h3{
-            font-size: 3vh
-        }
     }
     @media (min-width: variables.$phone_l){
         .hide-desktop{
             display: none !important;
-        }
-        .h3{
-            font-size: 4vh
         }
     }
 }
