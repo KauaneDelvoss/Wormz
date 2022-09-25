@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto book" width="9vw" height="28vh">
+  <v-card class="mx-auto book" >
     <v-img
       v-if="
         book.volumeInfo.imageLinks
@@ -77,6 +77,15 @@ export default {
 <style lang="sass" scoped>
 @use '~/assets/sass/variables'
 
+@media (max-width: variables.$phone_l)
+  .book
+    width: 35vw !important
+
+@media (max-width: variables.$tablet_xl)
+  .book
+    width: 18vh !important    
+
+
 .bottom-gradient
   background-image: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.3) 100%)
 
@@ -84,6 +93,8 @@ export default {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
   background-color: variables.$primary-color
   border-radius: 15px
+  width: 9vw 
+  height: 28vh
 
 .card-icon
   margin-right: 0

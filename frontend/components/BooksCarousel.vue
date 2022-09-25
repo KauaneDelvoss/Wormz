@@ -52,7 +52,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
 .carousel-wrapper {
     max-width: 100vw;
     overflow-x: hidden;

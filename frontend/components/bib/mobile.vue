@@ -1,16 +1,17 @@
 <template>
   <div class="bib-view-mobile">
-    <v-row class="mobile-profile mt-5">
+    <v-row class="mobile-profile mt-12">
       <v-col class="ms-md-12 d-flex flex-column align-center col-default">
         <div class="d-flex flex-column">
-          <div class="h1 mb-n2">Wormz</div>
-          <v-divider id="divider" color="#E8E5AE"></v-divider>
-          <div class="subtitulo mt-4 text-center">
+          <div class="h1">Wormz</div>
+          <v-divider id="divider" class="mb-n4" color="#E8E5AE"></v-divider>
+          <div class="subtitulo mt-10 text-center">
             Procure na sua biblioteca:
           </div>
         </div>
       </v-col>
     </v-row>
+
     <div class="form-container d-flex flex-column align-center mt-4">
       <input
         type="text"
@@ -32,11 +33,14 @@
       <div class="margin-left-page margin-right-page static-data">
         <div class="h3 mt-10 mb-2">
           Destaques:
-            <v-card class="card mt-2" width="36vw" height="28vh">
-                <div style="height: 100%" class="icon d-flex align-center justify-center">
-                    <v-icon large>mdi-plus</v-icon>
-                </div>
-            </v-card>
+          <v-card class="card mt-2" width="36vw" height="28vh">
+            <div
+              style="height: 100%"
+              class="icon d-flex align-center justify-center"
+            >
+              <v-icon large>mdi-plus</v-icon>
+            </div>
+          </v-card>
           <p class="subtitulo-minimo">carrosel</p>
         </div>
       </div>
@@ -46,10 +50,13 @@
         <div class="h3 mt-10 mb-2">
           Matches:
           <v-card class="card mt-2" width="36vw" height="28vh">
-                <div style="height: 100%" class="icon d-flex align-center justify-center">
-                    <v-icon large>mdi-plus</v-icon>
-                </div>
-            </v-card>
+            <div
+              style="height: 100%"
+              class="icon d-flex align-center justify-center"
+            >
+              <v-icon large>mdi-plus</v-icon>
+            </div>
+          </v-card>
           <p class="subtitulo-minimo">carrosel</p>
         </div>
       </div>
@@ -59,10 +66,13 @@
         <div class="h3 mt-10 mb-2">
           Estantes:
           <v-card class="card mt-2" width="36vw" height="28vh">
-                <div style="height: 100%" class="icon d-flex align-center justify-center">
-                    <v-icon large>mdi-plus</v-icon>
-                </div>
-            </v-card>
+            <div
+              style="height: 100%"
+              class="icon d-flex align-center justify-center"
+            >
+              <v-icon large>mdi-plus</v-icon>
+            </div>
+          </v-card>
           <p class="subtitulo-minimo">carrosel</p>
         </div>
       </div>
@@ -81,6 +91,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@include breakpoints;
+
 .bib-view-mobile {
   background-image: linear-gradient(45deg, $bg-color, $secondary-color);
   min-height: 100vh;
@@ -100,8 +112,8 @@ export default {
   width: 1%;
 }
 
-.card{
-    border-radius: 15px;
-    background-color: $primary-color;
+.card {
+  border-radius: 15px;
+  background-color: $primary-color;
 }
 </style>

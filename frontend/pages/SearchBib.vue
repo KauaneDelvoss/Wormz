@@ -2,12 +2,12 @@
   <v-app class="search-bib">
     <v-container fluid>
 
-        <v-row class="mobile-profile mt-5">
+        <v-row class="mobile-profile mt-12">
           <v-col class="ms-md-12 d-flex flex-column align-center col-default">
             <div class="d-flex flex-column">
               <div class="h1">Wormz</div>
               <v-divider id="divider" class="mb-n4" color="#E8E5AE"></v-divider>
-              <div class="subtitulo mt-12 text-center">
+              <div class="subtitulo mt-10 text-center">
                 Procure por livro ou por autor:
               </div>
             </div>
@@ -125,7 +125,7 @@ template {
 }
 
 .search-bib{
-  background-color: $bg-color !important;
+  background-image: linear-gradient(45deg, $bg-color, $secondary-color) !important;
   max-width: 100vw;
 }
 

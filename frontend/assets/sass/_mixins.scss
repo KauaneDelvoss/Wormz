@@ -14,6 +14,18 @@
             columns: 0 !important; 
             flex-basis: auto !important;
         }
+        .margin-left-page{
+            margin-left: 15px
+        }
+        .margin-right-page{
+            margin-right: 15px
+        }
+        .h1{
+            font-size: 9vh !important
+        }
+        .h3{
+            font-size: 3vh
+        }
       }
     @media (max-width: variables.$phone_l){
         .hide-mobile-l{
@@ -24,10 +36,10 @@
             flex-basis: auto !important;
         }
         .h1{
-            font-size: 20vw;
+            font-size: 9vh !important
         }
         .h3{
-            font-size: 4vw
+            font-size: 3vh
         }
     }
     @media (min-width: variables.$phone_l){
