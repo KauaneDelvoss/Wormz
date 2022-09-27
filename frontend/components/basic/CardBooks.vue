@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto book" >
+  <v-card class="mx-auto book" @click="goToBook(book.id)">
     <v-img
       v-if="
         book.volumeInfo.imageLinks
@@ -70,6 +70,11 @@ export default {
     likeBook(id) {
       this.$store.commit("search_books/LIKE_BOOK", id);
     },
+    goToBook(id) {
+      this.$router.push({
+        path: '/book/' + id
+      })
+    }
   },
 };
 </script>

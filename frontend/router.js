@@ -8,6 +8,7 @@ import SearchBib from '~/pages/SearchBib'
 import cadastroUser from '~/pages/cadastro/cadastroWormz'
 import UserBib from '~/pages/bib/default'
 import bookshelfView from '~/pages/bib/_bookshelf'
+import bookView from '~/pages/bib/_book'
 
 Vue.use(Router)
 
@@ -42,6 +43,10 @@ export function createRouter() {
       { 
         path: '/userBib/bookshelf/:id?',
         component: bookshelfView,
+      },
+      {
+        path: '/book/:id?',
+        component: bookView
       }
     ]
   })

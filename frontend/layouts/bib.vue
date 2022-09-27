@@ -6,7 +6,7 @@
     />
     <ToggleBar v-if="activeToggleBar" class="hide-desktop" />
     <DesktopView class="hide-mobile-l" />
-    <MobileView />
+    <MobileView class="hide-desktop" />
   </v-app>
 </template>
 
