@@ -21,7 +21,7 @@
             placeholder="Blade Runner..."
             id="form-area"
             v-model="searchField"
-            @keyup="search(searchField)"
+            @keyup.enter="search(searchField)"
             
           />
           <div class="icon-search d-flex flex-column">

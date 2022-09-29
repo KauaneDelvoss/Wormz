@@ -91,7 +91,7 @@ export default {
 }
 
 .card-container {
-  background-color: $secondary-color;
+  background-color: $bg-color;
 }
 
 .container-config {

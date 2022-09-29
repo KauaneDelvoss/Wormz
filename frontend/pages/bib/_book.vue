@@ -1,6 +1,6 @@
 <template>
-  <div class="book-view">
-        <v-row v-if="book.volumeInfo" class="d-flex container">
+  <div v-if="book.volumeInfo" class="book-view d-flex flex-column flex-grow-1 margin-left-page margin-right-page">
+        <v-row class="d-flex flex-container align-center">
             <v-col cols="6">
                 <div>
                     <p>
@@ -13,8 +13,13 @@
                     </div>
                     <span class="subtitulo data"> {{ book.volumeInfo.publishedDate }} </span>
                 </div>
+                <div>
+                    <button class="btnWormz" type="button" @click="irPara(path)">
+                        ADICIONAR A
+                    </button>
+                </div>
             </v-col>
-            <v-col cols="6" class="d-flex justify-end">
+            <v-col cols="6" class="d-flex">
                 <v-card class="mx-auto book">
                     <v-img
                     v-if="
@@ -28,6 +33,13 @@
                     />
                 </v-card>
             </v-col>
+        </v-row>
+        <v-divider class="divider my-10" />
+        <v-row class="box-description">
+            <p>
+                <span class="h3">Descrição</span>
+            </p>
+            <div class="subtitulo reading-text">{{ book.volumeInfo.description }}</div>
         </v-row>
   </div>
 </template>
@@ -52,7 +64,7 @@ export default {
 
 <style scoped lang="scss">
 .data{
-    font-size: 1.5vw;
+    font-size: 0.9rem;
     opacity: 80%;
 }
 
@@ -63,4 +75,33 @@ export default {
     height: 10vw;
     width: 9vw
 }
+
+.divider{
+    border-color: $primary-color !important;
+}
+
+.flex-container{
+    min-height: 18vw;
+}
+
+.reading-text{
+    font-size: 0.9rem;
+}
+
+.btnWormz{
+  background: $primary-color;
+  border-radius: 20px;
+  padding: 0.6vh 1.4vh;
+  color: black;
+  font-size: 1.5vh;
+  font-family: "Encode Sans", sans-serif;
+
+  &:hover{
+    background: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    transition: 00.5s;
+  }
+}
+
 </style>

@@ -23,28 +23,28 @@
       <v-row>
         <v-col class="barra-lateral d-flex flex-column" cols="2">
           <div class="box-item d-flex align-center">
-            <v-icon class="icon" large>mdi-cards-playing</v-icon>
-            <div class="header-title item-title">Indicações</div>
+            <v-icon class="icon">mdi-cards-playing</v-icon>
+            <div class="header-title item-title">Quizzes</div>
           </div>
           <v-divider class="divider-item"></v-divider>
           <div class="box-item d-flex align-center">
-            <v-icon class="icon" large>mdi-playlist-plus</v-icon>
-            <div class="header-title item-title">Criar Estante</div>
+            <v-icon class="icon">mdi-playlist-plus</v-icon>
+            <div class="header-title item-title" @click="openNewBook = true">Criar Estante</div>
             
           </div>
           <v-divider class="divider-item"></v-divider>
           <div class="box-item d-flex align-center">
-            <v-icon class="icon" large>mdi-human-greeting-proximity</v-icon>
+            <v-icon class="icon">mdi-human-greeting-proximity</v-icon>
             <div class="header-title item-title">Novo Match</div>
             
           </div>
           <v-divider class="divider-item"></v-divider>
           <div class="wrapper-div d-flex flex-column">
             <div class="box-item align-center d-flex">
-              <v-icon class="icon" large>mdi-bookshelf</v-icon>
+              <v-icon class="icon">mdi-bookshelf</v-icon>
               <div class="header-title item-title">Estantes</div>
-              <v-icon class="icon" large v-if="!open" @click="open = true">mdi-chevron-down</v-icon>
-              <v-icon class="icon" large v-else @click="open = false">mdi-chevron-up</v-icon>
+              <v-icon class="icon" v-if="!open" @click="open = true">mdi-chevron-down</v-icon>
+              <v-icon class="icon" v-else @click="open = false">mdi-chevron-up</v-icon>
             </div>
             <div v-if="open" class="bookshelves d-flex flex-column">
               <div class="margin-left-page header-title">
@@ -54,21 +54,25 @@
           </div>
         </v-col>
         <v-col class="conteudo" cols="10">
-          <v-container fluid fill-height class="conteudo-box">
+          <v-container fluid class="conteudo-box mt-10">
             <Nuxt />
           </v-container>
         </v-col>
       </v-row>
+
+      <OpenNewBook :dialog=openNewBook @close="openNewBook = false" />
     </div>
   </template>
   
   <script>
+  import OpenNewBook from '~/components/bib/OpenNewBook'
   export default {
+    components: { OpenNewBook },
     data(){
       return{
         open: false,
         searchField: '',
-        
+        openNewBook: false
       }
     }
   
