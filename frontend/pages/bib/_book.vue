@@ -13,8 +13,8 @@
                     </div>
                     <span class="subtitulo data"> {{ book.volumeInfo.publishedDate }} </span>
                 </div>
-                <div>
-                    <button class="btnWormz" type="button" @click="irPara(path)">
+                <div class="mt-5">
+                    <button class="btnWormz" type="button" @click="open = true">
                         ADICIONAR A
                     </button>
                 </div>
@@ -41,15 +41,21 @@
             </p>
             <div class="subtitulo reading-text">{{ book.volumeInfo.description }}</div>
         </v-row>
+
+        <BookShelfDialog @closeDialog="open = false" :dialog="open" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import BookShelfDialog from '~/components/bib/BookShelfDialog'
 export default {
     layout: 'bib',
+    components: { BookShelfDialog },
     data(){
-        return{}
+        return{
+            open: false
+        }
     },
     mounted(){
         const id = this.$router.currentRoute.params.id
