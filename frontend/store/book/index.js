@@ -12,7 +12,7 @@ export const mutations = {
 
 export const actions = {
     GET_URL({state, commit}, id){
-            const url = 'https://www.googleapis.com/books/v1/volumes/' + id + "?key=" + state.api_key
+            const url = 'https://www.googleapis.com/books/v1/volumes/' + id + '?projection=full' + "&key=" + state.api_key
             this.$axios.$get(url, {headers: {
                 'Authorization': ''
             }})

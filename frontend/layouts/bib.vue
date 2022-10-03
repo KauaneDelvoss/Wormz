@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import DesktopView from '~/components/bib/desktop'
-import MobileView from '~/components/bib/mobile'
+import DesktopView from '~/pages/bib/default/desktop'
+import MobileView from '~/pages/bib/default/mobile'
 
 export default {
   components: { DesktopView, MobileView },

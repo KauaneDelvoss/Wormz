@@ -2,7 +2,7 @@
   <div class="bookshelf-view">
     {{ id }}
     <v-row class="d-flex justify-center row">
-      <div v-for="book in this.bookshelf" :key="book" class="my-2 mx-5">
+      <div v-for="book in this.bookshelf" :key="book.id" class="my-2 mx-5">
         <CardBooks :book="book" />
       </div>
     </v-row>
