@@ -11,7 +11,7 @@
           display: none !important
         }
         .col-default{
-            columns: 0 !important; 
+            columns: 0 !important;
             flex-basis: auto !important;
         }
         .margin-left-page{
@@ -40,5 +40,10 @@
         .hide-desktop{
             display: none !important;
         }
+    }
+    @media (min-width: variables.$desktop_l){
+      .header-title{
+        font-size: 0.8rem !important;
+      }
     }
 }

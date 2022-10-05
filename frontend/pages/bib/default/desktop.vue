@@ -1,6 +1,6 @@
 <template>
     <div class="bib-user-desktop">
-    
+
 
       <v-row class="top-menu ms-5 me-8 align-center justify-space-between">
         <v-col cols="2" class="search-bar d-flex">
@@ -11,7 +11,7 @@
               id="form-area"
               v-model="searchField"
               @keyup="search(searchField)"
-              
+
             />
         </v-col>
         <!-- <div class="filter-box d-flex">
@@ -30,13 +30,13 @@
           <div class="box-item d-flex align-center">
             <v-icon class="icon">mdi-playlist-plus</v-icon>
             <div class="header-title item-title" @click="openNewBook = true">Criar Estante</div>
-            
+
           </div>
           <v-divider class="divider-item"></v-divider>
           <div class="box-item d-flex align-center">
             <v-icon class="icon">mdi-human-greeting-proximity</v-icon>
             <div class="header-title item-title">Novo Match</div>
-            
+
           </div>
           <v-divider class="divider-item"></v-divider>
           <div class="wrapper-div d-flex flex-column">
@@ -54,7 +54,7 @@
           </div>
         </v-col>
         <v-col class="conteudo" cols="10">
-          <v-container fluid class="conteudo-box mt-10">
+          <v-container fluid class="conteudo-box">
             <Nuxt />
           </v-container>
         </v-col>
@@ -63,7 +63,7 @@
       <OpenNewBook :dialog=openNewBook @close="openNewBook = false" />
     </div>
   </template>
-  
+
   <script>
   import OpenNewBook from '~/components/bib/OpenNewBook'
   export default {
@@ -75,10 +75,10 @@
         openNewBook: false
       }
     }
-  
+
   }
   </script>
-  
+
   <style lang="scss" scoped>
 
 #form-area {
@@ -89,7 +89,7 @@
     border-radius: 20px;
     padding-left: 2vw;
   }
-  
+
   .bib-user-desktop{
     background-color: $secondary-color !important;
     overflow: hidden;
@@ -99,26 +99,26 @@
     overflow: hidden;
     height: 100vh;
   }
-  
+
   .barra-lateral{
     background-color: $bg-color;
     height: 100vh;
     position: sticky;
   }
-  
+
   .box-item{
     height: 8vh;
     padding-left: 20%;
     gap: 1vw;
   }
-  
+
   .divider-item{
     border-color: $primary-color !important;
   }
-  
+
   .icon{
     color: $primary-color !important;
   }
-  
-  
+
+
   </style>
