@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="book.volumeInfo"
-    class="book-view d-flex flex-column flex-grow-1 margin-left-page margin-right-page"
+    class="book-view d-flex mb-4 flex-column flex-grow-1 margin-left-page margin-right-page"
   >
     <v-row class="d-flex flex-container align-center">
       <v-col cols="6">
@@ -106,6 +106,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .data {
   font-size: 0.9rem;
   opacity: 80%;

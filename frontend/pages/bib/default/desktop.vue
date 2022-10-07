@@ -21,7 +21,7 @@
       </v-row>
       <v-divider class="divider-item mb-3" style="border-style:dashed;"></v-divider>
       <v-row>
-        <v-col class="barra-lateral d-flex flex-column" cols="2">
+        <v-col class="barra-lateral" cols="2">
           <div class="box-item d-flex align-center">
             <v-icon class="icon">mdi-cards-playing</v-icon>
             <div class="header-title item-title">Quizzes</div>
@@ -46,11 +46,19 @@
               <v-icon class="icon" v-if="!open" @click="open = true">mdi-chevron-down</v-icon>
               <v-icon class="icon" v-else @click="open = false">mdi-chevron-up</v-icon>
             </div>
-            <div v-if="open" class="bookshelves d-flex flex-column">
+            <div v-if="open" class="bookshelves d-flex flex-column mb-3">
               <div class="margin-left-page header-title">
                 <router-link style="color: white" to="/userBib/bookshelf/1">Exemplo</router-link>
               </div>
             </div>
+          </div>
+          <v-divider class="divider-item"></v-divider>
+          <div class="d-flex wrapper-div flex-column">
+            <div class="box-item align-center d-flex">
+              <v-icon class="icon">mdi-nut</v-icon>
+              <div class="header-title item-title" >Configurações</div>
+            </div>
+            <!-- fazer configs !-->
           </div>
         </v-col>
         <v-col class="conteudo" cols="10">
@@ -60,7 +68,7 @@
         </v-col>
       </v-row>
 
-      <OpenNewBook :dialog=openNewBook @close="openNewBook = false" />
+    <OpenNewBook :dialog=openNewBook @close="openNewBook = false" />
     </div>
   </template>
 
@@ -95,15 +103,20 @@
     overflow: hidden;
     scrollbar-color: transparent;
     width: 100vw;
-    position: relative;
     overflow: hidden;
-    height: 100vh;
+    min-height: 100vh;
   }
 
   .barra-lateral{
     background-color: $bg-color;
     height: 100vh;
-    position: sticky;
+    z-index: 1;
+    position: fixed;
+  }
+
+  .conteudo{
+    position: absolute;
+    background-color: $secondary-color;
   }
 
   .box-item{
@@ -119,6 +132,5 @@
   .icon{
     color: $primary-color !important;
   }
-
 
   </style>
