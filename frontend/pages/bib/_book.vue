@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="book.volumeInfo"
-    class="book-view d-flex mb-4 flex-column flex-grow-1 margin-left-page margin-right-page"
+    class="book-view d-flex mb-4 flex-column flex-grow-1 margin-left-page margin-right-page mt-10"
   >
     <v-row class="d-flex flex-container align-center">
       <v-col cols="6">

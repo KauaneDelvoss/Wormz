@@ -1,6 +1,8 @@
 <template>
-  <div class="bib-user-desktop">
-    <v-row class="top-menu ms-5 me-8 align-center justify-space-between">
+    <div class="bib-user-desktop">
+
+
+      <v-row class="top-menu ms-5 me-8 align-center justify-space-between">
         <v-col cols="2" class="search-bar d-flex">
           <input
               type="text"
@@ -16,10 +18,11 @@
           <v-icon class="icon">mdi-filter-menu</v-icon>
           <span class="header-title ms-2">Filtros</span>
         </div>  -->
-    </v-row>
-
-    <div class="sidebar">
-      <div class="box-item d-flex align-center mt-2">
+      </v-row>
+      <v-divider class="divider-item mb-3" style="border-style:dashed;"></v-divider>
+      <v-row>
+        <v-col class="barra-lateral" cols="2">
+          <div class="box-item d-flex align-center">
             <v-icon class="icon">mdi-cards-playing</v-icon>
             <div class="header-title item-title">Quizzes</div>
           </div>
@@ -57,19 +60,19 @@
             </div>
             <!-- fazer configs !-->
           </div>
-    </div>
-
-    <div class="conteudo">
-      <v-container fluid class="conteudo-box">
+        </v-col>
+        <v-col class="conteudo" cols="10">
+          <v-container fluid class="conteudo-box">
             <Nuxt />
           </v-container>
+        </v-col>
+      </v-row>
+
+    <OpenNewBook :dialog=openNewBook @close="openNewBook = false" />
     </div>
+  </template>
 
-
-  </div>
-</template>
-
-<script>
+  <script>
   import OpenNewBook from '~/components/bib/OpenNewBook'
   export default {
     components: { OpenNewBook },
@@ -84,13 +87,7 @@
   }
   </script>
 
-<style lang="scss" scoped>
-
-.top-menu{
-  position: absolute;
-  margin-top: $header-height;
-  z-index: 1;
-}
+  <style lang="scss" scoped>
 
 #form-area {
     height: 2.5vh;
@@ -110,17 +107,15 @@
     min-height: 100vh;
   }
 
-  .sidebar{
+  .barra-lateral{
     background-color: $bg-color;
-    width: 15vw;
     height: 100vh;
     z-index: 1;
     position: fixed;
   }
 
   .conteudo{
-    margin-left: 15vw;
-    position: relative;
+    position: absolute;
     background-color: $secondary-color;
   }
 

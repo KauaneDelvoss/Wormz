@@ -1,7 +1,7 @@
 <template>
   <div class="bookshelf-view">
     {{ id }}
-    <v-row class="d-flex justify-center row">
+    <v-row class="d-flex justify-center row mt-10">
       <div v-for="book in this.bookshelf" :key="book.id" class="my-2 mx-5">
         <CardBooks :book="book" />
       </div>
