@@ -25,8 +25,8 @@
           </div>
           <v-divider class="divider-item"></v-divider>
           <div class="box-item d-flex align-center">
-            <v-icon class="icon">mdi-playlist-plus</v-icon>
-            <div class="header-title item-title" @click="openNewBook = true">Criar Estante</div>
+            <v-icon @click="openNewBook = true" class="icon">mdi-playlist-plus</v-icon>
+            <div class="header-title item-title" >Criar Estante</div>
 
           </div>
           <v-divider class="divider-item"></v-divider>
@@ -116,6 +116,7 @@
     height: 100vh;
     z-index: 1;
     position: fixed;
+    margin-top: $header-height;
   }
 
   .conteudo{

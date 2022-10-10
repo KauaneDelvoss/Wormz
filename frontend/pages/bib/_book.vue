@@ -71,7 +71,7 @@
         <div class="user-review d-flex">
             <ReviewAction />
         </div>
-        <div class="show-reviews">
+        <div class="show-reviews mt-10 mb-10">
             <ReviewView />
         </div>
     </div>
@@ -120,16 +120,8 @@ export default {
   width: 9vw;
 }
 
-.divider {
-  border-color: $primary-color !important;
-}
-
 .flex-container {
   min-height: 18vw;
-}
-
-.reading-text {
-  font-size: 0.9rem;
 }
 
 .btnWormz {

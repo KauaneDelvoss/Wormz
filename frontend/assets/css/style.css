@@ -49,6 +49,10 @@
   color: #E8E5AE;
 }
 
+.reading-text {
+  font-size: 0.9rem;
+}
+
 .col-default {
   columns: 6;
 }
@@ -75,6 +79,10 @@
 .app {
   margin: 0 auto;
   padding: 1.5rem 0;
+}
+
+.divider {
+  border-color: #E8E5AE !important;
 }
 
 .margin-left-page {
