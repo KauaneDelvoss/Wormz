@@ -6,7 +6,7 @@
       max-width="300px"
     >
       <v-card class="card-container">
-        <v-card-title class="h3">Adicionar a estante</v-card-title>
+        <v-card-title class="h3">Adicionar à estante</v-card-title>
         <v-divider class="divider"></v-divider>
         <v-card-text style="height: 300px;" class="mt-5">
           <div class="checkboxes">

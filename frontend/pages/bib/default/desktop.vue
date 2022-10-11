@@ -59,7 +59,7 @@
       <div class="d-flex wrapper-div flex-column">
         <div class="box-item align-center d-flex">
           <v-icon class="icon">mdi-nut</v-icon>
-          <div class="header-title item-title">Configurações</div>
+          <div class="header-title item-title pointer" @click="openConfig = true">Configurações</div>
         </div>
         <!-- fazer configs !-->
       </div>
@@ -72,18 +72,22 @@
     </div>
 
     <OpenNewBook :dialog="openNewBook" @close="openNewBook = false" />
+    <ConfigUser :dialog="openConfig" @close="openConfig = false" />
   </div>
 </template>
 
 <script>
 import OpenNewBook from "~/components/bib/OpenNewBook";
+import ConfigUser from "~/components/ConfigUser"
+
 export default {
-  components: { OpenNewBook },
+  components: { OpenNewBook, ConfigUser },
   data() {
     return {
       open: false,
       searchField: "",
       openNewBook: false,
+      openConfig: false,
     };
   },
 };

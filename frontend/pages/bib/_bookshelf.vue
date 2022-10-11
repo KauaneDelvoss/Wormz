@@ -22,6 +22,8 @@ export default {
     mounted() {
         this.$store.dispatch("bib/GET_URL")
         this.id = this.$router.currentRoute.params.id
+
+        console.log(this.$router.currentRoute)
     },
     computed: {
       ...mapState('bib', ['bookshelf'])

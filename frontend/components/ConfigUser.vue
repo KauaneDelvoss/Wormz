@@ -7,24 +7,6 @@
       persistent
       max-width="55vw"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <div
-          class="
-            mb-3
-            d-flex
-            dropdown-item
-            flex-row
-            align-center
-            header-title
-            justify-between
-          "
-          v-on="on"
-          v-bind="attrs"
-        >
-          CONFIGURAÇÕES
-          <v-icon small class="v-icon-item ms-2">mdi-nut</v-icon>
-        </div>
-      </template>
       <v-card class="card-container">
         <v-card-title>
           <span class="h3 mt-5">Configurações</span>
@@ -44,7 +26,7 @@
               </v-col>
               <v-col cols="8">
                 <div v-if="activeConfig == 0">
-                  <user @fechar="dialog = false" />
+                  <user @fechar="$emit('close')" />
                 </div>
                 <!-- continua -->
               </v-col>
@@ -56,7 +38,7 @@
           <v-btn
             class="dropdown-item"
             text
-            @click="(dialog = false)"
+            @click="$emit('close')"
           >
             Close
           </v-btn>
@@ -70,9 +52,9 @@
 import user from "~/components/configUser/user";
 export default {
   components: { user },
+  props: { dialog: Boolean },
   data() {
     return {
-      dialog: false,
       configs: ["Perfil", "Estantes", "Google Books"],
       activeConfig: 0,
     };

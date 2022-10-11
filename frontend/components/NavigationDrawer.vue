@@ -31,14 +31,18 @@
         <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, transitionMaker('/PerfilUser')">ACESSAR PERFIL
           <v-icon small class="v-icon-item ms-2">mdi-menu-right</v-icon>
         </div>
-        <configUser class="mb-1 mt-3"></configUser>
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="(show=false, showConfig = true)">CONFIGURAÇÕES
+          <v-icon small class="v-icon-item ms-2">mdi-nut</v-icon>
+        </div>
         <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, logOut()">LOG-OUT
           <v-icon small class="v-icon-item ms-2">mdi-logout-variant</v-icon>
         </div>
+        <ConfigUser :dialog="showConfig" @close="showConfig = false" />
       </div>
     </div>
 
     <v-divider class="divider-item" />
+
   </div>
 </template>
 
