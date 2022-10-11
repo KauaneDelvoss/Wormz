@@ -60,7 +60,7 @@
         <div v-else class="margin-left-page margin-right-page">
             <div class="margin-left-page margin-right-page static-data">
               <div class="h3 mt-10 mb-2">Destaques:
-                <BooksCarousel :books="search_getter('science fiction')" />
+                <BooksCarousel carouselId="1" :books="search_getter('science fiction')" />
               </div>
             </div>
         </div>

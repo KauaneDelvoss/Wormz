@@ -53,15 +53,15 @@
           </div>
           <div class="box-books">
             <div class="h3 bookshelf-name margin-left-page mt-5">Favoritos</div>
-            <BooksCarousel class="mx-7" />
+            <BooksCarousel carouselId="c1" :books="bookshelf" class="mx-7" />
           </div>
         </div>
 
         <div v-if="active == 1">
           <div class="h3 bookshelf-name margin-left-page mt-5">Favoritos</div>
-          <BooksCarousel  /> <!-- erro ! (não aceita mais de um uso na pg)-->
+          <BooksCarousel carouselId="c2" :books="bookshelf"  /> <!-- erro ! (não aceita mais de um uso na pg)-->
           <div class="h3 bookshelf-name margin-left-page mt-5">Dark Vibes</div>
-          <BooksCarousel />
+          <BooksCarousel carouselId="c3" :books="bookshelf" />
         </div>
 
         <div v-if="active == 2" class="margin-left-page margin-right-page">
@@ -115,8 +115,12 @@ export default {
     };
   },
   middleware: 'auth',
+  mounted(){
+    this.$store.dispatch("bib/GET_URL")
+  },
   computed: {
-    ...mapState('auth', ['user'])
+    ...mapState('auth', ['user']),
+    ...mapState('bib', ['bookshelf'])
   }
 };
 </script>

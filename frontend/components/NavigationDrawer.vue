@@ -168,7 +168,7 @@ export default {
   z-index: 1;
   top: $header-height;
   min-width: 100px;
-  background-color: $secondary-color;
+  background-color: $bg-color;
   padding: 10px;
 }
 
