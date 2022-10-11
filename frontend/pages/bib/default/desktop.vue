@@ -24,8 +24,8 @@
             <div class="header-title item-title">Quizzes</div>
           </div>
           <v-divider class="divider-item"></v-divider>
-          <div class="box-item d-flex align-center">
-            <v-icon @click="openNewBook = true" class="icon">mdi-playlist-plus</v-icon>
+          <div class="box-item d-flex align-center pointer" @click="openNewBook = true">
+            <v-icon class="icon">mdi-playlist-plus</v-icon>
             <div class="header-title item-title" >Criar Estante</div>
 
           </div>
@@ -65,7 +65,7 @@
           </v-container>
     </div>
 
-
+  <OpenNewBook :dialog="openNewBook" @close="openNewBook = false" />
   </div>
 </template>
 
@@ -137,6 +137,10 @@
 
   .icon{
     color: $primary-color !important;
+  }
+
+  .pointer:hover{
+    cursor:pointer;
   }
 
   </style>

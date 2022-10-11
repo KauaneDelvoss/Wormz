@@ -7,27 +7,12 @@
       persistent
       max-width="55vw"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <div
-          class="
-            mb-3
-            d-flex
-            dropdown-item
-            flex-row
-            align-center
-            header-title
-            justify-between
-          "
-          v-on="on"
-          v-bind="attrs"
-        >
-          CONFIGURAÇÕES
-          <v-icon small class="v-icon-item ms-2">mdi-nut</v-icon>
-        </div>
-      </template>
       <v-card class="card-container d-flex flex-column">
-        <v-card-title>
+        <v-card-title v-if="bookshelf_name" class="d-flex justify-center">
           <span class="h3 mt-5 align-self-center">{{ bookshelf_name }}</span>
+        </v-card-title>
+        <v-card-title v-else class="d-flex justify-center">
+          <span class="h3 mt-5 align-self-center">Nova Estante</span>
         </v-card-title>
         <v-divider class="divider mx-2" />
         <v-card-text>
@@ -37,8 +22,8 @@
                 <input
                 type="text"
                 name="form-container"
-                placeholder="Lista de Desejos"
-                id="form-area"
+                placeholder="Nova Estante"
+                class="form-area py-2"
                 v-model="bookshelf_name"
             />
             </div>
@@ -48,7 +33,7 @@
                 type="text"
                 name="form-container"
                 placeholder="Lista de Desejos"
-                id="form-area"
+                class="form-area py-2"
                 v-model="bookshelf_description"
                 max-lenght="150"
             />
@@ -84,8 +69,8 @@ export default {
     props: { dialog:Boolean },
     data(){
         return{
-            bookshelf_name: 'Nova Estante',
-            bookshelf_description: 'Tudo que desejo ler este ano...'
+            bookshelf_name: '',
+            bookshelf_description: ''
         }
     }
 }
@@ -100,14 +85,15 @@ export default {
     border-color: $primary-color !important;
 }
 
-#form-area {
+.form-area {
     height: 3vh;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: rgb(232, 229, 174, 0.64);
-    border-radius: 20px;
+    background-color: transparent;
+    border-bottom: 1px solid $primary-color;
     padding-left: 2vw;
     width: 70%;
+    color: $primary-color;
   }
 
 </style>
