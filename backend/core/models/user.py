@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from .bookshelf import Bookshelf
 
 class User(AbstractUser):
    
@@ -15,10 +16,10 @@ class User(AbstractUser):
     #admin = models.BooleanField(default=False)
 
     #cod_adress = models.ForeignKey('Adress', on_delete=models.PROTECT)
-    #cod_bookshelf = models.ForeignKey('Bookshelf', on_delete=models.PROTECT)
+    cod_bookshelf = models.ForeignKey(Bookshelf, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
-        return self.nickname
+        return self.username
     
     class Meta:
         verbose_name_plural = "Users"
