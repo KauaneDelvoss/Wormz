@@ -10,6 +10,7 @@ import UserBib from '~/pages/bib/default'
 import bookshelfView from '~/pages/bib/_bookshelf'
 import bookView from '~/pages/bib/_book'
 import quizzDefault from '~/pages/quizz/default'
+import quizzQuestion from '~/pages/quizz/_question'
 
 Vue.use(Router)
 
@@ -52,6 +53,10 @@ export function createRouter() {
       {
         path: '/quizz',
         component: quizzDefault
+      },
+      {
+        path: '/quizz/:id?',
+        component: quizzQuestion
       }
     ]
   })

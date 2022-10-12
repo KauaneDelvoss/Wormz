@@ -4,7 +4,7 @@
       <div class="card d-flex align-center justify-center flex-column">
         <div class="h3">Vai uma indicação aí?</div>
         <div class="h1">Quizz</div>
-        <button type="button" class="btnWormz mt-5">COMEÇAR</button>
+        <button type="button" class="btnWormz mt-5" @click="newQuizz()">COMEÇAR</button>
       </div>
     </div>
   </ImgBackground>
@@ -15,6 +15,13 @@ import ImgBackground from "~/components/basic/ImgBackground";
 
 export default {
   components: { ImgBackground },
+  methods: {
+    newQuizz(){
+      this.$router.push({
+        path: '/quizz/1'
+      })
+    }
+  }
 };
 </script>
 
