@@ -5,7 +5,8 @@
         <v-row class="justify-space-between mb-5">
           <v-icon large class="v-icon-item">mdi-arrow-left</v-icon>
           <div class="h3">Questão {{ question_id }} de 10</div>
-          <v-icon large class="v-icon-item">mdi-arrow-right</v-icon>
+          <v-icon v-if="question_id != 10" large class="v-icon-item">mdi-arrow-right</v-icon>
+          <v-icon v-else large class="v-icon-item">mdi-check-bold</v-icon>
         </v-row>
         <div
           class="
@@ -78,7 +79,7 @@ export default {
   data() {
     return {
       id: "",
-      question_id: 1,
+      question_id: 10,
       snip: "Aqui vai o texto",
       book: "Um título",
       author: "Um autor",
