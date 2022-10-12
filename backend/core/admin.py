@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from core.models import Author, Book, Bookshelf, Genre, Own, Type, Writes
 from core.models import User
 
 
@@ -42,3 +43,11 @@ class UserAdmin(UserAdmin):
 
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Author)
+admin.site.register(Book)
+admin.site.register(Bookshelf)
+admin.site.register(Genre)
+admin.site.register(Own)
+admin.site.register(Type)
+admin.site.register(Writes)
+
