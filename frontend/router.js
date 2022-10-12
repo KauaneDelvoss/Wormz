@@ -9,6 +9,7 @@ import cadastroUser from '~/pages/cadastro/cadastroWormz'
 import UserBib from '~/pages/bib/default'
 import bookshelfView from '~/pages/bib/_bookshelf'
 import bookView from '~/pages/bib/_book'
+import quizzDefault from '~/pages/quizz/default'
 
 Vue.use(Router)
 
@@ -47,6 +48,10 @@ export function createRouter() {
       {
         path: '/book/:id?',
         component: bookView
+      },
+      {
+        path: '/quizz',
+        component: quizzDefault
       }
     ]
   })
