@@ -1,11 +1,11 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="center" class="dialog">
     <v-dialog
       transition="dialog-bottom-transition"
       v-model="dialog"
       class="dialog"
       persistent
-      max-width="55vw"
+      :max-width="width"
     >
       <v-card class="card-container">
         <v-card-title>
@@ -14,7 +14,7 @@
         <v-card-text>
           <v-container class="container-config py-5 px-5">
             <v-row class="d-flex justify-center">
-              <v-col cols="4">
+              <v-col cols="4" class="hide-mobile-l">
                 <div
                   v-for="(item, index) in configs"
                   :key="index"
@@ -57,12 +57,33 @@ export default {
     return {
       configs: ["Perfil", "Estantes", "Google Books"],
       activeConfig: 0,
+      
     };
   },
+  computed: {
+    width(){
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 900
+          case 'sm': return 800
+          case 'md': return 600
+          case 'lg': return 700
+          case 'xl': return 1000
+        }
+      }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+
+@include breakpoints;
+
+@media (max-width: $phone_l) {
+  .dialog{
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+}
 .dropdown-item:hover {
   text-decoration: underline;
   cursor: pointer;

@@ -1,1 +1,13 @@
 // vuetify-variables
+
+@use '~/assets/sass/_variables';
+
+@media (max-width: $phone_l) {
+    $dialog-width: 100vw;
+    $dialog-height: 100vh;
+}
+
+@media (min-width: $tabket-xl) {
+    $dialog-width: 55vw;
+
+}

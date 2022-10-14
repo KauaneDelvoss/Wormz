@@ -15,7 +15,7 @@
 <script>
 export default {
     props: { 
-        books: Object || Array,
+        books: Array || Object,
         carouselId: String, 
     },
     data(){

@@ -62,7 +62,7 @@
 
 <script>
 export default {
-  props: { book: Object || Array },
+  props: { book: Array || Object },
   data: () => ({
     reveal: false,
   }),

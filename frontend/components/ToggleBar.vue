@@ -20,7 +20,7 @@
         <v-icon v-if="!show" class="v-icon-item">mdi-chevron-down</v-icon>
         <v-icon v-if="show" class="v-icon-item">mdi-chevron-up</v-icon>
 
-        <div v-if="show" class="dropdown-content d-flex flex-column" style="gap:10px;">
+        <div v-if="show" class="dropdown-content d-flex flex-column" style="gap:15px;">
           <div
             class="
               d-flex
@@ -29,7 +29,7 @@
               align-center
               subtitulo-minimo
               justify-between
-              mt-2
+              mt-4
             "
             @click="(show = false), transitionMaker('/PerfilUser')"
           >
@@ -37,7 +37,7 @@
             <v-icon small class="v-icon-item ms-2">mdi-menu-right</v-icon>
           </div>
           
-          <div class="subtitulo-minimo">CONFIGURAÇÕES</div>
+          <div class="subtitulo-minimo" @click="dialog = true">CONFIGURAÇÕES</div>
 
           <div
             class="
@@ -55,6 +55,8 @@
           </div>
         </div>
       </div>
+
+      <ConfigUser :dialog="dialog" @close="dialog = false" />
     </div>
   </transition>
 </template>
@@ -72,6 +74,7 @@ export default {
         { name: "Quizz", path: "/quizz" },
       ],
       show: false,
+      dialog: false
     };
   },
   methods: {
