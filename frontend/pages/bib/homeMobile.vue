@@ -20,8 +20,10 @@
         id="form-area"
         v-model="searchField"
         @keyup="search(searchField)"
+        class="subtitulo ps-2"
       />
       <v-icon
+        small
         style="width: 100%; left: 15vw"
         class="flex-column align-start my-2"
         color="#e8e5ae"
@@ -30,40 +32,60 @@
     </div>
 
     <div class="margin-left-page margin-right-page my-5">
-      <div class="margin-left-page margin-right-page static-data d-flex flex-row my-5 align-center">
-        <v-avatar
-            color="grey lighten-2"
-            size="90"
-            tile
-        ></v-avatar>
+      <div
+        class="
+          margin-left-page margin-right-page
+          static-data
+          d-flex
+          flex-row
+          my-5
+          align-center
+        "
+      >
+        <v-avatar color="grey lighten-2" size="60" tile></v-avatar>
         <div class="text-box">
-          <div class="h3 ms-3"> Indicações </div>
-          <div class="subtitulo ms-3"> Atualizado em: 12/10/2022 </div>
+          <div class="subtitulo font-weight-bold ms-3">Indicações</div>
+          <div class="subtitulo ms-3">Atualizado em: 12/10/2022</div>
         </div>
       </div>
-      <div class="margin-left-page margin-right-page static-data d-flex flex-row my-5 align-center">
-        <v-avatar
-            color="grey lighten-2"
-            size="90"
-            tile
-        ></v-avatar>
+      <div
+        class="
+          margin-left-page margin-right-page
+          static-data
+          d-flex
+          flex-row
+          my-5
+          align-center
+        "
+      >
+        <v-avatar color="grey lighten-2" size="60" tile></v-avatar>
         <div class="text-box">
-          <div class="h3 ms-3"> Curtidos </div>
-          <div class="subtitulo ms-3"> 123 livros </div>
+          <div class="subtitulo font-weight-bold ms-3">Curtidos</div>
+          <div class="subtitulo ms-3">123 livros</div>
         </div>
       </div>
 
       <v-divider class="divider" />
 
-      <div v-for="bookshelf in bookshelves" :key="bookshelf.id" class="margin-left-page margin-right-page static-data d-flex flex-row my-5 align-center" @click="goTo(bookshelf.id)">
-        <v-avatar
-            color="grey lighten-2"
-            size="90"
-            tile
-        ></v-avatar>
+      <div
+        v-for="bookshelf in bookshelves"
+        :key="bookshelf.id"
+        class="
+          margin-left-page margin-right-page
+          static-data
+          d-flex
+          flex-row
+          my-5
+          align-center
+        "
+        @click="goTo(bookshelf.id)"
+      >
+        <v-avatar color="grey lighten-2" size="60" tile></v-avatar>
         <div class="text-box">
-          <div class="h3 ms-3"> {{ bookshelf.name }} </div>
-          <div class="subtitulo ms-3"> {{ bookshelf.num_books }} livros </div>
+          <div class="subtitulo font-weight-bold ms-3">
+            {{ bookshelf.name }}
+          </div>
+          <div class="subtitulo ms-3">{{ bookshelf.num_books }} livros</div>
         </div>
       </div>
     </div>
@@ -76,17 +98,18 @@ export default {
     return {
       searchField: "",
       bookshelves: [
-        { id: 1, name: "enteropígrafe", num_books: 42 }
-      ]
+        { id: 1, name: "enteropígrafe", num_books: 42 },
+        { id: 2, name: "match com kakau", num_books: 10 }
+    ],
     };
   },
   methods: {
-    goTo(id){
+    goTo(id) {
       this.$router.push({
-        path: '/userBib/bookshelf/' + id
-      })
-    }
-  }
+        path: "/userBib/bookshelf/" + id,
+      });
+    },
+  },
 };
 </script>
 
@@ -94,8 +117,13 @@ export default {
 @include breakpoints;
 
 .bib-view-mobile {
-  background-image: linear-gradient(45deg, $bg-color, $secondary-color) !important;
+  background-image: linear-gradient(
+    45deg,
+    $bg-color,
+    $secondary-color
+  ) !important;
   min-height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
