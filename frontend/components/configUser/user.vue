@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="subtitulo">Alterar informações:</div>
+  <div class="py-3">
+    <div class="subtitulo hide-mobile-l">Alterar informações:</div>
     <form @submit.prevent class="row-wrapper">
       <div class="box-config-user d-flex flex-row align-center">
         <div class="header-title me-3">Foto:</div>
@@ -8,6 +8,7 @@
           label="Foto"
           prepend-icon="mdi-camera"
           dark
+          class="photo-input"
         ></v-file-input>
       </div>
     </form>
@@ -122,6 +123,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@include breakpoints;
+
+@media (max-width: $phone_l) {
+  .box-config-user{
+    flex-direction: column !important;
+    align-content: flex-end !important;
+    margin-right: $distance-margin;
+  }
+
+  .header-title{
+    margin-left: 0 !important;
+    align-self: flex-start  !important;
+  }
+
+  .photo-input{
+    width: 100%;
+  }
+}
+
 .row-wrapper {
   background: rgba(232, 229, 174, 0.2);
   padding: 20px;

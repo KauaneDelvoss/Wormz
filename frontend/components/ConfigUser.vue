@@ -14,22 +14,27 @@
         <v-card-text>
           <v-container class="container-config py-5 px-5">
             <v-row class="d-flex justify-center">
-              <v-col cols="4" class="hide-mobile-l">
+              <v-row class="row-div justify-space-around flex-column">
                 <div
                   v-for="(item, index) in configs"
                   :key="index"
                   class="actions-config subtitulo my-10"
                   @click="activeConfig = index"
                 >
+
+                <div v-if="activeConfig == index" style="text-decoration: underline;">
                   {{ item }}
                 </div>
-              </v-col>
-              <v-col cols="8">
+                <div v-else> {{ item }} </div>
+
+                </div>
+              </v-row>
+              <v-row>
                 <div v-if="activeConfig == 0">
                   <user @fechar="$emit('close')" />
                 </div>
                 <!-- continua -->
-              </v-col>
+              </v-row>
             </v-row>
           </v-container>
         </v-card-text>
@@ -82,6 +87,10 @@ export default {
   .dialog{
     max-width: 100vw !important;
     width: 100vw !important;
+  }
+
+  .row-div{
+    flex-direction: row !important;
   }
 }
 .dropdown-item:hover {

@@ -14,10 +14,7 @@
 
 <script>
 export default {
-    props: { 
-        books: Array || Object,
-        carouselId: String, 
-    },
+    props: ['books', 'carouselId'],
     data(){
         return{
             scroll: 0,

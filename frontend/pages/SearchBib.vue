@@ -43,7 +43,7 @@
           <div class="h3 mt-10 mb-8">Resultados da sua pesquisa: </div>
           <v-row>
             <div class="margin-left-page margin-right-page d-flex flex-wrap justify-center" style="gap: 2vw ;">
-              <div v-for="book in books" :key="book">
+              <div v-for="book in books" :key="book.id">
                 <CardBooks :book="book" class="book" />
               </div>
             </div>
@@ -60,7 +60,7 @@
         <div v-else class="margin-left-page margin-right-page">
             <div class="margin-left-page margin-right-page static-data">
               <div class="h3 mt-10 mb-2">Destaques:
-                <BooksCarousel carouselId="1" :books="search_getter('science fiction')" />
+                <BooksCarousel carouselId="1"  />
               </div>
             </div>
         </div>
@@ -90,16 +90,17 @@ export default {
       item
     );
     this.$store.dispatch("google_books/GET_URL");
-    },
+    }
+    
+    
+  },
+  computed: {
+    ...mapState("google_books", ["books"]),
 
     search_getter(item){
       this.search(item)
       return this.books
     }
-    
-  },
-  computed: {
-    ...mapState("google_books", ["books"])
 
     // NECESSÁRIO GETTER !
     //seacrhStatic(){
