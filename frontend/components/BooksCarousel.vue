@@ -2,7 +2,7 @@
   <div class="book-carousel">
     <div class="modifier d-flex flex-row justify-center" style="gap: 5px">
         <v-icon large class="v-icon-item" @click="scrollToLeft()">mdi-chevron-left</v-icon>
-    <div class="carousel-wrapper align-center d-flex flex-row">
+    <div :id="carouselId" class="carousel-wrapper align-center d-flex flex-row">
         <div v-for="(book, i) in books" :key="i" class="box-books">
               <CardBooks :book="book" class="mt-5 ms-2" />
         </div>
@@ -13,19 +13,16 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 export default {
+    props: ['books', 'carouselId'],
     data(){
         return{
             scroll: 0,
         }
     },
-    computed: {
-        ...mapState("search_books", ["books"])
-    },
     methods:{
         scrollToLeft(){
-            let sliders = document.querySelector(".carousel-wrapper");
+            let sliders = document.querySelector(`#${this.carouselId}`);
             let width = sliders.getBoundingClientRect().width
             sliders.scroll({
                 top: 0,
@@ -38,7 +35,7 @@ export default {
             }
         },
         scrollToRight(){
-            let sliders = document.querySelector(".carousel-wrapper");
+            let sliders = document.querySelector(`#${this.carouselId}`);
             let width = sliders.getBoundingClientRect().width
             let width_box = (document.querySelector(".box-books").getBoundingClientRect().width)*(document.querySelectorAll('.box-books').length)
             sliders.scroll({
@@ -55,7 +52,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
 .carousel-wrapper {
     max-width: 100vw;
     overflow-x: hidden;

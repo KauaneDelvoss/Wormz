@@ -2,24 +2,30 @@
   <div class="profile">
     <div class="box-profile">
       <ImgBackground style="width: 100%">
-        <v-row class="row-wrapper">
-          <v-col cols="4" class="d-flex align-center justify-center">
-            <v-icon size="30vh" class="v-icon-item">mdi-account-circle</v-icon>
+        <div class="d-flex flex-grow-1 row-wrapper mx-5">
+          <v-col cols="4" class="d-flex align-center justify-center col-mobile mt-5">
+            <v-icon :size="width" class="v-icon-item">mdi-account-circle</v-icon>
           </v-col>
           <v-col
             cols="auto"
             class="d-flex flex-column justify-center col-mobile"
           >
-            <div class="h1 mobile">Usuário</div>
+            <div class="h1 mobile">{{ user.username }}</div>
             <div
               class="local-wrapper d-flex flex-row mt-n5"
               style="opacity: 90%"
             >
+              <div class="h3 mobile ms-3">{{user.first_name}} {{user.last_name}}</div>
+            </div>
+            <div
+              class="local-wrapper d-flex flex-row mt-3"
+              style="opacity: 90%"
+            >
               <v-icon class="v-icon-item">mdi-google-maps</v-icon>
-              <div class="h3 ms-3">Local</div>
+              <div class="h3 mobile ms-3">Local</div>
             </div>
           </v-col>
-        </v-row>
+        </div>
       </ImgBackground>
     </div>
     <div class="nav-user-profile">
@@ -40,47 +46,26 @@
       <v-col cols="9" class="col-mobile-content">
         <div v-if="active == 0">
           <div class="margin-left-page div-mobile-content" style="max-width: 40vw">
-            <div class="h3">Título da biografia</div>
-            <div class="subtitulo mt-5">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget a a
-              ac, fermentum, id amet, sagittis. Urna justo fermentum in nascetur
-              elementum ornare. Phasellus blandit proin molestie elit, etiam et
-              in duis purus. In quis placerat nisl aliquam ullamcorper tristique
-              a, suspendisse velit.
+            <div class="h3">Biografia</div>
+            <div class="header-title mt-5">
+              {{ user.user_biography }}
             </div>
           </div>
           <div class="box-books">
             <div class="h3 bookshelf-name margin-left-page mt-5">Favoritos</div>
-            <BooksCarousel class="mx-7" />
+            <BooksCarousel carouselId="c1" :books="bookshelf" class="mx-7" />
           </div>
         </div>
 
         <div v-if="active == 1">
           <div class="h3 bookshelf-name margin-left-page mt-5">Favoritos</div>
-          <BooksCarousel  /> <!-- erro ! (não aceita mais de um uso na pg)-->
+          <BooksCarousel carouselId="c2" :books="bookshelf"  /> <!-- erro ! (não aceita mais de um uso na pg)-->
           <div class="h3 bookshelf-name margin-left-page mt-5">Dark Vibes</div>
-          <BooksCarousel />
+          <BooksCarousel carouselId="c3" :books="bookshelf" />
         </div>
 
         <div v-if="active == 2" class="margin-left-page margin-right-page">
-          <v-card elevation="2" class="review-card">
-            <div class="d-flex flex-row align-center div-wrapper">
-                <div class="h3 bookshelf-name px-5 py-5">
-                Em Despertar dos Deuses
-                </div>
-                <v-rating
-                empty-icon="mdi-star-outline"
-                full-icon="mdi-star"
-                half-icon="mdi-star-halffull"
-                class="v-rating"
-                readonly
-                length="5"
-                :value="3"
-                ></v-rating>
-            </div>
-            <v-divider class="hr"></v-divider>
-            <div class="subtitulo px-5 py-5">Trecho da review ...</div>
-          </v-card>
+          <ReviewUser />
         </div>
       </v-col>
       <v-col cols="auto hide-mobile-l">
@@ -104,13 +89,34 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import ReviewUser from '~/components/user/ReviewUser'
+
 export default {
+  components: { ReviewUser },
   data() {
     return {
       items: ["OVERVIEW", "ESTANTES", "AVALIAÇÕES"],
       active: 0,
     };
   },
+  middleware: 'auth',
+  mounted(){
+    this.$store.dispatch("bib/GET_URL")
+  },
+  computed: {
+    ...mapState('auth', ['user']),
+    ...mapState('bib', ['bookshelf']),
+    width(){
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 200
+          case 'sm': return 200
+          case 'md': return 200
+          case 'lg': return 200
+          case 'xl': return 300
+        }
+      }
+  }
 };
 </script>
 
@@ -120,21 +126,25 @@ export default {
 @media (max-width: $phone_l) {
   .row-wrapper{
     flex-direction: column !important;
-    align-content: center;
-    justify-content: center;
+    align-content: center !important;
+    justify-content: center !important;
   }
   .col-mobile{
     margin-top: -4vh;
     gap: 5px;
+    max-width: 100% !important;
   }
   .h1.mobile{
-      font-size: 5vh !important;
+      font-size: 4vh !important;
+  }
+  .h3.mobile{
+    font-size: 3vh !important;
   }
   .nav-mobile{
     justify-content: center;
   }
   .header-title-mobile{
-    font-size: 1.5vh !important;
+    font-size: 1.2vh !important;
     margin-right: $distance-margin;
   }
   .col-default-content{
@@ -149,7 +159,7 @@ export default {
 }
 
 .profile {
-  background-color: $bg-color;
+  background-color: $bg-color !important;
   min-height: 100vh;
 }
 

@@ -2,12 +2,12 @@
   <v-app class="search-bib">
     <v-container fluid>
 
-        <v-row class="mobile-profile">
+        <v-row class="mobile-profile mt-12">
           <v-col class="ms-md-12 d-flex flex-column align-center col-default">
             <div class="d-flex flex-column">
               <div class="h1">Wormz</div>
               <v-divider id="divider" class="mb-n4" color="#E8E5AE"></v-divider>
-              <div class="subtitulo mt-12 text-center">
+              <div class="subtitulo mt-10 text-center">
                 Procure por livro ou por autor:
               </div>
             </div>
@@ -20,6 +20,8 @@
             name="form-container"
             placeholder="Blade Runner..."
             id="form-area"
+            v-model="searchField"
+            @keyup.enter="search(searchField)"
             
           />
           <div class="icon-search d-flex flex-column">
@@ -37,14 +39,32 @@
           >
         </div>
 
-        <div class="margin-left-page margin-right-page">
-          <div class="h3 mt-10 mb-2">Destaques</div>
+        <div v-if="searchField.length > 0" class="margin-left-page margin-right-page">
+          <div class="h3 mt-10 mb-8">Resultados da sua pesquisa: </div>
           <v-row>
-            <v-col cols="12">
-                <BooksCarousel />
-            </v-col>
+            <div class="margin-left-page margin-right-page d-flex flex-wrap justify-center" style="gap: 2vw ;">
+              <div v-for="book in books" :key="book.id">
+                <CardBooks :book="book" class="book" />
+              </div>
+            </div>
           </v-row>
+          <!-- <v-row>
+            <v-col cols="12">
+                <div v-for="book in books" :key="book">
+                  <CardBooks :book="book" />
+                </div>
+            </v-col>
+          </v-row> -->
         </div>
+
+        <div v-else class="margin-left-page margin-right-page">
+            <div class="margin-left-page margin-right-page static-data">
+              <div class="h3 mt-10 mb-2">Destaques:
+                <BooksCarousel carouselId="1"  />
+              </div>
+            </div>
+        </div>
+
     </v-container>
   </v-app>
 </template>
@@ -55,10 +75,40 @@ import ImgBackground from "@/components/basic/ImgBackground.vue";
 import { mapState } from "vuex";
 
 export default {
-  components: { ImgBackground, CardBooks },
-  computed: {
-    ...mapState("search_books", ["books"]),
+  data(){
+    return{
+      searchField: '',
+      mode: ''
+    }
   },
+  middleware: 'auth',
+  components: { ImgBackground, CardBooks },
+  methods: {
+    search(item){
+      this.$store.commit(
+      "google_books/MAKE_URL_SEARCH",
+      item
+    );
+    this.$store.dispatch("google_books/GET_URL");
+    }
+    
+    
+  },
+  computed: {
+    ...mapState("google_books", ["books"]),
+
+    search_getter(item){
+      this.search(item)
+      return this.books
+    }
+
+    // NECESSÁRIO GETTER !
+    //seacrhStatic(){
+      //this.$store.commit("google_books/MAKE_URL_SEARCH", "Phillip K Dick")
+      //this.$store.dispatch("google_books/GET_URL");
+      //return 
+    //}
+  }
 };
 </script>
 
@@ -69,8 +119,14 @@ template {
   overflow-x: hidden;
 }
 
+.book:hover {
+  transform: scale(1.2);
+  transition: all 0.2s;
+  z-index: 1;
+}
+
 .search-bib{
-  background-color: $bg-color;
+  background-image: linear-gradient(45deg, $bg-color, $secondary-color) !important;
   max-width: 100vw;
 }
 

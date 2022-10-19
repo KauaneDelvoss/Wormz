@@ -19,37 +19,45 @@
     </div>
     <div class="icon-wrapper d-flex flex-row align-center justify-center margin-right-page hide-mobile-l">
       <div class="dropdown">
-        <div class="header-title list-item perfil" @click="show = !show">
-            PERFIL
-          <v-icon class="v-icon-item">mdi-chevron-down</v-icon>
+        <div v-if="user.username" class="header-title list-item perfil" @click="show = !show">
+          <span>
+            OLÁ, {{ user.username.toUpperCase() }}
+          </span>
+          <v-icon v-if="!show" class="v-icon-item">mdi-chevron-down</v-icon>
+          <v-icon v-if="show" class="v-icon-item">mdi-chevron-up</v-icon>
         </div>
       </div>
       <div v-if="show" class="dropdown-content">
-        <div class="mb-3 d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, transitionMaker('/PerfilEstatico')">ACESSAR PERFIL
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, transitionMaker('/PerfilUser')">ACESSAR PERFIL
           <v-icon small class="v-icon-item ms-2">mdi-menu-right</v-icon>
         </div>
-        <div class="mb-3 d-flex dropdown-item flex-row align-center header-title justify-between">CONFIGURAÇÕES
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="(show=false, showConfig = true)">CONFIGURAÇÕES
           <v-icon small class="v-icon-item ms-2">mdi-nut</v-icon>
         </div>
-        <div class="d-flex dropdown-item flex-row align-center header-title justify-between">LOG-OUT
+        <div class="d-flex dropdown-item flex-row align-center header-title justify-between" @click="show=false, logOut()">LOG-OUT
           <v-icon small class="v-icon-item ms-2">mdi-logout-variant</v-icon>
         </div>
+        <ConfigUser :dialog="showConfig" @close="showConfig = false" />
       </div>
     </div>
 
     <v-divider class="divider-item" />
+
   </div>
 </template>
 
 <script>
+import {mapActions, mapState} from 'vuex'
+import ConfigUser from '~/components/ConfigUser'
 export default {
   props: {activeToggleBar: Boolean}  ,
+  components: {ConfigUser},
     data(){
         return{
             pageActive: '',
             transition: '',
             items: [
-              { name: 'Home', path: '/HomeWormz' },
+              { name: 'Home', path: '/' },
               { name: 'Login', path: '/loginWormz' },
               { name: 'Explorar', path: '/SearchBib'},
               { name: 'Biblioteca', path: '/userBib' },
@@ -57,6 +65,7 @@ export default {
             ],
             toggleBar: false,
             show: false,
+            showConfig: false,
         }
     },
     mounted() {
@@ -67,6 +76,7 @@ export default {
     },
 
     methods:{
+      ...mapActions('auth', ['LOGOUT']),
       transitionMaker(path){
         
         if (path != this.pageActive){
@@ -82,11 +92,20 @@ export default {
           )
         }
       },
+      logOut(){
+        this.LOGOUT()
+        this.$router.push({
+          path: '/loginWormz'
+        })
+      }
     },
     watch: {
       '$route' (to, from){
         this.pageActive = to.path
       }
+    },
+    computed: {
+      ...mapState('auth', ['user'])
     }
 };
 </script>
@@ -104,10 +123,12 @@ export default {
 }
 
 .navigation-drawer{
+  top: 0;
   width: 100vw;
-  min-height: $header-height;
-  max-height: $header-height;
+  height: $header-height;
   background-color: #434c6d;
+  position: fixed;
+  z-index: 2;
 }
 
 .v-icon-item{
@@ -151,7 +172,7 @@ export default {
   z-index: 1;
   top: $header-height;
   min-width: 100px;
-  background-color: $secondary-color;
+  background-color: $bg-color;
   padding: 10px;
 }
 

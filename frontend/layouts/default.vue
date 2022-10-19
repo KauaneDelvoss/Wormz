@@ -15,7 +15,7 @@ export default {
     return {
       activeToggleBar: false,
     };
-  },
+  }
 };
 </script>
 

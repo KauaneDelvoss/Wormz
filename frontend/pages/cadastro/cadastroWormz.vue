@@ -1,31 +1,37 @@
 <template>
-  <div class="cadastro-wormz">
+  <form v-on:submit.prevent class="cadastro-wormz">
     <v-row class="app d-fluid flex-row" style="height: 100vh">
       <v-col class="m-5 d-flex flex-column justify-center col-default">
         <div class="titulo d-flex flex-column align-center">Cadastro</div>
-        <div v-if="sliderValue == 0">
-          <transition :name="transition">
-            <FirstSlider>
-              <btnWormz :nome="'Próximo'" @sliderCount="next()" />
-            </FirstSlider>
-          </transition>
-        </div>
-        <div v-if="sliderValue == 1">
-          <transition :name="transition">
-            <SecondSlider>
-              <v-row style="gap: 2vw">
-                <btnWormz :nome="'Anterior'" @sliderCount="prev()" />
-                <btnWormz :nome="'Próximo'" @sliderCount="next()" />
-              </v-row>
-            </SecondSlider>
-          </transition>
-        </div>
+        <transition :name="transition">
+          <FirstSlider
+            v-if="sliderValue == 0"
+            @resultFirstForm="(resultFirstForm) => setResult(resultFirstForm)"
+          />
+        </transition>
+        <transition :name="transition">
+          <SecondSlider
+            v-if="sliderValue == 1"
+            @goBack="prev()"
+            @resultSecondForm="
+              (resultSecondForm) => setSecondResult(resultSecondForm)
+            "
+          />
+        </transition>
         <div v-if="sliderValue == 2">
           <transition :name="transition">
             <ThirdSlider>
               <v-row style="gap: 2vw">
                 <btnWormz :nome="'Anterior'" @sliderCount="prev()" />
-                <btnWormz :nome="'Concluir'" :path="'/loginWormz'" />
+                <button
+                  type="button"
+                  class="btnWormz"
+                  @click="SIGN_UP_USER(formData), 
+                  //SIGN_UP_BIO(formUser), 
+                  goTo()"
+                >
+                  CONCLUIR
+                </button>
               </v-row>
             </ThirdSlider>
           </transition>
@@ -38,13 +44,14 @@
         </div>
       </v-col>
     </v-row>
-  </div>
+  </form>
 </template>
 
 <script>
-import FirstSlider from '@/pages/cadastro/FirstSlider.vue'
-import SecondSlider from '@/pages/cadastro/SecondSlider.vue'
-import ThirdSlider from '@/pages/cadastro/ThirdSlider.vue'
+import FirstSlider from "@/pages/cadastro/FirstSlider.vue";
+import SecondSlider from "@/pages/cadastro/SecondSlider.vue";
+import ThirdSlider from "@/pages/cadastro/ThirdSlider.vue";
+import { mapActions } from "vuex";
 
 export default {
   components: { FirstSlider, SecondSlider, ThirdSlider },
@@ -53,9 +60,31 @@ export default {
       sliderValue: 0,
       active: false,
       transition: "",
-      };
+      formData: {},
+      formUser: {},
+    };
   },
   methods: {
+    ...mapActions("auth", ["SIGN_UP_USER", "SIGN_UP_BIO"]),
+
+    setResult(e) {
+      this.formData["username"] = e.username;
+      this.formData["password"] = e.password;
+      this.formData["email"] = e.email;
+      this.next();
+    },
+
+    setSecondResult(e) {
+      this.formData["first_name"] = e.first_name;
+      this.formData["last_name"] = e.last_name;
+      this.formData["user_biography"] = e.user_biography;
+      this.next();
+    },
+
+    goTo(){
+      this.$router.push({path: '/SearchBib'})
+    },
+
     next() {
       this.goToIndex(this.nextIndex);
     },
@@ -91,7 +120,7 @@ export default {
     },
   },
   mounted() {
-      this.goToIndex(this.sliderValue);
+    this.goToIndex(this.sliderValue);
   },
 };
 </script>

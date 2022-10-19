@@ -19,6 +19,10 @@ export default {
     ]
   },
 
+  router: {
+    middleware: ['tokenInit']
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/css/style.css', 
@@ -26,6 +30,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/api/auth/authServiceLogin.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -39,12 +44,22 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/router'
   ],
+
+  routerModule: {
+    /* module options */
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
   ],
+
+  axios: {
+    baseURL: 'http://localhost:8000/'
+  },
 
   styleResources: {
     scss: [
@@ -56,7 +71,7 @@ export default {
   vuetify: {
     // customVariables: ['~/assets/vuetify-variables.scss'],
     theme: {
-      dark: false,
+      disable: true,
       themes: {
         dark: {
           primary: colors.blue.darken2,

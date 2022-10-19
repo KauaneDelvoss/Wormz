@@ -11,8 +11,8 @@
   font-family: "Encode Sans";
   font-size: 3vh;
   font-weight: 400;
-  font-size: 24px;
   line-height: 30px;
+  font-size: 3vh;
   color: #E8E5AE;
 }
 
@@ -49,6 +49,10 @@
   color: #E8E5AE;
 }
 
+.reading-text {
+  font-size: 0.9rem;
+}
+
 .col-default {
   columns: 6;
 }
@@ -57,9 +61,28 @@
   color: #E8E5AE !important;
 }
 
+.btnWormz {
+  background: #E8E5AE;
+  border-radius: 20px;
+  padding: 0.6vh 1.4vh;
+  color: black;
+  font-size: 1.5vh;
+  font-family: "Encode Sans", sans-serif;
+}
+.btnWormz:hover {
+  background: transparent;
+  border: 1px solid #E8E5AE;
+  color: #E8E5AE;
+  transition: 0.5s;
+}
+
 .app {
   margin: 0 auto;
   padding: 1.5rem 0;
+}
+
+.divider {
+  border-color: #E8E5AE !important;
 }
 
 .margin-left-page {

@@ -15,8 +15,8 @@
     font-family: 'Encode Sans'
     font-size: 3vh
     font-weight: 400
-    font-size: 24px
     line-height: 30px
+    font-size: 3vh
     color: variables.$primary-color
 
 .bookshelf-name:hover
@@ -48,16 +48,37 @@
     font-size: 2vh
     color: variables.$primary-color
 
+.reading-text 
+  font-size: 0.9rem
+
+
 .col-default
-    columns: 6 
+    columns: 6
 
 .v-icon-item
-    color: variables.$primary-color  !important  
+    color: variables.$primary-color  !important
+
+.btnWormz
+  background: variables.$primary-color
+  border-radius: 20px
+  padding: 0.6vh 1.4vh
+  color: black
+  font-size: 1.5vh
+  font-family: "Encode Sans", sans-serif
+
+  &:hover
+    background: transparent
+    border: 1px solid variables.$primary-color
+    color: variables.$primary-color
+    transition: 00.5s
+
 
 // Configurações de margem
 .app
     @include mixins.container
 
+.divider
+  border-color: variables.$primary-color !important
 
 
 .margin-left-page
@@ -66,4 +87,4 @@
 .margin-right-page
     margin-right: variables.$distance-margin
 
-     
+
