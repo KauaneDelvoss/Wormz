@@ -19,7 +19,7 @@ class UserAdmin(UserAdmin):
                 "fields": (
                     "first_name",
                     "last_name",
-                    "nickname",
+                    #"nickname",
                     "email",
                     "genre_pref",
                     "user_biography",

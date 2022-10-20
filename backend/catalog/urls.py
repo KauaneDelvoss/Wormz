@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from core.views import UserViewSet, BookViewSet, BookshelfViewSet, GenreViewSet, OwnViewSet, TypeViewSet, WritesViewSet
 
+
 router = DefaultRouter()
 router.register(r"users", UserViewSet)
 router.register(r"books", BookViewSet)

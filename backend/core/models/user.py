@@ -5,7 +5,7 @@ from .bookshelf import Bookshelf
 class User(AbstractUser):
    
     cod_user = models.AutoField(primary_key=True, default=None)
-    nickname = models.CharField(max_length=50, unique=True)  
+    username = models.CharField(max_length=50, unique=True)  
     email = models.EmailField(max_length=50)  
     genre_pref = models.CharField(max_length=50)
     user_biography = models.TextField(max_length=2000)
