@@ -6,7 +6,9 @@ export const state = () => ({
 
 export const mutations = {
     COMMIT_URL(state, payload){
-        state.bookshelf = payload
+        state.bookshelf.books = payload
+        state.bookshelf.name = 'Nome da Estante'
+        state.bookshelf.description = 'Descrição da Estante'
     },
 }
 
