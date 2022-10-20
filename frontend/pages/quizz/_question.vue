@@ -93,6 +93,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@media (max-width: $phone_l) {
+  .card{
+    width: 90vw !important;
+  }
+}
+
+
 .question-quizz {
   height: 100vh;
 }
@@ -100,7 +107,7 @@ export default {
 .card {
   height: 50vh;
   width: 50vw;
-  background-color: $bg-color;
+  background-color: $bg-color !important;
   border-radius: 20px;
   border: 1px solid $primary-color;
 }
