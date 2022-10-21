@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .bookshelf import Bookshelf
 
+
 class User(AbstractUser):
    
-    cod_user = models.AutoField(primary_key=True, default=None)
+    #cod_user = models.AutoField(primary_key=True, default=None)
     username = models.CharField(max_length=50, unique=True)  
     email = models.EmailField(max_length=50)  
     genre_pref = models.CharField(max_length=50)

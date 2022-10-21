@@ -1,13 +1,16 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User as UserDjangoAuth
+#from django.contrib.auth.models import AbstractUser as DjangoAuthAdmin
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.http.response import HttpResponse
 from rest_framework.renderers import JSONRenderer
 from django.shortcuts import render
 
 from core.models import User
-from core.serializers import UserSerializer
+from core.serializers import UserSerializer, UserAuthSerializer
+
+#User = get_user_model()
 
 class UserViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -25,19 +28,55 @@ class UserViewSet(ModelViewSet):
             user_biography = request.POST.get('user_biography')
 
             group = Group.objects.get(name='common_users') 
-            user = UserDjangoAuth.objects.filter(username=username).first()
+            user = User.objects.filter(username=username).first()
 
             if user:
                 return render (HttpResponse("Já existe um usuário com esse username!"))
             else:
-                user = UserDjangoAuth.objects.create_user(username = username, password = password, email=email, first_name=first_name, last_name=last_name)
-                id_user = (UserDjangoAuth.objects.get(username=username)).id
-                print(id_user)
-                perfil = User(username=username, user_biography=user_biography, cod_user=id_user)
+                user = User.objects.create_user(username = username, password = password, email=email, first_name=first_name, last_name=last_name)
+                id_user = (User.objects.get(username=username)).id
+                perfil = User(username=username, user_biography=user_biography) #, cod_user=id_user)
 
                 user.save()
                 perfil.save()
 
-                user_group = UserDjangoAuth.objects.get(username = username)
+                user_group = User.objects.get(username = username)
                 user_group.groups.add(group)
                 return render (HttpResponse('Usuário cadastrado com sucesso!'))
+                 
+    def getUser(request):
+        username = request.POST.get("username")
+        user = User.objects.get(username = username)
+        perfil = User.objects.get(username = username)
+        
+        serializers = UserAuthSerializer(user)
+        data = serializers.data
+
+        data.update(user_biography = perfil.user_biography)
+
+        json = JSONRenderer().render(data)
+        return HttpResponse(json, content_type="text/json-comment-filtered")
+
+    def updateUser(request):
+        if request.POST:
+            user = User.objects.get(pk=request.POST.get('id'))
+            profile = User.objects.get(cod_user=request.POST.get('id'))
+            profile.user_biography = request.POST.get('user_biography')
+            user.username = request.POST.get('username')
+            user.first_name = request.POST.get('first_name')
+            user.last_name = request.POST.get('last_name')
+            profile.save()
+            user.save()
+
+            return HttpResponse('Usuário atualizado com sucesso!')
+        else:
+            return HttpResponse('Métodos permitidos: /POST/')
+
+    def deleteUser(request):
+        print(request)
+
+        user = User.objects.get(pk=request.POST.get('id'))
+        profile = User.objects.get(cod_user=request.POST.get('id'))
+        user.delete()
+        profile.delete()
+        return HttpResponse('Usuário deletado com sucesso!')            

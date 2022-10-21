@@ -4,5 +4,5 @@ from .bookshelf import BookshelfSerializer
 from .genre import GenreSerializer
 from .own import OwnSerializer
 from .type import TypeSerializer 
-from .user import UserSerializer
+from .user import UserSerializer, UserAuthSerializer
 from .writes import WritesSerializer
