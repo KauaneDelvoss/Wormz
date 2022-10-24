@@ -18,7 +18,7 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
 
     def cadastro(request):
-        if request.method == "POST" :
+        if request.POST:
             username = request.POST.get('username')
             #nickname = request.POST.get('nickname')
             password = request.POST.get('password')
@@ -34,14 +34,17 @@ class UserViewSet(ModelViewSet):
                 return render (HttpResponse("Já existe um usuário com esse username!"))
             else:
                 user = User.objects.create_user(username = username, password = password, email=email, first_name=first_name, last_name=last_name)
-                id_user = (User.objects.get(username=username)).id
-                perfil = User(username=username, user_biography=user_biography) #, cod_user=id_user)
-
+                #id_user = (User.objects.get(username=username)).id
+                #perfil = User(username=username, user_biography=user_biography) #, cod_user=id_user)
+                user.is_active = True 
                 user.save()
-                perfil.save()
+                #perfil.save()
 
-                user_group = User.objects.get(username = username)
-                user_group.groups.add(group)
+                #user_group = User.objects.get(username = username)
+                #user_group.groups.add(group)
+
+                user.groups.add(group)
+
                 return render (HttpResponse('Usuário cadastrado com sucesso!'))
                  
     def getUser(request):
