@@ -1,12 +1,6 @@
 <template>
   <v-row justify="center" class="dialog">
-    <v-dialog
-      transition="dialog-bottom-transition"
-      v-model="dialog"
-      class="dialog"
-      persistent
-      :max-width="width"
-    >
+    <v-dialog transition="dialog-bottom-transition" v-model="dialog" class="dialog" persistent :max-width="width">
       <v-card class="card-container">
         <v-card-title>
           <span class="h3 mt-5">Configurações</span>
@@ -14,18 +8,14 @@
         <v-card-text>
           <v-container class="container-config py-5 px-5">
             <v-row class="d-flex justify-center">
-              <v-row class="row-div justify-space-around flex-column">
-                <div
-                  v-for="(item, index) in configs"
-                  :key="index"
-                  class="actions-config subtitulo my-10"
-                  @click="activeConfig = index"
-                >
+              <v-row class="row-div flex-column mx-2">
+                <div v-for="(item, index) in configs" :key="index" class="actions-config subtitulo my-10"
+                  @click="activeConfig = index">
 
-                <div v-if="activeConfig == index" style="text-decoration: underline;">
-                  {{ item }}
-                </div>
-                <div v-else> {{ item }} </div>
+                  <div v-if="activeConfig == index" style="text-decoration: underline;">
+                    {{ item }}
+                  </div>
+                  <div v-else> {{ item }} </div>
 
                 </div>
               </v-row>
@@ -40,11 +30,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            class="dropdown-item"
-            text
-            @click="$emit('close')"
-          >
+          <v-btn class="dropdown-item" text @click="$emit('close')">
             Close
           </v-btn>
         </v-card-actions>
@@ -62,37 +48,41 @@ export default {
     return {
       configs: ["Perfil", "Estantes", "Google Books"],
       activeConfig: 0,
-      
+
     };
   },
   computed: {
-    width(){
-        switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return 900
-          case 'sm': return 800
-          case 'md': return 600
-          case 'lg': return 700
-          case 'xl': return 1000
-        }
+    width() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 900
+        case 'sm': return 800
+        case 'md': return 600
+        case 'lg': return 700
+        case 'xl': return 1000
       }
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
 @include breakpoints;
 
 @media (max-width: $phone_l) {
-  .dialog{
+  .dialog {
     max-width: 100vw !important;
     width: 100vw !important;
   }
 
-  .row-div{
+  .row-div {
+    justify-items: space-around
+  }
+
+  .row-div {
     flex-direction: row !important;
   }
 }
+
 .dropdown-item:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -113,6 +103,7 @@ export default {
 .actions-config {
   cursor: pointer;
 }
+
 .actions-config:hover {
   text-decoration: underline;
 }
