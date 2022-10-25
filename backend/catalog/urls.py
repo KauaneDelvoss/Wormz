@@ -4,7 +4,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from core.views import UserViewSet, BookViewSet, BookshelfViewSet, GenreViewSet, OwnViewSet, TypeViewSet, WritesViewSet
+from core.views import UserViewSet, BookViewSet, BookshelfViewSet, GenreViewSet, OwnViewSet, TypeViewSet
 
 
 router = DefaultRouter()
@@ -14,7 +14,7 @@ router.register(r"bookshelf", BookshelfViewSet)
 router.register(r"genre", GenreViewSet)
 router.register(r"own", OwnViewSet)
 router.register(r"type", TypeViewSet)
-router.register(r"writes", WritesViewSet)
+#router.register(r"writes", WritesViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

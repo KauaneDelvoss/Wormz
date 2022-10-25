@@ -19,7 +19,7 @@ from core.serializers import UserSerializer, UserAuthSerializer
 
 class BookViewSet(ModelViewSet):
     #permission_classes = [IsAuthenticated]
-    queryset = User.objects.all()
+    queryset = Book.objects.all()
     serializer_class = BookSerializer
 
     def cadastro(request):
@@ -36,7 +36,7 @@ class BookViewSet(ModelViewSet):
             if book:
                 return render(HttpResponse("Já existe um livro com esse nome!"))
             else:
-                user = User.objects.create_user(
+                book = User.objects.create_user(
                     username=username,
                     password=password,
                     email=email,

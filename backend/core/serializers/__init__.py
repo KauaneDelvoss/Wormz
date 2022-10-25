@@ -5,4 +5,3 @@ from .genre import GenreSerializer
 from .own import OwnSerializer
 from .type import TypeSerializer 
 from .user import UserSerializer, UserAuthSerializer
-from .writes import WritesSerializer

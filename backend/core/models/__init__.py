@@ -6,5 +6,5 @@ from .author import Author
 from .genre import Genre 
 from .bookshelf import Bookshelf
 from .own import Own
-from .writes import Writes
+#from .writes import Writes
 from .type import Type
