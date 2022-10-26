@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
-from core.models import Book, Author
+from core.models import Book
 from core.serializers import BookSerializer
 
 #from rest_framework.viewsets import ModelViewSet
@@ -11,10 +11,7 @@ from core.serializers import BookSerializer
 #from django.contrib.auth.models import Group
 from django.http.response import HttpResponse
 from rest_framework.renderers import JSONRenderer
-from django.shortcuts import render
-
-from core.models import User
-from core.serializers import UserSerializer, UserAuthSerializer
+#from django.shortcuts import render
 
 
 class BookViewSet(ModelViewSet):
@@ -30,39 +27,42 @@ class BookViewSet(ModelViewSet):
             #adicionar campo editora do livro
             #adicionar autor
 
-            book = User.objects.filter(name_book=name_book).first() 
+            book = Book.objects.filter(name_book=name_book).first() 
             #book = User.objects.filter(name_book=name_book, editora=editora).first() #podem existir várias versões com o mesmo nome
 
             if book:
-                return render(HttpResponse("Já existe um livro com esse nome!"))
+                return HttpResponse("Já existe um livro com esse nome!")
             else:
-                book = User.objects.create_user(
-                    username=username,
-                    password=password,
-                    email=email,
-                    first_name=first_name,
-                    last_name=last_name,
+                book = Book.objects.create(
+                    name_book=name_book,
+                    resume=resume,
+                    pages=pages,
+                    #editora = editora,
+                    
                 )
                 # id_user = (User.objects.get(username=username)).id
                 # perfil = User(username=username, user_biography=user_biography) #, cod_user=id_user)
-                user.is_active = True
-                user.save()
+                #user.is_active = True
+                book.save()
                 # perfil.save()
 
                 # user_group = User.objects.get(username = username)
                 # user_group.groups.add(group)
 
-                user.groups.add(group)
+                #user.groups.add(group)
 
-                return HttpResponse("Usuário cadastrado com sucesso!")
-
-
+                return HttpResponse("Livro cadastrado com sucesso!")
 
 
+    def getBook(request):
+        # username = request.POST.get("username")
+        book = Book.objects.get(name_book=request.POST.get("name_book"))
+        # perfil = User.objects.get(username = username)
 
+        serializers = BookSerializer(book)
+        data = serializers.data
 
-    
-class BookViewSet(ModelViewSet):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+        data.update(username=book.name_book)
 
+        json = JSONRenderer().render(data)
+        return HttpResponse(json, content_type="text/json-comment-filtered")
