@@ -2,6 +2,7 @@
 from django.db import models
 from .author import Author
 from .genre import Genre
+from media.models import Image
 
 class Book(models.Model):
     resume = models.CharField(max_length=2000, null=True)
@@ -11,6 +12,7 @@ class Book(models.Model):
     pages = models.IntegerField(null=True)
     author = models.ManyToManyField(Author, related_name="author_books")
     genre = models.ManyToManyField(Genre, related_name="genre_books")
+    capa = models.ForeignKey(Image, related_name="+",on_delete=models.CASCADE, null=True,blank=True,default=None)
 
     def __str__(self) :
         return self.name_book
