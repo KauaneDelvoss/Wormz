@@ -54,7 +54,7 @@
             class="dropdown-item"
             text
             color="white"
-            @click="$emit('close')"
+            @click="($emit('close'), GET_BOOKSHELF(1))"
           >
             Criar
           </v-btn>
@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     props: { dialog:Boolean },
     data(){
@@ -72,6 +74,9 @@ export default {
             bookshelf_name: '',
             bookshelf_description: ''
         }
+    },
+    methods:{
+      ...mapActions('bookshelf', ['GET_BOOKSHELF'])
     }
 }
 </script>
