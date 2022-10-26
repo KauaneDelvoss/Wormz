@@ -4,7 +4,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from core.views import UserViewSet, BookViewSet, BookshelfViewSet, GenreViewSet, OwnViewSet, TypeViewSet
+from core.views import UserViewSet, BookViewSet, BookshelfViewSet, GenreViewSet
 
 
 router = DefaultRouter()
@@ -12,8 +12,8 @@ router.register(r"users", UserViewSet)
 router.register(r"books", BookViewSet)
 router.register(r"bookshelf", BookshelfViewSet)
 router.register(r"genre", GenreViewSet)
-router.register(r"own", OwnViewSet)
-router.register(r"type", TypeViewSet)
+#router.register(r"own", OwnViewSet)
+#router.register(r"type", TypeViewSet)
 #router.register(r"writes", WritesViewSet)
 
 urlpatterns = [
@@ -26,4 +26,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('bookshelf/get', BookshelfViewSet.getBookshelf, name="getBookshelf")
     ]

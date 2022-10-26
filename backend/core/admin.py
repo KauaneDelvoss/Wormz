@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Author, Book, Bookshelf, Genre, Own, Type, User
+from core.models import Author, Book, Bookshelf, Genre, User
 
 
 # Register your models here.
@@ -46,7 +46,7 @@ admin.site.register(Author)
 admin.site.register(Book)
 admin.site.register(Bookshelf)
 admin.site.register(Genre)
-admin.site.register(Own)
-admin.site.register(Type)
+#admin.site.register(Own)
+#admin.site.register(Type)
 #admin.site.register(Writes)
 
