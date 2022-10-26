@@ -1,9 +1,9 @@
 <template>
-  <div class="bookshelf-view">
-    <v-row class="justify-center mt-8 margin-left-page">
-      <ImgBookshelf :books="bookshelf.books" />
+  <div v-if="this.bookshelf.books" class="bookshelf-view">
+    <v-row class="justify-start my-12 mx-5 align-center">
+      <ImgBookshelf :books="(this.bookshelf.books).slice(0, 4)" />
 
-      <div class="d-flex flex-column">
+      <div class="d-flex flex-column ms-5">
         <div class="h3">{{ bookshelf.name }}</div>
         <div class="subtitulo">{{ bookshelf.description }}</div>
       </div>
@@ -22,9 +22,11 @@
 
 <script>
 import { mapState } from "vuex";
+import ImgBookshelf from '~/components/bib/ImgBookshelf'
 
 export default {
   layout: "bib",
+  components: { ImgBookshelf },
   data() {
     return {
       id: 0,
@@ -33,8 +35,6 @@ export default {
   mounted() {
     this.$store.dispatch("bib/GET_URL");
     this.id = this.$router.currentRoute.params.id;
-
-    console.log(this.bookshelf);
   },
   computed: {
     ...mapState("bib", ["bookshelf"]),

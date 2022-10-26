@@ -89,11 +89,15 @@
         </div>
       </div>
     </div>
+    <FloatingButton />
   </div>
 </template>
 
 <script>
+import FloatingButton from '~/components/basic/FloatingButton'
+
 export default {
+  components: { FloatingButton },
   data() {
     return {
       searchField: "",
