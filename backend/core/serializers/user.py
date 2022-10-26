@@ -1,8 +1,8 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from django.contrib.auth.models import User as UserDjangoAuth
 
-from core.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class UserAuthSerializer(serializers.Serializer):
     email = serializers.EmailField()
@@ -13,5 +13,5 @@ class UserAuthSerializer(serializers.Serializer):
 
 class UserSerializer(ModelSerializer):
     class Meta:
-        model = User
+        model = get_user_model()
         fields = "__all__"

@@ -8,8 +8,8 @@
       max-width="55vw"
     >
       <v-card class="card-container d-flex flex-column">
-        <v-card-title v-if="bookshelf_name" class="d-flex justify-center">
-          <span class="h3 mt-5 align-self-center">{{ bookshelf_name }}</span>
+        <v-card-title v-if="bookshelf.bookshelf_name" class="d-flex justify-center">
+          <span class="h3 mt-5 align-self-center">{{ bookshelf.bookshelf_name }}</span>
         </v-card-title>
         <v-card-title v-else class="d-flex justify-center">
           <span class="h3 mt-5 align-self-center">Nova Estante</span>
@@ -24,7 +24,7 @@
                 name="form-container"
                 placeholder="Nova Estante"
                 class="form-area py-2"
-                v-model="bookshelf_name"
+                v-model="bookshelf.bookshelf_name"
             />
             </div>
             <div class="description-form mt-5">
@@ -34,7 +34,7 @@
                 name="form-container"
                 placeholder="Lista de Desejos"
                 class="form-area py-2"
-                v-model="bookshelf_description"
+                v-model="bookshelf.bookshelf_desc"
                 max-lenght="150"
             />
             </div>
@@ -54,7 +54,7 @@
             class="dropdown-item"
             text
             color="white"
-            @click="$emit('close')"
+            @click="($emit('close'), LOGIN(bookshelf))"
           >
             Criar
           </v-btn>
@@ -65,13 +65,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     props: { dialog:Boolean },
     data(){
         return{
-            bookshelf_name: '',
-            bookshelf_description: ''
+            bookshelf : {}
         }
+    },
+    methods:{
+      ...mapActions('bookshelf', ['LOGIN'])
     }
 }
 </script>
