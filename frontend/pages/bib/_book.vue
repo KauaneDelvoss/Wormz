@@ -12,7 +12,7 @@
         </v-row>
         <div>
           <div v-for="author in book.author" :key="author">
-            <span class="subtitulo"> {{ book.author }} </span>
+            <span class="subtitulo"> {{ author }} </span>
           </div>
           <!-- <span class="subtitulo data">
             {{ book.volumeInfo.publishedDate }}

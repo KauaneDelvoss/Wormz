@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
-from core.models import Book
+from core.models import Book, Author, Genre
 from core.serializers import BookSerializer
 
 #from rest_framework.viewsets import ModelViewSet
@@ -61,6 +61,16 @@ class BookViewSet(ModelViewSet):
 
         serializers = BookSerializer(book)
         data = serializers.data
+        
+        author = []
+        for item in data["author"]:
+            author.append(Author.objects.get(pk = item).name_author)
+        data["author"] = author
+
+        genre = []
+        for item in data["genre"]:
+            genre.append(Genre.objects.get(pk = item).name_genre)
+        data["genre"] = genre
 
         json = JSONRenderer().render(data)
         return HttpResponse(json, content_type="text/json-comment-filtered")

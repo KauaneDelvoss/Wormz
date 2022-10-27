@@ -8,6 +8,11 @@ export const mutations = {
         console.log(payload)
         state.book = payload
     },
+
+    SET_BOOK(state, payload){
+        console.log(payload)
+        state.book = payload
+    }
 }
 
 export const actions = {
@@ -25,7 +30,7 @@ export const actions = {
             
             this.$axios.$get('/get/book/' + id).then(
                 response => {
-                    console.log(response)
+                    commit("SET_BOOK", response)
                 }
             )
         }
