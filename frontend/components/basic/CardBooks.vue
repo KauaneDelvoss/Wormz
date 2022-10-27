@@ -1,12 +1,8 @@
 <template>
   <v-card class="mx-auto book" @click="goToBook(book.id)">
     <v-img
-      v-if="
-        book.volumeInfo.imageLinks
-          ? book.volumeInfo.imageLinks.thumbnail
-          : false
-      "
-      :src="book.volumeInfo.imageLinks.thumbnail"
+      v-if="book"
+      :src="book.capa.url"
       height="28vh"
       aspect-ratio="1.7"
     >
@@ -42,13 +38,13 @@
         style="height: 100%"
       >
         <v-card-text>
-          <div v-for="item in book.volumeInfo.authors" :key="item">
+          <div v-for="item in book.author" :key="item">
             {{ item }}
           </div>
           <div class="header-title text--primary">
-            {{ book.volumeInfo.title }}
+            {{ book.book_name }}
           </div>
-          <p>{{ book.volumeInfo.publishedDate }}</p>
+          <!-- <p>{{ book.volumeInfo.publishedDate }}</p> -->
         </v-card-text>
         <v-card-actions class="pt-0">
           <v-btn text class="v-card-show" @click="reveal = false">

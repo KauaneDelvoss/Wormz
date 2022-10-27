@@ -48,9 +48,9 @@
           >
         </div>
         <div v-if="open" class="bookshelves d-flex flex-column mb-3">
-          <div class="margin-left-page header-title">
-            <router-link style="color: white" to="/userBib/bookshelf/1"
-              >Exemplo</router-link
+          <div v-for="bookshelf in bookshelves" :key="bookshelf.id" class="margin-left-page header-title">
+            <router-link style="color: white" :to="'/userBib/' + user.id + '/bookshelf/' + bookshelf.id"
+              >{{ bookshelf.bookshelf_name }}</router-link
             >
           </div>
         </div>
@@ -60,6 +60,14 @@
         <div class="box-item align-center d-flex">
           <v-icon class="icon">mdi-nut</v-icon>
           <div class="header-title item-title pointer" @click="openConfig = true">Configurações</div>
+        </div>
+        <!-- fazer configs !-->
+      </div>
+      <div class="d-flex wrapper-div flex-column">
+        <div class="box-item align-center d-flex">
+          <div class="header-title item-title pointer">
+            <router-link :to="'/book/1'">Teste Livro</router-link>
+          </div>
         </div>
         <!-- fazer configs !-->
       </div>
@@ -79,6 +87,7 @@
 <script>
 import OpenNewBook from "~/components/bib/OpenNewBook";
 import ConfigUser from "~/components/ConfigUser"
+import { mapActions, mapState } from 'vuex'
 
 export default {
   components: { OpenNewBook, ConfigUser },
@@ -87,9 +96,20 @@ export default {
       open: false,
       searchField: "",
       openNewBook: false,
-      openConfig: false,
+      openConfig: false
     };
   },
+  mounted(){
+    this.GET_BOOKSHELVES(this.user.username)
+    console.log(this.bookshelves)
+  },
+  methods:{
+    ...mapActions('bookshelf', ["GET_BOOKSHELVES"])
+  },
+  computed: {
+    ...mapState('bookshelf', ["bookshelf", "bookshelves"]),
+    ...mapState('auth', ["user"])
+  }
 };
 </script>
 

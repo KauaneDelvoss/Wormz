@@ -54,7 +54,7 @@
             class="dropdown-item"
             text
             color="white"
-            @click="($emit('close'), LOGIN(bookshelf))"
+            @click="($emit('close'), bookshelf.user = user.id, ADD_BOOKSHELF(bookshelf))"
           >
             Criar
           </v-btn>
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
     props: { dialog:Boolean },
@@ -75,7 +75,10 @@ export default {
         }
     },
     methods:{
-      ...mapActions('bookshelf', ['LOGIN'])
+      ...mapActions('bookshelf', ['ADD_BOOKSHELF'])
+    },
+    computed: {
+      ...mapState('auth', ['user'])
     }
 }
 </script>

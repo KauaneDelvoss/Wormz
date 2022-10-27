@@ -1,22 +1,22 @@
 <template>
   <div
-    v-if="book.volumeInfo"
+    v-if="book"
     class="book-view d-flex mb-4 flex-column flex-grow-1 margin-left-page margin-right-page mt-10"
   >
     <v-row class="d-flex flex-container align-center">
       <v-col cols="6">
         <v-row class="align-center mb-3">
-          <span class="h3">{{ book.volumeInfo.title }}</span>
+          <span class="h3">{{ book.name_book }}</span>
           <v-icon class="ms-5 v-icon-item" @click="book.liked = false" v-if="book.liked">mdi-cards-heart</v-icon>
           <v-icon class="ms-5 v-icon-item" @click="book.liked = true" v-else>mdi-cards-heart-outline</v-icon>
         </v-row>
         <div>
-          <div v-for="author in book.volumeInfo.authors" :key="author">
+          <div v-for="author in book.author" :key="author">
             <span class="subtitulo"> {{ author }} </span>
           </div>
-          <span class="subtitulo data">
+          <!-- <span class="subtitulo data">
             {{ book.volumeInfo.publishedDate }}
-          </span>
+          </span> -->
         </div>
         <v-row class="align-center mt-2">
           <v-rating
@@ -41,12 +41,9 @@
       <v-col cols="6" class="d-flex">
         <v-card class="mx-auto book">
           <v-img
-            v-if="
-              book.volumeInfo.imageLinks
-                ? book.volumeInfo.imageLinks.thumbnail
-                : false
-            "
-            :src="book.volumeInfo.imageLinks.thumbnail"
+            v-if="book.capa"
+
+            :src="book.capa.url"
             height="28vh"
             aspect-ratio="1.7"
           />
@@ -59,7 +56,7 @@
         <span class="h3">Descrição</span>
       </p>
       <div class="subtitulo reading-text">
-        {{ book.volumeInfo.description }}
+        {{ book.resume }}
       </div>
     </v-row>
     <v-divider class="divider my-10" />
@@ -76,12 +73,12 @@
         </div>
     </div>
 
-    <BookShelfDialog @closeDialog="open = false" :dialog="open" />
+    <BookShelfDialog @closeDialog="open = false" :dialog="open" :book="book.id" />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import BookShelfDialog from "~/components/bib/BookShelfDialog";
 import ReviewAction from "~/components/bib/ReviewAction";
 import ReviewView from "~/components/bib/ReviewView";
@@ -96,12 +93,16 @@ export default {
   },
   mounted() {
     const id = this.$router.currentRoute.params.id;
-    this.$store.dispatch("book/GET_URL", id);
-    console.log(this.book);
+    // this.$store.dispatch("book/GET_URL", id);
+    this.GET_BOOK(id)
+
   },
   computed: {
     ...mapState("book", ["book"]),
   },
+  methods:{
+    ...mapActions("book", ["GET_BOOK"])
+  }
 };
 </script>
 

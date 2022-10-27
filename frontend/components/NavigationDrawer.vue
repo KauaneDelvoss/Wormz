@@ -38,6 +38,8 @@
           <v-icon small class="v-icon-item ms-2">mdi-logout-variant</v-icon>
         </div>
         <ConfigUser :dialog="showConfig" @close="showConfig = false" />
+
+        
       </div>
     </div>
 
@@ -49,6 +51,7 @@
 <script>
 import {mapActions, mapState} from 'vuex'
 import ConfigUser from '~/components/ConfigUser'
+
 export default {
   props: {activeToggleBar: Boolean}  ,
   components: {ConfigUser},
@@ -174,6 +177,7 @@ export default {
   min-width: 100px;
   background-color: $bg-color;
   padding: 10px;
+  min-height: 11vh;
 }
 
 .dropdown-item:hover{

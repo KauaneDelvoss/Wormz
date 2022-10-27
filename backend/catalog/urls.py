@@ -40,7 +40,12 @@ urlpatterns = [
     path('api/media/', include(media_router.urls)),
 
     path('bookshelf/create', BookshelfViewSet.createBookshelf, name="createBookshelf"),
-    path('bookshelf/get', BookshelfViewSet.getBookshelf, name="getBookshelf"),
+
+    path('get/<slug:user_username>/bookshelf', BookshelfViewSet.getBookshelves, name="getBookshelves"),
+    path('get/<slug:user_username>/bookshelf/<int:id>', BookshelfViewSet.getBookshelf, name="getBookshelf"),
+    path('post/addBookshelf', BookshelfViewSet.addBookshelf, name="addBookshelf"),
+
+    path('get/book/<int:id>', BookViewSet.getBook, name="getBook"),
     #path('update/bookshelf', BookshelfViewSet.updateBookshelf, name="updateBookshelf"),
     #path('delete/bookshelf', BookshelfViewSet.deleteBookshelf, name="deleteBookshelf"),
 

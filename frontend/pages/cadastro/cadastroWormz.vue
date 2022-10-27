@@ -26,9 +26,11 @@
                 <button
                   type="button"
                   class="btnWormz"
-                  @click="SIGN_UP_USER(formData), 
-                  //SIGN_UP_BIO(formUser), 
-                  goTo()"
+                  @click="
+                    SIGN_UP_USER(formData),
+                      //SIGN_UP_BIO(formUser),
+                      goTo()
+                  "
                 >
                   CONCLUIR
                 </button>
@@ -81,8 +83,8 @@ export default {
       this.next();
     },
 
-    goTo(){
-      this.$router.push({path: '/SearchBib'})
+    goTo() {
+      this.$router.push({ path: "/SearchBib" });
     },
 
     next() {
@@ -129,7 +131,7 @@ export default {
 @include breakpoints;
 
 .cadastro-wormz {
-  height: $template-height;
+  height: 100vh;
   width: 100vw;
   background-color: #22273c;
   background-image: url("@/assets/images/blobblue.png");
