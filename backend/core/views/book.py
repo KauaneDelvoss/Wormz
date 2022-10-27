@@ -54,15 +54,13 @@ class BookViewSet(ModelViewSet):
                 return HttpResponse("Livro cadastrado com sucesso!")
 
 
-    def getBook(request):
+    def getBook(request, id):
         # username = request.POST.get("username")
-        book = Book.objects.get(name_book=request.POST.get("name_book"))
+        book = Book.objects.get(pk = id)
         # perfil = User.objects.get(username = username)
 
         serializers = BookSerializer(book)
         data = serializers.data
-
-        data.update(username=book.name_book)
 
         json = JSONRenderer().render(data)
         return HttpResponse(json, content_type="text/json-comment-filtered")

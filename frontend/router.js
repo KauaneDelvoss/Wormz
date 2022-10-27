@@ -47,7 +47,7 @@ export function createRouter() {
         component: UserBib,
       },
       {
-        path: "/userBib/bookshelf/:id?",
+        path: "/userBib/:user?/bookshelf/:id?",
         component: bookshelfView,
       },
       {

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import ImgBookshelf from '~/components/bib/ImgBookshelf'
 
 export default {
@@ -33,11 +33,14 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("bib/GET_URL");
     this.id = this.$router.currentRoute.params.id;
+    this.GET_BOOKSHELF(this.id)
+  },
+  methods: {
+    ...mapActions('bookshelf', ["GET_BOOKSHELF"])
   },
   computed: {
-    ...mapState("bib", ["bookshelf"]),
+    ...mapState("bookshelf", ["bookshelf"]),
   },
 };
 </script>

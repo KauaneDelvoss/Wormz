@@ -5,6 +5,7 @@ from rest_framework.renderers import JSONRenderer
 from django.http import JsonResponse
 from yaml import serialize
 from core import serializers
+from core.models.book import Book
 from core.serializers import BookshelfSerializer
 
 from core.models import User
@@ -62,6 +63,8 @@ class BookshelfViewSet(ModelViewSet):
     def getBookshelf(request, user_username, id):
         # username = request.POST.get("username")
         print(user_username, id)
+        print((Bookshelf.objects.get(id)).book)
+        print(Book.objects.filter(pk = (Bookshelf.objects.get(id)).book))
         #print(request.POST)
         #return HttpResponse("uhum")
 

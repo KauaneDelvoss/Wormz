@@ -19,5 +19,14 @@ export const actions = {
             .then(res => { 
                 commit('COMMIT_URL',  res)
             })
+        },
+
+        GET_BOOK({commit}, id){
+            
+            this.$axios.$get('/get/book/' + id).then(
+                response => {
+                    console.log(response)
+                }
+            )
         }
     }

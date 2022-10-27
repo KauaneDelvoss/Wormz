@@ -49,7 +49,7 @@
         </div>
         <div v-if="open" class="bookshelves d-flex flex-column mb-3">
           <div v-for="bookshelf in bookshelves" :key="bookshelf.id" class="margin-left-page header-title">
-            <router-link style="color: white" :to="'/userBib/bookshelf/' + bookshelf.id"
+            <router-link style="color: white" :to="'/userBib/' + user.id + '/bookshelf/' + bookshelf.id"
               >{{ bookshelf.bookshelf_name }}</router-link
             >
           </div>
@@ -60,6 +60,14 @@
         <div class="box-item align-center d-flex">
           <v-icon class="icon">mdi-nut</v-icon>
           <div class="header-title item-title pointer" @click="openConfig = true">Configurações</div>
+        </div>
+        <!-- fazer configs !-->
+      </div>
+      <div class="d-flex wrapper-div flex-column">
+        <div class="box-item align-center d-flex">
+          <div class="header-title item-title pointer">
+            <router-link :to="'/book/1'">Teste Livro</router-link>
+          </div>
         </div>
         <!-- fazer configs !-->
       </div>
