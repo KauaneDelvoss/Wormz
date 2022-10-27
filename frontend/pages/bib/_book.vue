@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <BookShelfDialog @closeDialog="open = false" :dialog="open" />
+    <BookShelfDialog @closeDialog="open = false" :dialog="open" :book="book.id" />
   </div>
 </template>
 
@@ -95,7 +95,7 @@ export default {
     const id = this.$router.currentRoute.params.id;
     // this.$store.dispatch("book/GET_URL", id);
     this.GET_BOOK(id)
-    console.log(this.book);
+
   },
   computed: {
     ...mapState("book", ["book"]),

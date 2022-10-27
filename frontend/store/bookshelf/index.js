@@ -56,28 +56,14 @@ export const actions = {
 
 
 
-    POST_BOOKSHELF({commit, dispatch}, formData) {
-        const getFormData = object => Object.keys(object).reduce((formData, key) => {
-            formData.append(key, object[key]);
-            return formData;
-        }, new FormData());
+    ADD_TO_BOOKSHELF({ commit }, payload){
 
-        console.log(formData)
-        this.$axios.post('/get/bookshelf/', getFormData(formData),
-        {headers: {'Content-Type': 'multipart/form-data'}})
-        .then(response => {
-            if(response.status == 200){
-                dispatch('LOGIN', { "bookshelf_name": formData.bookshelf_name, "bookshelf_desc": formData.bookshelf_desc }).then(response => {
-                    if(response){
-                        commit('SET_BOOKSHELF_INFO')
-                    } else {
-                        alert(response.data)
-                    }
-                })
-            } else {
-                alert(response.data)
+        this.$axios.post('post/addBookshelf', JSON.stringify(payload), {headers: {'Content-Type': 'application/json'}}).then(
+            response => {
+                console.log(response.data)
             }
-        })
+        )
+
     }
 }
 

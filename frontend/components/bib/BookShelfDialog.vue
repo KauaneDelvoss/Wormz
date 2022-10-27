@@ -10,8 +10,8 @@
         <v-divider class="divider"></v-divider>
         <v-card-text style="height: 300px;" class="mt-5">
           <div class="checkboxes">
-            <div v-for="bookshelf in bookshelves" :key="bookshelf.name" class="my-n2">
-                <v-checkbox dark v-model="checkboxActive" :label="bookshelf.name" :value="bookshelf.name" class="subtitulo"/>
+            <div v-for="bookshelf in bookshelves" :key="bookshelf.id" class="my-n2">
+                <v-checkbox dark v-model="checkboxActive" :label="bookshelf.bookshelf_name" :value="bookshelf" class="subtitulo"/>
             </div>
           </div>
         </v-card-text>
@@ -28,7 +28,7 @@
           <v-btn
             class="button"
             text
-            @click="$emit('closeDialog')"
+            @click="($emit('closeDialog'), ADD_TO_BOOKSHELF({bookshelves: checkboxActive, id_book: book}))"
           >
             ADICIONAR
           </v-btn>
@@ -39,19 +39,26 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 
 export default {
-    props: { dialog:Boolean },
+    props: { dialog: Boolean, book: Number },
     data(){
         return{
             checkboxActive: [],
-            bookshelves: [
-                { id: 1, name: 'Primeira' },
-                { id: 1, name: 'Segunda' },
-                { id: 2, name: 'Terceira' }
-            ]
         }
-    }
+    },
+    mounted(){
+      this.GET_BOOKSHELVES(this.user.username)
+      console.log(this.book)
+    },
+  methods:{
+    ...mapActions('bookshelf', ["GET_BOOKSHELVES", "ADD_TO_BOOKSHELF"])
+  },
+  computed: {
+    ...mapState('bookshelf', ["bookshelf", "bookshelves"]),
+    ...mapState('auth', ["user"])
+  }
 }
 </script>
 

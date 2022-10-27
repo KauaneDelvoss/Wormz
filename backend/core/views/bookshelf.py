@@ -82,10 +82,20 @@ class BookshelfViewSet(ModelViewSet):
         # #json
         # return HttpResponse(json, content_type="text/json-comment-filtered")
 
-    def addBookshelf():
-        pass
-        #id livro
-        #if bookshelf
+    def addBookshelf(request):
+        
+        if request.POST:
+            body = request.body
+            book = Book.objects.get(pk = body["id_book"])
+
+            for item in body["bookshelves"]:
+                bookshelf = Bookshelf.objects.get(pk = item["id"])
+                bookshelf.add(book)
+
+            return HttpResponse("Estantes atualizadas com sucesso!")
+        
+        else:
+            return HttpResponse("Método proibido: somente POST")
     
 
     def removeBookshelf():
