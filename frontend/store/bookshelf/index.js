@@ -1,12 +1,16 @@
 export const state = () => ({
-    bookshelf: {}
+    bookshelf: {},
+    bookshelves: []
 })
 
 export const mutations = {
 
-    SET_BOOKSHELF_INFO(state){
-        state.bookshelf_name = {}
-        state.bookshelf_desc = {}
+    SET_BOOKSHELF_INFO(state, payload){
+        state.bookshelf = payload
+    },
+
+    SET_BOOKSHELVES(state, payload){
+        state.bookshelves = payload
     }
 }
 
@@ -14,15 +18,23 @@ export const mutations = {
 
 export const actions = {
     GET_BOOKSHELF({ commit }, id){
-        this.$axios.post('/get/bookshelf/', id).then(
+        this.$axios.$get('/bookshelf/' + id).then(
             response => {
-                console.log(response)
+                commit("SET_BOOKSHELF_INFO", response)
             }
         )
 
     },
 
-    async LOGIN( { commit }, bookshelf){
+    GET_BOOKSHELVES({commit}, user_username){
+        this.$axios.get('get/' + user_username + '/bookshelf' ).then(
+            response => {
+                commit("SET_BOOKSHELVES", response.data)
+            }
+        )
+    },
+
+    async ADD_BOOKSHELF( { commit, dispatch }, bookshelf){
         try{
             const getFormData = object => Object.keys(object).reduce((formData, key) => {
                 formData.append(key, object[key]);
@@ -34,8 +46,9 @@ export const actions = {
             // bookshelf.id = bookshelfResponse.id
             // bookshelf.bookshelf_name = bookshelfResponse.bookshelf_name
             // bookshelf.bookshelf_desc = bookshelfResponse.booskhelf_desc
+            
+            commit('GET_BOOKSHELVES', )
 
-            commit('SET_BOOKSHELF_INFO', bookshelf)
             
         } catch(e) {
             return Promise.reject(e) }

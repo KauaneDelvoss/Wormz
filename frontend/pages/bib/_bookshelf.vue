@@ -1,14 +1,14 @@
 <template>
   <div v-if="this.bookshelf.books" class="bookshelf-view">
     <v-row class="justify-start my-12 mx-5 align-center">
-      <ImgBookshelf :books="(this.bookshelf.books).slice(0, 4)" />
+      <!-- <ImgBookshelf :books="(this.bookshelf.books).slice(0, 4)" /> -->
 
       <div class="d-flex flex-column ms-5">
-        <div class="h3">{{ bookshelf.name }}</div>
-        <div class="subtitulo">{{ bookshelf.description }}</div>
+        <div class="h3">{{ bookshelf.bookshelf_name }}</div>
+        <div class="subtitulo">{{ bookshelf_desc }}</div>
       </div>
     </v-row>
-    <v-row class="d-flex justify-center row mt-8">
+    <!-- <v-row class="d-flex justify-center row mt-8">
       <div
         v-for="book in this.bookshelf.books"
         :key="book.id"
@@ -16,7 +16,7 @@
       >
         <CardBooks :book="book" />
       </div>
-    </v-row>
+    </v-row> -->
   </div>
 </template>
 
