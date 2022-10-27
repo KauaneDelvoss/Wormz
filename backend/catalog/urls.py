@@ -11,6 +11,12 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from core.views import UserViewSet, BookViewSet, BookshelfViewSet, GenreViewSet
 
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
+
 
 router = DefaultRouter()
 router.register(r"users", UserViewSet)
@@ -38,6 +44,18 @@ urlpatterns = [
     #path('update/bookshelf', BookshelfViewSet.updateBookshelf, name="updateBookshelf"),
     #path('delete/bookshelf', BookshelfViewSet.deleteBookshelf, name="deleteBookshelf"),
 
+    # OpenAPI 3
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/swagger/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "api/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
 
   
     ]

@@ -62,10 +62,11 @@ class BookshelfViewSet(ModelViewSet):
 
         return HttpResponse(json, content_type="text/json-comment-filtered")
 
-    def addBookshelf(request):
-        pass
+    def addBookshelf(request, user_username, id):
+        #pass
         #id livro
-        #id bookshelf
+        #id bookshelf   
+        pass
         
 
 
