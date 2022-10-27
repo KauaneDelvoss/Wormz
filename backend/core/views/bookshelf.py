@@ -59,9 +59,9 @@ class BookshelfViewSet(ModelViewSet):
         return JsonResponse(data, safe=False)  # or JsonResponse({'data': data})
 
 
-    def getBookshelf(request, id):
+    def getBookshelf(request, user_username, id):
         # username = request.POST.get("username")
-        print(id)
+        print(user_username, id)
         #print(request.POST)
         #return HttpResponse("uhum")
 
