@@ -84,12 +84,20 @@ export default {
   middleware: 'auth',
   components: { ImgBackground, CardBooks },
   methods: {
+    // search(item){
+    //   this.$store.commit(
+    //   "google_books/MAKE_URL_SEARCH",
+    //   item
+    // );
+    // this.$store.dispatch("google_books/GET_URL");
+    // }
+
     search(item){
-      this.$store.commit(
-      "google_books/MAKE_URL_SEARCH",
-      item
-    );
-    this.$store.dispatch("google_books/GET_URL");
+      this.$axios.get("get/book/search/" + item).then(
+        response => {
+          this.books = response.data
+        }
+      )
     }
     
     

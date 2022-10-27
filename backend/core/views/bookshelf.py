@@ -2,11 +2,12 @@ from rest_framework.viewsets import ModelViewSet
 from django.http.response import HttpResponse
 #from .bookshelf import Bookshelf
 from rest_framework.renderers import JSONRenderer
+import json
 from django.http import JsonResponse
 from yaml import serialize
 from core import serializers
 from core.models.book import Book
-from core.serializers import BookshelfSerializer
+from core.serializers import BookshelfSerializer, BookSerializer
 
 from core.models import User
 from core.models import Bookshelf, bookshelf
@@ -62,41 +63,36 @@ class BookshelfViewSet(ModelViewSet):
 
     def getBookshelf(request, user_username, id):
         # username = request.POST.get("username")
-        print(user_username, id)
-        print((Bookshelf.objects.get(id)).book)
-        print(Book.objects.filter(pk = (Bookshelf.objects.get(id)).book))
-        #print(request.POST)
-        #return HttpResponse("uhum")
 
-        
-        #bookshelf = Bookshelf.objects.get(bookshelf_name=request.POST.get("Bookshelf.id"))
-        # bookshelf = Bookshelf.objects.get(pk = request.POST.get(id))
-        #livros que estão dentro dela
+        user = User.objects.get(username = user_username)
+        book_serializer = BookSerializer(Book.objects.get(bookshelf = id))
+        serialize = book_serializer.data
 
-        # serializers = BookshelfSerializer(bookshelf)
-        # data = serializers.data
+        bookshelf = (Bookshelf.objects.filter(user = user, pk=id)).values()
+        bookshelf = list(bookshelf)
 
-        # data.update(bookshelf_name=bookshelf.bookshelf_name)
+        data = {}
 
-        # json = JSONRenderer().render(data)
-        # #json
-        # return HttpResponse(json, content_type="text/json-comment-filtered")
+        data.update(book = serialize, bookshelf_info = bookshelf[0])
+
+        # data = list(data)  # wrap in list(), because QuerySet is not JSON serializable
+
+        # return JsonResponse(data, safe=False)  # or JsonResponse({'data': data})
+
+        json = JSONRenderer().render(data)
+        return HttpResponse(json, content_type="text/json-comment-filtered")
 
     def addBookshelf(request):
-        
-        if request.POST:
-            body = request.body
-            book = Book.objects.get(pk = body["id_book"])
+        body = json.loads(request.body)
 
-            for item in body["bookshelves"]:
-                bookshelf = Bookshelf.objects.get(pk = item["id"])
-                bookshelf.add(book)
+        book = Book.objects.get(pk = body["id_book"])
 
-            return HttpResponse("Estantes atualizadas com sucesso!")
+        for item in body["bookshelves"]:
+            bookshelf = Bookshelf.objects.get(pk = item["id"])
+            bookshelf.book.add(book)
+
+        return HttpResponse("Estantes atualizadas com sucesso!")
         
-        else:
-            return HttpResponse("Método proibido: somente POST")
-    
 
     def removeBookshelf():
         pass

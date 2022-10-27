@@ -4,8 +4,8 @@
       <!-- <ImgBookshelf :books="(this.bookshelf.books).slice(0, 4)" /> -->
 
       <div class="d-flex flex-column ms-5">
-        <div class="h3">{{ bookshelf.bookshelf_name }}</div>
-        <div class="subtitulo">{{ bookshelf.bookshelf_desc }}</div>
+        <div class="h3">{{ bookshelf.bookshelf_info.bookshelf_name }}</div>
+        <div class="subtitulo">{{ bookshelf.bookshelf_info.bookshelf_desc }}</div>
       </div>
     </v-row>
     
@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     this.id = this.$router.currentRoute.params.id;
-    this.GET_BOOKSHELF(this.id)
+    this.GET_BOOKSHELF({ user: this.user.username, id: this.id })
     console.log(this.bookshelf)
   },
   methods: {
@@ -44,6 +44,7 @@ export default {
   },
   computed: {
     ...mapState("bookshelf", ["bookshelf"]),
+    ...mapState("auth", ["user"])
   },
 };
 </script>

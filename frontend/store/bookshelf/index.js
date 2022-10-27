@@ -6,7 +6,8 @@ export const state = () => ({
 export const mutations = {
 
     SET_BOOKSHELF_INFO(state, payload){
-        state.bookshelf = payload
+        state.bookshelf.book = payload.book
+        state.bookshelf.bookshelf_info = payload.bookshelf_info
     },
 
     SET_BOOKSHELVES(state, payload){
@@ -14,13 +15,11 @@ export const mutations = {
     }
 }
 
-
-
 export const actions = {
-    GET_BOOKSHELF({ commit }, id){
-        this.$axios.$get('/bookshelf/' + id).then(
+    GET_BOOKSHELF({ commit }, payload){
+        this.$axios.get('/get/' + payload.user + '/bookshelf/' + payload.id).then(
             response => {
-                commit("SET_BOOKSHELF_INFO", response)
+                commit("SET_BOOKSHELF_INFO", response.data)
             }
         )
 
