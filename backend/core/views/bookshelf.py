@@ -5,8 +5,8 @@ from rest_framework.renderers import JSONRenderer
 from core.serializers import BookshelfSerializer
 
 
-from core.models import Bookshelf, bookshelf
-from core.serializers import BookshelfSerializer
+from core.models import Bookshelf, Book
+from core.serializers import BookshelfSerializer, BookSerializer
 
 class BookshelfViewSet(ModelViewSet):
     queryset = Bookshelf.objects.all()
@@ -54,16 +54,23 @@ class BookshelfViewSet(ModelViewSet):
         serializers = BookshelfSerializer(bookshelf)
         data = serializers.data
 
-        data.update(bookshelf_name=bookshelf.bookshelf_name)
+        data.update(pk=bookshelf.bookshelf_name)
 
         json = JSONRenderer().render(data)
         #json
+        print(request.POST)
+
         return HttpResponse(json, content_type="text/json-comment-filtered")
 
-    def addBookshelf():
+    def addBookshelf(request):
         pass
         #id livro
-        #if bookshelf
+        #id bookshelf
+        
+
+
+
+
     
 
     def removeBookshelf():
@@ -72,5 +79,8 @@ class BookshelfViewSet(ModelViewSet):
 
 
 
-    def deleteBookshelf():
-        pass
+    def deleteBookshelf(request):
+        
+        bookshelf = Bookshelf.objects.get(pk=request.POST.get("id"))
+        bookshelf.delete()
+        return HttpResponse("Estante deletada com sucesso!")
