@@ -70,7 +70,7 @@ class UserViewSet(ModelViewSet):
 
     def updateUser(request):
         if request.POST:
-            user = User.objects.get(pk=request.POST.get("id"))
+            user = User.objects.get(pk = request.POST.get('id'))
             # profile = User.objects.get(cod_user=request.POST.get('id'))
             user.user_biography = request.POST.get("user_biography")
             user.username = request.POST.get("username")

@@ -40,7 +40,7 @@ urlpatterns = [
     path('post/addBookshelf', BookshelfViewSet.addBookshelf, name="addBookshelf"),
 
     path('get/book/<int:id>', BookViewSet.getBook, name="getBook"),
-    path('get/book/search/<slug: search>', BookshelfViewSet.search, name ="search")
+    path('get/book/search/<slug:search>', BookViewSet.getSearch, name ="search")
     #path('update/bookshelf', BookshelfViewSet.updateBookshelf, name="updateBookshelf"),
     #path('delete/bookshelf', BookshelfViewSet.deleteBookshelf, name="deleteBookshelf"),
 

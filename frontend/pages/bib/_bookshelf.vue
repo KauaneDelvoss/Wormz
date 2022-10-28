@@ -10,13 +10,14 @@
     </v-row>
     
     <v-row class="d-flex justify-center row mt-8" v-if="this.bookshelf.book">
-      <div
+      <!-- <div
         v-for="book in this.bookshelf.book"
         :key="book.id"
         class="my-2 mx-5"
       >
         <CardBooks :book="book" />
-      </div>
+      </div> -->
+      <CardBooks :book="this.bookshelf.book" />
     </v-row>
 
   </div>

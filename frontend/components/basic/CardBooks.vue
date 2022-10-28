@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto book" @click="goToBook(book.id)">
     <v-img
-      v-if="book"
+      v-if="book.capa"
       :src="book.capa.url"
       height="28vh"
       aspect-ratio="1.7"

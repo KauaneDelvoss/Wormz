@@ -84,12 +84,14 @@ export default {
       userLocal: {}
     }
   },
-  created(){
-    this.userLocal = this.user
-  },
+  // created(){
+  //   this.userLocal = this.user
+  // },
   methods:{
     ...mapActions('auth', ['LOGOUT']),
     submitAuthData(){
+      this.userLocal.id = this.user.id
+
       const getFormData = object => Object.keys(object).reduce((formData, key) => {
                 formData.append(key, object[key]);
                 return formData;

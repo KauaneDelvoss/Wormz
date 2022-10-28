@@ -43,9 +43,10 @@
           <div class="h3 mt-10 mb-8">Resultados da sua pesquisa: </div>
           <v-row>
             <div class="margin-left-page margin-right-page d-flex flex-wrap justify-center" style="gap: 2vw ;">
-              <div v-for="book in books" :key="book.id">
+              <!-- <div v-for="book in books" :key="book.id">
                 <CardBooks :book="book" class="book" />
-              </div>
+              </div> -->
+              <CardBooks :book="books" class="book" />
             </div>
           </v-row>
           <!-- <v-row>
@@ -60,7 +61,7 @@
         <div v-else class="margin-left-page margin-right-page">
             <div class="margin-left-page margin-right-page static-data">
               <div class="h3 mt-10 mb-2">Destaques:
-                <BooksCarousel carouselId="1"  />
+                <BooksCarousel carouselId="a1"  />
               </div>
             </div>
         </div>
@@ -78,11 +79,15 @@ export default {
   data(){
     return{
       searchField: '',
-      mode: ''
+      mode: '',
+      books: {},
     }
   },
   middleware: 'auth',
   components: { ImgBackground, CardBooks },
+  mounted(){
+    console.log(this.books)
+  },
   methods: {
     // search(item){
     //   this.$store.commit(
@@ -92,31 +97,28 @@ export default {
     // this.$store.dispatch("google_books/GET_URL");
     // }
 
-    search(item){
-      this.$axios.get("get/book/search/" + item).then(
-        response => {
-          this.books = response.data
-        }
-      )
+    async search(item){
+      const response = await this.$axios.get("get/book/search/" + item)
+      this.books = response.data
     }
     
     
   },
-  computed: {
-    ...mapState("google_books", ["books"]),
+  // computed: {
+  //   ...mapState("google_books", ["books"]),
 
-    search_getter(item){
-      this.search(item)
-      return this.books
-    }
+  //   search_getter(item){
+  //     this.search(item)
+  //     return this.books
+  //   }
 
-    // NECESSÁRIO GETTER !
-    //seacrhStatic(){
-      //this.$store.commit("google_books/MAKE_URL_SEARCH", "Phillip K Dick")
-      //this.$store.dispatch("google_books/GET_URL");
-      //return 
-    //}
-  }
+  //   // NECESSÁRIO GETTER !
+  //   //seacrhStatic(){
+  //     //this.$store.commit("google_books/MAKE_URL_SEARCH", "Phillip K Dick")
+  //     //this.$store.dispatch("google_books/GET_URL");
+  //     //return 
+  //   //}
+  // }
 };
 </script>
 

@@ -63,14 +63,13 @@
         </div>
         <!-- fazer configs !-->
       </div>
-      <div class="d-flex wrapper-div flex-column">
+      <!-- <div class="d-flex wrapper-div flex-column">
         <div class="box-item align-center d-flex">
           <div class="header-title item-title pointer">
             <router-link :to="'/book/1'">Teste Livro</router-link>
           </div>
         </div>
-        <!-- fazer configs !-->
-      </div>
+      </div> -->
     </div>
 
     <div class="conteudo">
