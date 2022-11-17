@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto book" @click="goToBook(book.id)">
+  <v-card v-if="book.capa" class="mx-auto book" @click="goToBook(book.id)">
     <v-img
       v-if="book"
       :src="book.capa.url"

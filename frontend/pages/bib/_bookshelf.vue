@@ -1,5 +1,5 @@
 <template>
-  <div v-if="this.bookshelf" class="bookshelf-view">
+  <div v-if="bookshelf" class="bookshelf-view">
     <v-row class="justify-start my-12 mx-5 align-center">
       <!-- <ImgBookshelf :books="(this.bookshelf.books).slice(0, 4)" /> -->
 
@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     this.id = this.$router.currentRoute.params.id;
-    this.GET_BOOKSHELF(this.id)
+    this.GET_BOOKSHELF(this.bookshelf)
     console.log(this.bookshelf)
   },
   methods: {
