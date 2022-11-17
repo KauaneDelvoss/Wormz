@@ -18,54 +18,50 @@ class BookshelfViewSet(ModelViewSet):
     serializer_class = BookshelfSerializer
 
     def createBookshelf(request):
-        if request.POST:
-            bookshelf_name = request.POST.get("bookshelf_name")
-            # nickname = request.POST.get('nickname')
-            bookshelf_desc = request.POST.get("bookshelf")
-            user = request.POST.get("user")
+
+        if request.body:
+            body = json.loads(request.body.decode('utf-8'))
+
+            print(body)
+
+            bookshelf_name = body["bookshelf_name"]
+            bookshelf_desc = body["bookshelf_desc"]
+            user = body["user"]
+
+            user = User.objects.get(pk = user["id"])
 
             bookshelf = Bookshelf.objects.filter(bookshelf_name=bookshelf_name).first()
 
-            print(request.POST)
             if bookshelf:
                 return HttpResponse("Já existe uma estante com esse nome!")
             else:
                 bookshelf = Bookshelf.objects.create(
                     bookshelf_name=bookshelf_name,
                     booshelf_desc=bookshelf_desc,
-                    user = User.objects.get(pk = user)
-                    #email=email,
-                    #first_name=first_name,
-                    #last_name=last_name,
+                    user = user
                 )
-                
+
                 bookshelf.save()
-           
 
-                # user_group = User.objects.get(username = username)
-                # user_group.groups.add(group)
+                return HttpResponse("Estante cadastrada com sucesso!")
 
-                #user.groups.add(group)
-
-                return HttpResponse("Estante cadastrado com sucesso!")
+        else:
+            return HttpResponse("Algo deu errado.")
 
     def getBookshelves(request, user_username):
         user_id = User.objects.get(username = user_username).id
         bookshelves = (Bookshelf.objects.filter(user = user_id)).values()
 
-        # serializers = BookshelfSerializer(i)
-        # data = serializers.data
-        # json =  JSONRenderer().render(data)
-
-        data = list(bookshelves)  # wrap in list(), because QuerySet is not JSON serializable
-        return JsonResponse(data, safe=False)  # or JsonResponse({'data': data})
+        data = list(bookshelves)  
+        return JsonResponse(data, safe=False) 
 
 
     def getBookshelf(request, user_username, id):
         # username = request.POST.get("username")
 
         user = User.objects.get(username = user_username)
-        book_serializer = BookSerializer(Book.objects.get(bookshelf = id))
+        
+        book_serializer = BookSerializer(Book.objects.filter(bookshelf = id))
         serialize = book_serializer.data
 
         bookshelf = (Bookshelf.objects.filter(user = user, pk=id)).values()

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="this.bookshelf" class="bookshelf-view">
+  <div v-if="bookshelf" class="bookshelf-view">
     <v-row class="justify-start my-12 mx-5 align-center">
       <!-- <ImgBookshelf :books="(this.bookshelf.books).slice(0, 4)" /> -->
 
@@ -8,7 +8,7 @@
         <div class="subtitulo">{{ bookshelf.bookshelf_info.bookshelf_desc }}</div>
       </div>
     </v-row>
-    
+
     <v-row class="d-flex justify-center row mt-8" v-if="this.bookshelf.book">
       <!-- <div
         v-for="book in this.bookshelf.book"

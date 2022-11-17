@@ -52,7 +52,7 @@
           ></v-textarea>
       </div>
     </form>
-    
+
     <form @submit.prevent class="row-wrapper">
       <div class="box-config-user d-flex flex-row align-center">
         <div class="header-title me-3">País:</div>
@@ -88,34 +88,14 @@ export default {
   //   this.userLocal = this.user
   // },
   methods:{
-    ...mapActions('auth', ['LOGOUT']),
+    ...mapActions('auth', ['LOGOUT', 'UPDATE_USER', 'DELETE_USER']),
     submitAuthData(){
       this.userLocal.id = this.user.id
-
-      const getFormData = object => Object.keys(object).reduce((formData, key) => {
-                formData.append(key, object[key]);
-                return formData;
-            }, new FormData());
-
-      this.$axios.post('/update/user', getFormData(this.userLocal)).then(
-        response => console.log(response)
-      )
+      this.UPDATE_USER(this.userLocal)
     },
 
     deleteUser(){
-      const getFormData = object => Object.keys(object).reduce((formData, key) => {
-                formData.append(key, object[key]);
-                return formData;
-            }, new FormData());
-        
-      this.$axios.post('/delete/user', getFormData({'id': this.userLocal.id})).then(
-        response => {if(response.status==200){
-          this.LOGOUT()
-          this.$router.push({
-            path: '/'
-          })
-        }}
-      )
+      this.DELETE_USER({'id': this.userLocal.id})
     }
   },
   computed: {

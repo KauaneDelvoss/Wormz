@@ -22,7 +22,7 @@
             id="form-area"
             v-model="searchField"
             @keyup.enter="search(searchField)"
-            
+
           />
           <div class="icon-search d-flex flex-column">
             <v-img
@@ -97,12 +97,14 @@ export default {
     // this.$store.dispatch("google_books/GET_URL");
     // }
 
-    async search(item){
-      const response = await this.$axios.get("get/book/search/" + item)
-      this.books = response.data
+    search(item){
+      this.$axios.get("get/book/search/" + item).then( response => {
+        this.books = response.data
+        console.log(response.data)
+      })
     }
-    
-    
+
+
   },
   // computed: {
   //   ...mapState("google_books", ["books"]),
@@ -116,7 +118,7 @@ export default {
   //   //seacrhStatic(){
   //     //this.$store.commit("google_books/MAKE_URL_SEARCH", "Phillip K Dick")
   //     //this.$store.dispatch("google_books/GET_URL");
-  //     //return 
+  //     //return
   //   //}
   // }
 };

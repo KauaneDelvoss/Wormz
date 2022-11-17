@@ -40,15 +40,12 @@ export const mutations = {
 export const actions = {
     async LOGIN( { commit }, user){
         try{
-            const getFormData = object => Object.keys(object).reduce((formData, key) => {
-                formData.append(key, object[key]);
-                return formData;
-            }, new FormData());
 
             const userInfo = await this.$authServiceLogin.login(user)
             user.token = userInfo.access
-            
-            const userResponse = (await this.$axios.post('/get/user', getFormData({'username': user.username }), {headers: {'Content-Type': 'multipart/form-data'}})).data
+
+            const userResponse = (await this.$axios.post('/get/user', JSON.stringify({'username': user.username }), {headers: {'Content-Type': 'application/json'}})).data
+
             user.id = userResponse.id
             user.first_name = userResponse.first_name
             user.last_name = userResponse.last_name
@@ -66,15 +63,28 @@ export const actions = {
         commit('SET_LOGOUT')
     },
 
+    UPDATE_USER({ commit }, formData){
+      this.$axios.post('/update/user', JSON.stringify(formData)).then(
+        response => console.log(response))
+        commit('SET_LOGIN_INFO', formData)
+    },
+
+    DELETE_USER({ dispatch }, formData){
+      this.$axios.post('/delete/user', JSON.stringify(formData)).then(
+        response => {if(response.status==200){
+          dispatch('LOGOUT')
+          this.$router.push({
+            path: '/'
+          })
+        }}
+      )
+    },
+
     SIGN_UP_USER({ commit, dispatch, state }, formData){
-        const getFormData = object => Object.keys(object).reduce((formData, key) => {
-            formData.append(key, object[key]);
-            return formData;
-        }, new FormData());
 
         console.log(formData)
-        this.$axios.post('/cadastro/', getFormData(formData),
-        {headers: {'Content-Type': 'multipart/form-data'}})
+        this.$axios.post('/cadastro/', JSON.stringify(formData),
+        {headers: {'Content-Type': 'application/json'}})
         .then(response => {
             if(response.status == 200){
                 dispatch('LOGIN', { "username": formData.username, "password": formData.password }).then(response => {

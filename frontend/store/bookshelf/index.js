@@ -35,20 +35,12 @@ export const actions = {
 
     async ADD_BOOKSHELF( { commit, dispatch }, bookshelf){
         try{
-            const getFormData = object => Object.keys(object).reduce((formData, key) => {
-                formData.append(key, object[key]);
-                return formData;
-            }, new FormData());
-            
-            console.log(bookshelf)
-            const bookshelfResponse = (await this.$axios.post('/bookshelf/create', getFormData(bookshelf), {headers: {'Content-Type': 'multipart/form-data'}})).data
-            // bookshelf.id = bookshelfResponse.id
-            // bookshelf.bookshelf_name = bookshelfResponse.bookshelf_name
-            // bookshelf.bookshelf_desc = bookshelfResponse.booskhelf_desc
-            
-            commit('GET_BOOKSHELVES', )
+          const bookshelfResponse = (await this.$axios.post('/bookshelf/create', JSON.stringify(bookshelf), {headers: {'Content-Type': 'application/json'}})).data
+          console.log(bookshelfResponse)
 
-            
+          dispatch("GET_BOOKSHELVES", bookshelf.user.username)
+
+
         } catch(e) {
             return Promise.reject(e) }
     },

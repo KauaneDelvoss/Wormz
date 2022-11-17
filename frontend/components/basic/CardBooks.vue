@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto book" @click="goToBook(book.id)">
+  <v-card v-if="book.capa" class="mx-auto book" @click="goToBook(book.id)">
     <v-img
       v-if="book.capa"
       :src="book.capa.url"
@@ -84,7 +84,7 @@ export default {
 
 @media (max-width: variables.$tablet_xl)
   .book
-    width: 18vh !important    
+    width: 18vh !important
 
 
 .bottom-gradient
@@ -94,7 +94,7 @@ export default {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
   background-color: variables.$primary-color
   border-radius: 15px
-  width: 9vw 
+  width: 9vw
   height: 28vh
 
 .card-icon

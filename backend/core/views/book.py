@@ -76,12 +76,12 @@ class BookViewSet(ModelViewSet):
         return HttpResponse(json, content_type="text/json-comment-filtered")
 
     def getSearch(request, search):
-        book = Book.objects.get(name_book = search)
+        book = Book.objects.filter(name_book__icontains = search)
 
-        serializers = BookSerializer(book)
+        serializers = BookSerializer(book, many=True)
         data = serializers.data
 
         json = JSONRenderer().render(data)
-        print(data)
+        
         return HttpResponse(json, content_type="text/json-comment-filtered")
 

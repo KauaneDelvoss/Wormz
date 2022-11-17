@@ -54,7 +54,7 @@
             class="dropdown-item"
             text
             color="white"
-            @click="($emit('close'), bookshelf.user = user.id, ADD_BOOKSHELF(bookshelf))"
+            @click="($emit('close'), bookshelf.user = user, ADD_BOOKSHELF(bookshelf)), bookshelf = {}"
           >
             Criar
           </v-btn>
