@@ -43,19 +43,11 @@
           <div class="h3 mt-10 mb-8">Resultados da sua pesquisa: </div>
           <v-row>
             <div class="margin-left-page margin-right-page d-flex flex-wrap justify-center" style="gap: 2vw ;">
-              <!-- <div v-for="book in books" :key="book.id">
+              <div v-for="book in books" :key="book.id">
                 <CardBooks :book="book" class="book" />
-              </div> -->
-              <CardBooks :book="books" class="book" />
+              </div>
             </div>
           </v-row>
-          <!-- <v-row>
-            <v-col cols="12">
-                <div v-for="book in books" :key="book">
-                  <CardBooks :book="book" />
-                </div>
-            </v-col>
-          </v-row> -->
         </div>
 
         <div v-else class="margin-left-page margin-right-page">
@@ -89,13 +81,6 @@ export default {
     console.log(this.books)
   },
   methods: {
-    // search(item){
-    //   this.$store.commit(
-    //   "google_books/MAKE_URL_SEARCH",
-    //   item
-    // );
-    // this.$store.dispatch("google_books/GET_URL");
-    // }
 
     search(item){
       this.$axios.get("get/book/search/" + item).then( response => {
@@ -106,21 +91,6 @@ export default {
 
 
   },
-  // computed: {
-  //   ...mapState("google_books", ["books"]),
-
-  //   search_getter(item){
-  //     this.search(item)
-  //     return this.books
-  //   }
-
-  //   // NECESSÁRIO GETTER !
-  //   //seacrhStatic(){
-  //     //this.$store.commit("google_books/MAKE_URL_SEARCH", "Phillip K Dick")
-  //     //this.$store.dispatch("google_books/GET_URL");
-  //     //return
-  //   //}
-  // }
 };
 </script>
 

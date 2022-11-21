@@ -49,7 +49,7 @@
         </div>
         <div v-if="open" class="bookshelves d-flex flex-column mb-3">
           <div v-for="bookshelf in bookshelves" :key="bookshelf.id" class="margin-left-page header-title">
-            <router-link style="color: white" :to="'/userBib/' + user.id + '/bookshelf/' + bookshelf.id"
+            <router-link style="color: white" :to="'/userBib/' + user.username + '/bookshelf/' + bookshelf.id"
               >{{ bookshelf.bookshelf_name }}</router-link
             >
           </div>
