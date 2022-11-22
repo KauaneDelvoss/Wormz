@@ -63,26 +63,22 @@ class BookshelfViewSet(ModelViewSet):
         
         count = Book.objects.filter(bookshelf = id)
 
+        bookshelf = (Bookshelf.objects.filter(user = user, pk=id)).values()
+        bookshelf = list(bookshelf)
+        data = {}
+
         if len(count) > 0:
             for item in count:
                 book_serializer.append(BookSerializer(item).data)
 
-            # serialize = book_serializer.data
-
-            bookshelf = (Bookshelf.objects.filter(user = user, pk=id)).values()
-            bookshelf = list(bookshelf)
-
-            data = {}
-
             data.update(book = book_serializer, bookshelf_info = bookshelf[0])
-            print(data)
+        
+        else:
+            data.update(book = {}, bookshelf_info = bookshelf[0])
 
-            # data = list(data)  # wrap in list(), because QuerySet is not JSON serializable
-
-            # return JsonResponse(data, safe=False)  # or JsonResponse({'data': data})
-
-            json = JSONRenderer().render(data)
-            return HttpResponse(json, content_type="text/json-comment-filtered")
+        json = JSONRenderer().render(data)
+        return HttpResponse(json, content_type="text/json-comment-filtered")
+    
 
     def addBookshelf(request):
         body = json.loads(request.body)

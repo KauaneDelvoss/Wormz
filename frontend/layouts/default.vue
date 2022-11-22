@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  middleware: 'tokenInit',
   data() {
     return {
       activeToggleBar: false,

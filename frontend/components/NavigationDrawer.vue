@@ -177,7 +177,7 @@ export default {
   min-width: 100px;
   background-color: $bg-color;
   padding: 10px;
-  min-height: 11vh;
+  min-height: 8vh;
 }
 
 .dropdown-item:hover{

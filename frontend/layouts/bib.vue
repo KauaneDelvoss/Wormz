@@ -16,6 +16,7 @@ import MobileView from '~/pages/bib/default/mobile'
 
 export default {
   components: { DesktopView, MobileView },
+  middleware: 'tokenInit',
   data(){
     return{
       activeToggleBar: false,
