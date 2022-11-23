@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 
 from core.models import Book, Author, Genre
-from core.serializers import BookSerializer
+from core.serializers import BookSerializer, AuthorSerializer
 
 #from rest_framework.viewsets import ModelViewSet
 #from rest_framework.permissions import IsAuthenticated
@@ -76,12 +76,23 @@ class BookViewSet(ModelViewSet):
         return HttpResponse(json, content_type="text/json-comment-filtered")
 
     def getSearch(request, search):
+        author = Author.objects.filter(name_author__icontains = search)
+        author_serializer = (AuthorSerializer(author, many=True)).data
+        jsonAuthor = JSONRenderer().render(author_serializer)
+        
         book = Book.objects.filter(name_book__icontains = search)
 
         serializers = BookSerializer(book, many=True)
         data = serializers.data
-
+        
+        for item in jsonAuthor:
+            books_in_author = Book.objects.filter(author = item.id) # tem que entrar num for
+            print(books_in_author)
+            
+        data.append(books_in_author)
+        
         json = JSONRenderer().render(data)
+        
         
         return HttpResponse(json, content_type="text/json-comment-filtered")
 
