@@ -78,18 +78,18 @@ class BookViewSet(ModelViewSet):
     def getSearch(request, search):
         author = Author.objects.filter(name_author__icontains = search)
         author_serializer = (AuthorSerializer(author, many=True)).data
-        jsonAuthor = JSONRenderer().render(author_serializer)
+        # jsonAuthor = JSONRenderer().render(author_serializer)
         
         book = Book.objects.filter(name_book__icontains = search)
 
         serializers = BookSerializer(book, many=True)
         data = serializers.data
         
-        for item in jsonAuthor:
-            books_in_author = Book.objects.filter(author = item.id) # tem que entrar num for
-            print(books_in_author)
+        # for item in jsonAuthor:
+        #     books_in_author = Book.objects.filter(author = item.id) # tem que entrar num for
+        #     print(books_in_author)
             
-        data.append(books_in_author)
+        # data.append(books_in_author)
         
         json = JSONRenderer().render(data)
         

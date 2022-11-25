@@ -9,7 +9,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from core.views import UserViewSet, BookViewSet, BookshelfViewSet, GenreViewSet
+from core.views import UserViewSet, BookViewSet, BookshelfViewSet, GenreViewSet, ReviewViewSet
 
 
 router = DefaultRouter()
@@ -40,9 +40,9 @@ urlpatterns = [
     path('get/<slug:user_username>/bookshelf/<int:id>', BookshelfViewSet.getBookshelf, name="getBookshelf"),
 
     path('get/book/<int:id>', BookViewSet.getBook, name="getBook"),
-    path('get/book/search/<slug:search>', BookViewSet.getSearch, name ="search")
+    path('get/book/search/<slug:search>', BookViewSet.getSearch, name ="search"),
 
-
+    path('post/review', ReviewViewSet.submitReview, name="submitReview")
   
     ]
 urlpatterns += static(settings.MEDIA_ENDPOINT, document_root=settings.MEDIA_ROOT)

@@ -25,7 +25,8 @@
             half-increments
             length="5"
             size="20"
-            :value="2.5"
+            v-model="review.stars"
+            :value="review.stars"
           ></v-rating>
         </div>
         <v-textarea
@@ -38,7 +39,7 @@
           solo
         ></v-textarea>
         <div>
-          <button class="btnWormz mb-3" type="button">SUBMETER</button>
+          <button class="btnWormz mb-3" type="button" @click="submitReview()">SUBMETER</button>
         </div>
       </div>
     </v-card>
@@ -46,12 +47,37 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
+  props: ["book"],
   data() {
     return {
       review: {},
     };
   },
+  mounted(){
+    this.getReviews()
+  },
+  methods:{
+    submitReview(){
+      this.review.user = this.user.id
+      this.review.book = this.book.id
+
+      console.log(this.review)
+
+      this.$axios.post('post/review', JSON.stringify(this.review), {headers: {'Content-Type': 'application/json'}}).then(
+        response => {
+          console.log(response.data)
+        }
+      )
+    },
+
+    
+  },
+  computed:{
+    ...mapState("auth", ["user"])
+  }
 };
 </script>
 

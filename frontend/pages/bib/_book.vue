@@ -66,7 +66,7 @@
                 <span class="h3">Comentários</span>
             </p>
         <div class="user-review d-flex">
-            <ReviewAction />
+            <ReviewAction :book="book" />
         </div>
         <div class="show-reviews mt-10 mb-10">
             <ReviewView />
