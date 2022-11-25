@@ -56,9 +56,6 @@ export default {
       review: {},
     };
   },
-  mounted(){
-    this.getReviews()
-  },
   methods:{
     submitReview(){
       this.review.user = this.user.id
@@ -72,7 +69,7 @@ export default {
         }
       )
     },
-
+    
     
   },
   computed:{

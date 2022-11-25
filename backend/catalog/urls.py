@@ -42,7 +42,8 @@ urlpatterns = [
     path('get/book/<int:id>', BookViewSet.getBook, name="getBook"),
     path('get/book/search/<slug:search>', BookViewSet.getSearch, name ="search"),
 
-    path('post/review', ReviewViewSet.submitReview, name="submitReview")
+    path('post/review', ReviewViewSet.submitReview, name="submitReview"),
+    path('get/reviews/<int:id>', ReviewViewSet.getReviews, name="getReviews")
   
     ]
 urlpatterns += static(settings.MEDIA_ENDPOINT, document_root=settings.MEDIA_ROOT)

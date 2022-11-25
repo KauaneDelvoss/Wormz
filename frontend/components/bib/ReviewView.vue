@@ -19,7 +19,7 @@
           ></v-rating>
         </v-row>
 
-        <div class="subtitulo reading-text mt-3"> {{ review.description }} </div>
+        <div class="subtitulo reading-text mt-3"> {{ review.comment }} </div>
       </div>
 
       <v-divider class="divider" />
@@ -29,15 +29,7 @@
 
 <script>
 export default {
-  data(){
-    return{
-      reviews: [
-        { id: 0, stars: 4.5, user: 'coffeau', description: 'muito bom muito bom' },
-        { id: 1, stars: 3.5, user: 'duds', description: 'me fez pensar bastante' },
-        { id: 2, stars: 4.0, user: 'marco', description: 'um dos melhores que li este ano' },
-      ]
-    }
-  }
+  props: ["reviews"]
 }
 </script>
 

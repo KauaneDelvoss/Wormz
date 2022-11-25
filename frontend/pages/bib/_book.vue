@@ -69,7 +69,7 @@
             <ReviewAction :book="book" />
         </div>
         <div class="show-reviews mt-10 mb-10">
-            <ReviewView />
+            <ReviewView :reviews="reviews" />
         </div>
     </div>
 
@@ -89,19 +89,29 @@ export default {
   data() {
     return {
       open: false,
+      reviews: {}
     };
   },
   mounted() {
     const id = this.$router.currentRoute.params.id;
     // this.$store.dispatch("book/GET_URL", id);
     this.GET_BOOK(id)
+    this.getReviews()
 
   },
   computed: {
     ...mapState("book", ["book"]),
   },
   methods:{
-    ...mapActions("book", ["GET_BOOK"])
+    ...mapActions("book", ["GET_BOOK"]),
+    getReviews(){
+      this.$axios.$get('get/reviews/' + this.book.id).then(
+        response => {
+          console.log(response)
+          this.reviews = response
+        }
+      )
+    }
   }
 };
 </script>

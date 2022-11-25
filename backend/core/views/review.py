@@ -3,6 +3,7 @@ from django.http.response import HttpResponse
 
 from core.models.review import Review, User, Book
 from core.serializers import ReviewSerializer
+from rest_framework.renderers import JSONRenderer
 
 import json
 
@@ -28,3 +29,13 @@ class ReviewViewSet(ModelViewSet):
         review.save()
 
         return HttpResponse("Review cadastrada com sucesso!")
+
+    def getReviews(request, id):
+        book = Book.objects.get(pk = id)
+        reviews = Review.objects.filter(book = book)
+
+        data = (ReviewSerializer(reviews, many=True)).data
+        json = JSONRenderer().render(data)
+        return HttpResponse(json, content_type="text/json-comment-filtered")
+
+        # colocar nome do user no json (esta indo so o id)
