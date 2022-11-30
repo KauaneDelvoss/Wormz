@@ -19,52 +19,34 @@
           "
         >
           <div class="d-flex flex-column">
-            <div class="subtitulo reading-text">{{ snip }}</div>
+            <div class="subtitulo reading-text">{{ pergunta_um.snip }}</div>
             <div class="subtitulo little justify-self-end">
               {{ book }} - {{ author }}
             </div>
           </div>
-          <div class="d-flex justify-space-around" style="width: 100%">
-            <div class="radio-box d-flex align-center flex-column">
-              <div class="subtitulo mb-2">Não gostei</div>
+          <div v-for="radio in pergunta_um.radios" :key="radio.id" class="justify-content">
+
+
+            <div class="radio-box d-flex  flex-row">
               <v-icon
-                small
-                class="v-icon-item"
-                v-if="selected == 1"
-                @click="selected = 1"
-                >mdi-circle-slice-8</v-icon
+              small
+              class="v-icon-item"
+              v-if="pergunta_um.selected == radio.id"
+              @click="pergunta_um.selected = radio.id"
+              >mdi-circle-slice-8</v-icon
               >
-              <v-icon small class="v-icon-item" v-else @click="selected = 1"
-                >mdi-circle-outline</v-icon
+              <v-icon small class="v-icon-item" v-else @click="pergunta_um.selected = radio.id"
+              >mdi-circle-outline</v-icon
               >
+              <div class="subtitulo mb-2"
+               >{{radio.subtitle}}</div>
             </div>
-            <div class="radio-box d-flex align-center flex-column">
-              <div class="subtitulo mb-2">Não tenho certeza</div>
-              <v-icon
-                small
-                class="v-icon-item"
-                v-if="selected == 2"
-                @click="selected = 2"
-                >mdi-circle-slice-8</v-icon
-              >
-              <v-icon small class="v-icon-item" v-else @click="selected = 2"
-                >mdi-circle-outline</v-icon
-              >
-            </div>
-            <div class="radio-box d-flex align-center flex-column">
-              <div class="subtitulo mb-2">Gostei!</div>
-              <v-icon
-                small
-                class="v-icon-item"
-                v-if="selected == 3"
-                @click="selected = 3"
-                >mdi-circle-slice-8</v-icon
-              >
-              <v-icon small class="v-icon-item" v-else @click="selected = 3"
-                >mdi-circle-outline</v-icon
-              >
-            </div>
+
+          </div >
+          <div>
+              informações: {{pergunta_um}}
           </div>
+
         </div>
       </div>
     </div>
@@ -78,12 +60,33 @@ export default {
   components: { ImgBackground },
   data() {
     return {
-      id: "",
-      question_id: 10,
-      snip: "Aqui vai o texto",
+
+      pergunta_um: {
+        id : 1,
+        snip: "Quantas páginas você gostaria de ler?",
+        selected: "",
+        radios : [
+        {
+        id: 1,
+        subtitle: "30 páginas"
+        },
+        {
+        id: 2,
+        subtitle: "100 páginas"
+        },
+        {
+        id: 3,
+        subtitle: "300 páginas"
+        }, ],
+
+      },
+      question_id: 1,
+
+
+
       book: "Um título",
       author: "Um autor",
-      selected: 0,
+      // Não vamos conseguir usar autor e livro, serão perguntas técnicas
     };
   },
   mounted() {
