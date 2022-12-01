@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from yaml import serialize
 from core import serializers
 from core.models.book import Book
+from media.models.image import Image
 from core.serializers import BookshelfSerializer, BookSerializer
 
 from core.models import User
@@ -51,8 +52,18 @@ class BookshelfViewSet(ModelViewSet):
     def getBookshelves(request, user_username):
         user_id = User.objects.get(username = user_username).id
         bookshelves = (Bookshelf.objects.filter(user = user_id)).values()
-
         data = list(bookshelves)  
+
+        for item in data:
+            books = list((Book.objects.filter(bookshelf = item["id"])).values())
+            
+            # capa não está retornando capa.url 
+            for book in books:
+                capa = list((Image.objects.filter(pk = book["capa_id"])).values())
+                book.update(capa = capa)
+
+            item.update(book = books)
+
         return JsonResponse(data, safe=False) 
 
 
