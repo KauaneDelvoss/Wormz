@@ -9,6 +9,7 @@ from core import serializers
 from core.models.book import Book
 from media.models.image import Image
 from core.serializers import BookshelfSerializer, BookSerializer
+from media.serializers import ImageSerializer
 
 from core.models import User
 from core.models import Bookshelf, bookshelf
@@ -55,13 +56,7 @@ class BookshelfViewSet(ModelViewSet):
         data = list(bookshelves)  
 
         for item in data:
-            books = list((Book.objects.filter(bookshelf = item["id"])).values())
-            
-            # capa não está retornando capa.url 
-            for book in books:
-                capa = list((Image.objects.filter(pk = book["capa_id"])).values())
-                book.update(capa = capa)
-
+            books = BookSerializer(Book.objects.filter(bookshelf = item["id"]), many=True).data
             item.update(book = books)
 
         return JsonResponse(data, safe=False) 
