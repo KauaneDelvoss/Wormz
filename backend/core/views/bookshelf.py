@@ -98,11 +98,20 @@ class BookshelfViewSet(ModelViewSet):
         return HttpResponse("Estantes atualizadas com sucesso!")
         
 
-    def removeBookshelf():
-        pass
+    def editBookshelf(request):
+        body = json.loads(request.body)
+        print(body)
+        bookshelf = Bookshelf.objects.get(pk = body["id"])
+        bookshelf.bookshelf_name = body["bookshelf_name"]
+        bookshelf.booshelf_desc = body["bookshelf_desc"]
+        bookshelf.save()
+
+        return HttpResponse("Estante atualizada com sucesso!")
 
 
 
+    def deleteBookshelf(request, id_bookshelf):
+        bookshelf = Bookshelf.objects.get(pk = id_bookshelf)
+        bookshelf.delete()
 
-    def deleteBookshelf():
-        pass
+        return HttpResponse("Estante deletada com sucesso!")

@@ -38,6 +38,7 @@ urlpatterns = [
     #path('delete/bookshelf', BookshelfViewSet.deleteBookshelf, name="deleteBookshelf"),
     path('get/<slug:user_username>/bookshelf', BookshelfViewSet.getBookshelves, name="getBookshelves"),
     path('get/<slug:user_username>/bookshelf/<int:id>', BookshelfViewSet.getBookshelf, name="getBookshelf"),
+    path('post/editBookshelf', BookshelfViewSet.editBookshelf, name="editBookshelf"),
 
     path('get/book/<int:id>', BookViewSet.getBook, name="getBook"),
     path('get/book/search/<slug:search>', BookViewSet.getSearch, name ="search"),
