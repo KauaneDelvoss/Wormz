@@ -10,7 +10,7 @@
         
         <div class="d-flex me-5 mt-2 align-center">
           <v-icon class="icon v-icon-item me-4" @click="dialog = true">mdi-playlist-edit</v-icon>
-          <v-icon class="icon delete-button v-icon-item">mdi-trash-can-outline</v-icon>
+          <v-icon class="icon delete-button v-icon-item" @click="deleteBookshelf()">mdi-trash-can-outline</v-icon>
         </div>
     </v-row>
 
@@ -45,12 +45,22 @@ export default {
     this.getBookshelf({ user: this.user.username, id: this.id })
   },
   methods: {
+    ...mapActions('bookshelf', ["GET_BOOKSHELVES"]),
     getBookshelf(payload){
       this.$axios.get('/get/' + payload.user + '/bookshelf/' + payload.id).then(
             response => {
                 this.bookshelf = response.data
             }
         )
+    },
+    deleteBookshelf(){
+      this.$axios.get('/delete/bookshelf/' + this.id).then(
+        response => {
+          this.bookshelf = response.data
+          this.GET_BOOKSHELVES(this.user.username)
+          this.$router.push({path: '/userBib'})
+        }
+      )
     }
   },
   computed: {

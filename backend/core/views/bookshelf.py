@@ -109,9 +109,8 @@ class BookshelfViewSet(ModelViewSet):
         return HttpResponse("Estante atualizada com sucesso!")
 
 
-
-    def deleteBookshelf(request, id_bookshelf):
-        bookshelf = Bookshelf.objects.get(pk = id_bookshelf)
+    def deleteBookshelf(request, id):
+        bookshelf = Bookshelf.objects.get(pk = id)
         bookshelf.delete()
 
         return HttpResponse("Estante deletada com sucesso!")
