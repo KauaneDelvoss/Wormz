@@ -53,11 +53,16 @@ export default {
       console.log(this.book)
     },
   methods:{
-    ...mapActions('bookshelf', ["GET_BOOKSHELVES", "ADD_TO_BOOKSHELF"])
+    ...mapActions('bookshelf', ["GET_BOOKSHELVES", "ADD_TO_BOOKSHELF"]) 
+    // Mapeando as funções lá da store
+    // Vou fazer o quizz nos methods, ou seja, actions
+    //Mutations vem aqui tb
   },
   computed: {
     ...mapState('bookshelf', ["bookshelf", "bookshelves"]),
     ...mapState('auth', ["user"])
+    // Aqui vão os getters também
+
   }
 }
 </script>

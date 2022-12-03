@@ -38,7 +38,9 @@ export const actions = {
           const bookshelfResponse = (await this.$axios.post('/bookshelf/create', JSON.stringify(bookshelf), {headers: {'Content-Type': 'application/json'}})).data
           console.log(bookshelfResponse)
 
-          dispatch("GET_BOOKSHELVES", bookshelf.user.username)
+          dispatch("GET_BOOKSHELVES", bookshelf.user.username) 
+        //   Dispacth serve para chamar uma action
+        // Primeiro passa o método e depois passa o parâmetro
 
 
         } catch(e) {
