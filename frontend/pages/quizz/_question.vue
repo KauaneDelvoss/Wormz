@@ -18,33 +18,39 @@
             py-10
           "
         >
-          <div class="d-flex flex-column">
-            <div class="subtitulo reading-text">{{ pergunta_um.snip }}</div>
-            <div class="subtitulo little justify-self-end">
-              {{ book }} - {{ author }}
+          <div class="d-flex flex-column ">
+            <div class="subtitulo little justify-self-end" v-for="pergunta in perguntas"  v-show:key="(pergunta.id ==  question_id)" >
+              <h1>
+                {{ pergunta.book }} - {{ pergunta.author }}
+              </h1>
+              <h3>
+                {{ pergunta.snip }}
+              </h3>
             </div>
           </div>
-          <div v-for="radio in pergunta_um.radios" :key="radio.id" class="justify-content">
+          <div v-for="resposta in respostas" :key="resposta.id" class="justify-content">
+          
 
-
-            <div class="radio-box d-flex  flex-row">
+            <div class="radio-box d-flex  flex-row" >
               <v-icon
               small
               class="v-icon-item"
-              v-if="pergunta_um.selected == radio.id"
-              @click="pergunta_um.selected = radio.id"
+              v-if="perguntas[question_id-1].selected == resposta.id"
+              @click="perguntas[question_id].selected = resposta.id"
               >mdi-circle-slice-8</v-icon
               >
-              <v-icon small class="v-icon-item" v-else @click="pergunta_um.selected = radio.id"
+              <v-icon small class="v-icon-item" v-else @click="perguntas[question_id-1].selected = resposta.id"
               >mdi-circle-outline</v-icon
               >
               <div class="subtitulo mb-2"
-               >{{radio.subtitle}}</div>
+               >{{resposta.subtitle}}</div>
             </div>
 
           </div >
           <div>
-              informações: {{pergunta_um}}
+            <button type="button" class="btnWormz mt-5 green" @click="proximo() ">proximo</button>
+
+            informações: {{question_id}} {{perguntas[question_id-1].selected}}
           </div>
 
         </div>
@@ -61,34 +67,108 @@ export default {
   data() {
     return {
 
-      pergunta_um: {
+      question_id: 1,
+      genres: [
+        {name: "fantasia", contador: 0},
+        {name: "ficcao", contador: 0},
+        {name: "filosofia", contador: 0}
+
+      ],
+
+      respostas: [
+        { id: 1, subtitle:"Gostei"},
+        { id: 2, subtitle: "Não tenho certeza"},
+        { id: 3, subtitle: "Não gostei"}
+      ],
+      
+      perguntas:  [ {
         id : 1,
-        snip: "Quantas páginas você gostaria de ler?",
+        snip: "O que você acha da seguinte história: Ela roubou uma vida. Agora deve pagar com o coração. Acompanhe as aventuras de Feyre pelo perigoso e deslumbrante mundo das fadas. ",
         selected: "",
-        radios : [
-        {
-        id: 1,
-        subtitle: "30 páginas"
-        },
-        {
-        id: 2,
-        subtitle: "100 páginas"
-        },
-        {
-        id: 3,
-        subtitle: "300 páginas"
-        }, ],
+        book: "Corte de Espinhos e Rosas",
+        author: "Sarah J. Maas",
+        genres: "fantasia"
 
       },
-      question_id: 1,
+      {
+        id : 2,
+        snip: "fdgdia: Ela roubou uma vida. Agora deve pagar com o coração. Acompanhe as aventuras de Feyre pelo perigoso e deslumbrante mundo das fadas. ",
+        selected: "",
+        book: "Outra coisa ne",
+        author: "blz",
+        genres: "fantasia"
 
+      },
+      {
+        id : 3,
+        snip: "fdgdia: Ela roubou uma vida. Agora deve pagar com o coração. Acompanhe as aventuras de Feyre pelo perigoso e deslumbrante mundo das fadas. ",
+        selected: "",
+        book: "Outra coisa ne",
+        author: "blz",
+        genres: "ficcao"
 
+      },
+      {
+        id : 4,
+        snip: "fdgdia: Ela roubou uma vida. Agora deve pagar com o coração. Acompanhe as aventuras de Feyre pelo perigoso e deslumbrante mundo das fadas. ",
+        selected: "",
+        book: "Outra coisa ne",
+        author: "blz",
+        genres: "ficcao"
 
-      book: "Um título",
-      author: "Um autor",
-      // Não vamos conseguir usar autor e livro, serão perguntas técnicas
+      },
+      {
+        id : 5,
+        snip: "fdgdia: Ela roubou uma vida. Agora deve pagar com o coração. Acompanhe as aventuras de Feyre pelo perigoso e deslumbrante mundo das fadas. ",
+        selected: "",
+        book: "Outra coisa ne",
+        author: "blz",
+        genres: ""
+
+      },
+    ]
+      
     };
   },
+  methods: {
+    proximo() {
+      if (this.perguntas[this.question_id-1].selected === this.respostas[0].id ){ 
+        var g =  this.perguntas[this.question_id-1].genres; //descobrindo o gênero da pergunta
+        console.log(this.respostas[0].id)
+        var result = this.genres.find(genre => {
+        if (genre.name === g) {
+          genre.contador += 1
+          // console.log(genre.contador)
+          // console.log(this.genres[0].contador)
+          return result
+        } //filtrando os gêneros por nome e adicionando um contador no gênero igual à const g (o gênero da pergunta).
+        else {
+        }  
+      })
+      }
+      else if (this.perguntas[this.question_id-1].selected === this.respostas[2].id ) {
+        var g =  this.perguntas[this.question_id-1].genres; //descobrindo o gênero da pergunta
+        // console.log(g)
+        console.log(this.respostas[2].id)
+        var result = this.genres.find(genre => {
+        if (genre.name === g) {
+
+          
+          genre.contador -= 1
+          // console.log(this.genres[0].contador)
+          // console.log(genre.contador)
+          return result
+        } //filtrando os gêneros por nome e adicionando um contador no gênero igual à const g (o gênero da pergunta).
+        else {
+        }  
+        })
+      
+      } else {}
+      console.log(this.genres[0].contador)
+      this.question_id += 1; //adicionando um marcador para trocar de pergunta
+    },
+  },
+
   mounted() {
     this.id = this.$router.currentRoute.params.id;
   },
