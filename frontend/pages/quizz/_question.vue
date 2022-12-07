@@ -49,9 +49,11 @@
           </div >
           <div>
             <button type="button" class="btnWormz mt-5 green" @click="proximo() ">proximo</button>
+            <button type="button" v-show="(question_id == 3)" class="btnWormz mt-5 green" @click="enviar() ">enviar</button>
 
             informações: {{question_id}} {{perguntas[question_id-1].selected}}
           </div>
+
 
         </div>
       </div>
@@ -68,6 +70,11 @@ export default {
     return {
 
       question_id: 1,
+      answer: {
+        user: 1,
+        cod_answer: 1 ,
+        cod_question: 1 ,
+      },
       genres: [
         {name: "fantasia", contador: 0},
         {name: "ficcao", contador: 0},
@@ -167,7 +174,17 @@ export default {
       console.log(this.genres[0].contador)
       this.question_id += 1; //adicionando um marcador para trocar de pergunta
     },
+    async enviar() {
+      try{
+            const quizResponse = (await this.$axios.post('/quizz/create', JSON.stringify(this.answer), {headers: {'Content-Type': 'application/json'}})).data
+            console.log(quizResponse)
+  
+          } catch(e) {
+              return Promise.reject(e) }
+  
+    },
   },
+
 
   mounted() {
     this.id = this.$router.currentRoute.params.id;
