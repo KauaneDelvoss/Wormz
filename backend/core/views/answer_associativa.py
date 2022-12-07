@@ -5,7 +5,7 @@ from django.http.response import HttpResponse
 from django.http import JsonResponse
 from rest_framework.viewsets import ModelViewSet
 
-from core.models import AnswerAssociativa, User
+from core.models import AnswerAssociativa, User, Answer, Question
 from core.serializers import AnswerAssociativaSerializer
 
 
@@ -22,15 +22,21 @@ class AnswerAssociativaViewSet(ModelViewSet):
         cod_answer = body["cod_answer"]
         cod_question = body["cod_question"]
         user = body["user"]
-
+        print(body)
         # print(user['id'])
         user = User.objects.get(pk = user)
+
         # user = User.objects.get(pk = user["id"])
         quiz = AnswerAssociativa.objects.create(
                     cod_resp_forms = user,
-                    cod_answer = cod_answer,
-                    cod_question = cod_question
+                    cod_answer = Answer.objects.get(status = cod_answer),
+                    cod_question = Question.objects.get(id = cod_question ) 
                 )
+
+        # quiz = Answer.objects.create(
+        #             text = "oi",
+        #             status = cod_answer
+        #         )
 
         quiz.save()
 
