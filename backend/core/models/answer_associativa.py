@@ -10,7 +10,7 @@ class AnswerAssociativa(models.Model) :
     cod_question = models.ForeignKey(Question,on_delete=models.PROTECT, null=False, blank=False) 
     
     def __str__(self) :
-        return self.cod_resp_forms
+        return "Formulario1"
 
     class Meta:
         verbose_name_plural = "AnswerAssociativa"
