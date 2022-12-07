@@ -1,11 +1,12 @@
 from django.db import models
 from .answer import Answer
+from .genre import Genre
 #from .resolves import Resolves
 
 class Question(models.Model) :
     text = models.CharField(max_length=500)
-    genres = models.CharField(max_length=100)
-    answer = models.ManyToManyField(Answer,related_name="answer_question")
+    genres = models.ManyToManyField(Genre, related_name="genres")
+    # answer = models.ManyToManyField(Answer,related_name="answer_question", null=True)
   #  answer = models.ManyToManyField(Resolves,related_name="answer_question")
 
     

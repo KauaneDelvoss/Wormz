@@ -39,6 +39,7 @@ urlpatterns = [
     path('api/media/', include(media_router.urls)),
 
     path('quizz/create', AnswerAssociativaViewSet.createQuiz, name="createQuiz"),
+    path('quizz/bookshelf', AnswerAssociativaViewSet.BookshelfQuiz, name="bookshelfQuiz"),
 
     path('bookshelf/create', BookshelfViewSet.createBookshelf, name="createBookshelf"),
     path('post/addBookshelf', BookshelfViewSet.addBookshelf, name="addBookshelf"),
