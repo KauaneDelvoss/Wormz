@@ -3,15 +3,8 @@ from rest_framework.viewsets import ModelViewSet
 from core.models import Book, Author, Genre
 from core.serializers import BookSerializer, AuthorSerializer
 
-#from rest_framework.viewsets import ModelViewSet
-#from rest_framework.permissions import IsAuthenticated
-
-# from django.contrib.auth.models import AbstractUser as DjangoAuthAdmin
-#from django.contrib.auth import get_user_model
-#from django.contrib.auth.models import Group
 from django.http.response import HttpResponse
 from rest_framework.renderers import JSONRenderer
-#from django.shortcuts import render
 
 
 class BookViewSet(ModelViewSet):

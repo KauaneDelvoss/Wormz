@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Author, Book, Bookshelf, Genre, User, Review, Form, Question, Resolves, Answer 
+from core.models import Author, Book, Bookshelf, Genre, User, Review, Form, Question, Resolves, Answer, AnswerAssociativa
 
 
 # Register your models here.
@@ -51,6 +51,7 @@ admin.site.register(Answer)
 admin.site.register(Question)
 admin.site.register(Form)
 admin.site.register(Resolves)
+admin.site.register(AnswerAssociativa)
 
 
 #admin.site.register(Own)
