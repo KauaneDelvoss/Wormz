@@ -38,6 +38,8 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/media/', include(media_router.urls)),
 
+    path('quizz/create', AnswerAssociativaViewSet.createQuiz, name="createQuiz"),
+
     path('bookshelf/create', BookshelfViewSet.createBookshelf, name="createBookshelf"),
     path('post/addBookshelf', BookshelfViewSet.addBookshelf, name="addBookshelf"),
     #path('delete/bookshelf', BookshelfViewSet.deleteBookshelf, name="deleteBookshelf"),
