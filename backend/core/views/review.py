@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from django.http.response import HttpResponse
+from django.http import JsonResponse
 
 from core.models.review import Review, User, Book
 from core.serializers import ReviewSerializer
@@ -19,23 +20,38 @@ class ReviewViewSet(ModelViewSet):
         comment = body["text"]
         stars = body["stars"]
 
-        review = Review.objects.create(
-            user = user,
-            book = book,
-            comment = comment,
-            stars = stars
-        )
+        search = Review.objects.get(book = book.id, user = user.id)
 
-        review.save()
+        if search:
+            search.comment = comment
+            search.stars = stars
+            
+            search.save()
 
-        return HttpResponse("Review cadastrada com sucesso!")
+            return HttpResponse("Review atualizada com sucesso!")
+
+        else:
+            review = Review.objects.create(
+                user = user,
+                book = book,
+                comment = comment,
+                stars = stars
+            )
+
+            review.save()
+
+            return HttpResponse("Review cadastrada com sucesso!")
+        
 
     def getReviews(request, id):
         book = Book.objects.get(pk = id)
-        reviews = Review.objects.filter(book = book)
+        reviews = list((Review.objects.filter(book = book)).values())
 
-        data = (ReviewSerializer(reviews, many=True)).data
-        json = JSONRenderer().render(data)
-        return HttpResponse(json, content_type="text/json-comment-filtered")
+        for item in reviews:
+            print(item)
+            user = list((User.objects.filter(pk = item["user_id"])).values())
+            item.update(user = {"username": user[0]["username"], "id": user[0]["id"]})
+
+        return JsonResponse(reviews, safe=False) 
 
         # colocar nome do user no json (esta indo so o id)

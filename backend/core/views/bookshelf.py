@@ -98,7 +98,6 @@ class BookshelfViewSet(ModelViewSet):
 
     def editBookshelf(request):
         body = json.loads(request.body)
-        print(body)
         bookshelf = Bookshelf.objects.get(pk = body["id"])
         bookshelf.bookshelf_name = body["bookshelf_name"]
         bookshelf.booshelf_desc = body["bookshelf_desc"]

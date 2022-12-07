@@ -28,9 +28,9 @@
             length="5"
             readonly
             size="20"
-            :value="2.5"
+            :value="reviewCount"
           ></v-rating>
-          <span class="subtitulo data">102 reviews</span>
+          <span class="subtitulo data">{{ reviews.length }} reviews</span>
         </v-row>
         <div class="mt-5">
           <button class="btnWormz" type="button" @click="open = true">
@@ -66,7 +66,7 @@
                 <span class="h3">Comentários</span>
             </p>
         <div class="user-review d-flex">
-            <ReviewAction :book="book" />
+            <ReviewAction @submitReview="getReviews()" :book="book" />
         </div>
         <div class="show-reviews mt-10 mb-10">
             <ReviewView :reviews="reviews" />
@@ -89,7 +89,8 @@ export default {
   data() {
     return {
       open: false,
-      reviews: {}
+      reviews: {},
+      reviewCount: 0
     };
   },
   mounted() {
@@ -111,6 +112,9 @@ export default {
           this.reviews = response
         }
       )
+    },
+    reviewCount(){
+      // vc esta aqui
     }
   }
 };

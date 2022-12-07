@@ -4,7 +4,7 @@
       <div class="review-card py-2">
         <v-row class="justify-space-between">
           <span class="subtitulo mt-3">
-            {{ review.user }}
+            {{ review.user.username }}
           </span>
           <v-rating
             class="rating"
@@ -29,7 +29,10 @@
 
 <script>
 export default {
-  props: ["reviews"]
+  props: ["reviews"],
+  mounted(){
+    console.log(this.reviews)
+  }
 }
 </script>
 
