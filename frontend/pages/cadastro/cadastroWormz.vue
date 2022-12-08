@@ -18,7 +18,7 @@
             "
           />
         </transition>
-        <div v-if="sliderValue == 2">
+        <!-- <div v-if="sliderValue == 2">
           <transition :name="transition">
             <ThirdSlider>
               <v-row style="gap: 2vw">
@@ -37,7 +37,7 @@
               </v-row>
             </ThirdSlider>
           </transition>
-        </div>
+        </div> -->
       </v-col>
 
       <v-col cols="6" class="m-5 mb-6 d-flex flex-column hide-mobile-xl">
@@ -80,7 +80,8 @@ export default {
       this.formData["first_name"] = e.first_name;
       this.formData["last_name"] = e.last_name;
       this.formData["user_biography"] = e.user_biography;
-      this.next();
+      this.SIGN_UP_USER(this.formData)
+      this.goTo()
     },
 
     goTo() {
