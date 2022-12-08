@@ -39,7 +39,7 @@
           solo
         ></v-textarea>
         <div>
-          <button class="btnWormz mb-3" type="button" @click="submitReview()">SUBMETER</button>
+          <button class="btnWormz mb-3" type="button" @click="(submitReview(), $emit('submitReview'))">SUBMETER</button>
         </div>
       </div>
     </v-card>

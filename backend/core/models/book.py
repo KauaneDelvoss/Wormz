@@ -12,6 +12,10 @@ class Book(models.Model):
     pages = models.IntegerField(null=True)
     author = models.ManyToManyField(Author, related_name="author_books")
     genre = models.ManyToManyField(Genre, related_name="genre_books")
+    link = models.CharField(max_length=200, null=True, default=None)
+    price = models.FloatField(null=True, default=None)
+
+
     capa = models.ForeignKey(Image, related_name="+",on_delete=models.CASCADE, null=True,blank=True,default=None)
 
     def __str__(self) :

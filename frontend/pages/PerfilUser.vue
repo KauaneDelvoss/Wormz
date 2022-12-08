@@ -17,13 +17,13 @@
             >
               <div class="h3 mobile ms-3">{{user.first_name}} {{user.last_name}}</div>
             </div>
-            <div
+            <!-- <div
               class="local-wrapper d-flex flex-row mt-3"
               style="opacity: 90%"
             >
               <v-icon class="v-icon-item">mdi-google-maps</v-icon>
               <div class="h3 mobile ms-3">Local</div>
-            </div>
+            </div> -->
           </v-col>
         </div>
       </ImgBackground>
@@ -58,10 +58,10 @@
         </div>
 
         <div v-if="active == 1">
-          <div class="h3 bookshelf-name margin-left-page mt-5">Favoritos</div>
-          <BooksCarousel carouselId="c2" :books="bookshelf"  /> <!-- erro ! (não aceita mais de um uso na pg)-->
-          <div class="h3 bookshelf-name margin-left-page mt-5">Dark Vibes</div>
-          <BooksCarousel carouselId="c3" :books="bookshelf" />
+          <div v-for="bookshelf in bookshelves" :key="bookshelf.id">
+            <div class="h3 bookshelf-name margin-left-page mt-5">{{ bookshelf.bookshelf_name }}</div>
+            <BooksCarousel v-if="bookshelf.book.length > 0" :carouselId="'c' + bookshelf.id" :books="bookshelf.book"  />
+          </div>
         </div>
 
         <div v-if="active == 2" class="margin-left-page margin-right-page">
@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import ReviewUser from '~/components/user/ReviewUser'
 
 export default {
@@ -103,10 +103,15 @@ export default {
   middleware: 'auth',
   mounted(){
     this.$store.dispatch("bib/GET_URL")
+    this.GET_BOOKSHELVES(this.user.username)
+    console.log(this.bookshelves)
+  },
+  methods:{
+    ...mapActions('bookshelf', ["GET_BOOKSHELVES"])
   },
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState('bib', ['bookshelf']),
+    ...mapState('bookshelf', ['bookshelves']),
     width(){
         switch (this.$vuetify.breakpoint.name) {
           case 'xs': return 200

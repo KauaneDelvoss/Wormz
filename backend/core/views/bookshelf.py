@@ -7,7 +7,9 @@ from django.http import JsonResponse
 from yaml import serialize
 from core import serializers
 from core.models.book import Book
+from media.models.image import Image
 from core.serializers import BookshelfSerializer, BookSerializer
+from media.serializers import ImageSerializer
 
 from core.models import User
 from core.models import Bookshelf, bookshelf
@@ -30,20 +32,18 @@ class BookshelfViewSet(ModelViewSet):
 
             user = User.objects.get(pk = user["id"])
 
-            bookshelf = Bookshelf.objects.filter(bookshelf_name=bookshelf_name).first()
+            # bookshelf = Bookshelf.objects.filter(bookshelf_name=bookshelf_name).first()
+        
 
-            if bookshelf:
-                return HttpResponse("Já existe uma estante com esse nome!")
-            else:
-                bookshelf = Bookshelf.objects.create(
-                    bookshelf_name=bookshelf_name,
-                    booshelf_desc=bookshelf_desc,
-                    user = user
-                )
+            bookshelf = Bookshelf.objects.create(
+                bookshelf_name=bookshelf_name,
+                booshelf_desc=bookshelf_desc,
+                user = user
+            )
 
-                bookshelf.save()
+            bookshelf.save()
 
-                return HttpResponse("Estante cadastrada com sucesso!")
+            return HttpResponse("Estante cadastrada com sucesso!")
 
         else:
             return HttpResponse("Algo deu errado.")
@@ -51,8 +51,12 @@ class BookshelfViewSet(ModelViewSet):
     def getBookshelves(request, user_username):
         user_id = User.objects.get(username = user_username).id
         bookshelves = (Bookshelf.objects.filter(user = user_id)).values()
-
         data = list(bookshelves)  
+
+        for item in data:
+            books = BookSerializer(Book.objects.filter(bookshelf = item["id"]), many=True).data
+            item.update(book = books)
+
         return JsonResponse(data, safe=False) 
 
 
@@ -92,11 +96,18 @@ class BookshelfViewSet(ModelViewSet):
         return HttpResponse("Estantes atualizadas com sucesso!")
         
 
-    def removeBookshelf():
-        pass
+    def editBookshelf(request):
+        body = json.loads(request.body)
+        bookshelf = Bookshelf.objects.get(pk = body["id"])
+        bookshelf.bookshelf_name = body["bookshelf_name"]
+        bookshelf.booshelf_desc = body["bookshelf_desc"]
+        bookshelf.save()
+
+        return HttpResponse("Estante atualizada com sucesso!")
 
 
+    def deleteBookshelf(request, id):
+        bookshelf = Bookshelf.objects.get(pk = id)
+        bookshelf.delete()
 
-
-    def deleteBookshelf():
-        pass
+        return HttpResponse("Estante deletada com sucesso!")
