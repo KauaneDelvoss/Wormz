@@ -4,8 +4,8 @@
       <div class="d-flex flex-column">
         <v-row class="justify-space-between mb-5">
           <v-icon large class="v-icon-item">mdi-arrow-left</v-icon>
-          <div class="h3">Questão {{ question_id }} de 10</div>
-          <v-icon v-if="question_id != 10" large class="v-icon-item"
+          <div class="h3">Questão {{ question_id }} de 5</div>
+          <v-icon v-if="question_id != 6" large class="v-icon-item"
             >mdi-arrow-right</v-icon
           >
           <v-icon v-else large class="v-icon-item">mdi-check-bold</v-icon>
@@ -20,7 +20,7 @@
             py-10
           "
         >
-          <div class="d-flex flex-column">
+          <div id="oi" class="d-flex flex-column" >
             <div
               class="subtitulo little justify-self-end"
               v-for="pergunta in perguntas"
@@ -38,7 +38,7 @@
             :key="resposta.id"
             class="justify-content"
           >
-            <div class="radio-box d-flex flex-row">
+            <div id="radio" class="radio-box d-flex flex-row">
               <v-icon
                 small
                 class="v-icon-item"
@@ -59,22 +59,20 @@
           <div>
             <button
               type="button"
-              class="btnWormz mt-5 green"
+              class="btnWormz"
+              v-show="(question_id < 5)"
               @click="proximo()"
             >
               proximo
             </button>
             <button
               type="button"
-              v-show="question_id == 5"
-              class="btnWormz mt-5 green"
-              @click="goTo()"
+              v-show="(question_id == 5)"
+              class="btnWormz"
+              @click="(proximo(), $router.push('/userBib'))"
             >
               enviar
             </button>
-
-            informações: {{ question_id }}
-            {{ answer_id }}
           </div>
         </div>
       </div>
@@ -90,13 +88,16 @@ export default {
   components: { ImgBackground },
   data() {
     return {
+      contador : 0,
       question_id: 1,
       answer_id: 0,
+      url : '',
       answer: {
         user: 0,
         cod_answer: 0,
-        cod_question: 0,
-        cod_forms: 1
+        cod_question: 1,
+        cod_forms: 1, //sem dinamicidade com o id do quizz ainda,
+        genre: ""
       },
       genres: [
         { name: "fantasia", contador: 0 },
@@ -120,7 +121,7 @@ export default {
         },
         {
           id: 2,
-          snip: "Seu tema central - um personagem que leva uma vida dupla, mantendo uma aparência de virtude enquanto se entrega ao hedonismo mais extremado e sua trama se vale de alguns dos traços que notabilizaram a melhor literatura de sua época, como a presença de elementos fantásticos e de grandes reflexões filosóficas, além do senso de humor sagaz e do sarcasmo implacável",
+          snip: "Seu tema central - um personagem que leva uma vida dupla, mantendo uma aparência de virtude enquanto se entrega ao hedonismo mais extremado, com a presença de elementos fantásticos e de grandes reflexões filosóficas, além do senso de humor sagaz e do sarcasmo implacável",
           book: "O Retrato de Dorian Gray",
           author: "Oscar Wilde",
           genres: "filosofia",
@@ -155,42 +156,35 @@ export default {
   methods: {
     proximo() {
       if (
-        this.perguntas[this.question_id - 1].selected === this.respostas[0].id
+        this.answer_id === this.respostas[0].id
       ) {
         var g = this.perguntas[this.question_id - 1].genres; //descobrindo o gênero da pergunta
-        console.log(this.respostas[0].id);
         var result = this.genres.find((genre) => {
           if (genre.name === g) {
             genre.contador += 1;
-            // console.log(genre.contador)
-            // console.log(this.genres[0].contador)
             return result;
           } //filtrando os gêneros por nome e adicionando um contador no gênero igual à const g (o gênero da pergunta).
           else {
           }
         });
       } else if (
-        this.perguntas[this.question_id - 1].selected === this.respostas[2].id
+        this.answer_id === this.respostas[2].id
       ) {
         var g = this.perguntas[this.question_id - 1].genres; //descobrindo o gênero da pergunta
-        // console.log(g)
-        console.log(this.respostas[2].id);
         var result = this.genres.find((genre) => {
           if (genre.name === g) {
             genre.contador -= 1;
-            // console.log(this.genres[0].contador)
-            // console.log(genre.contador)
             return result;
           } //filtrando os gêneros por nome e adicionando um contador no gênero igual à const g (o gênero da pergunta).
           else {
           }
         });
-      } else {
       }
-      console.log(this.genres[0].contador);
-      console.log(this.answer.cod_answer)
+      console.log("Fantasia: " +this.genres[0].contador);
+      console.log("Ficção: " + this.genres[1].contador);
+      console.log("Filosofia: " + this.genres[2].contador);
+      console.log("O resultado desses contadores fica no componente Vue. O que sobe para o banco é o id_pergunta + id_resposta + cod_form")
       this.enviar()
-      this.question_id += 1; //adicionando um marcador para trocar de pergunta
     },
     async enviar() {
       this.answer.cod_answer = this.answer_id;
@@ -206,15 +200,27 @@ export default {
       } catch (e) {
         return Promise.reject(e);
       }
+      this.question_id += 1; //adicionando contador para mudar de pergunta
     },
-  },
-  async bookshelfQuiz() {
+    bookshelfQuiz() {
 
+    //   this.answer.cod_answer = this.answer_id;
+    //   this.answer.cod_question = this.question_id;
+    //   this.answer.user = this.user.id;
+    //   // this.answer.genre = this.genres.maxKey()
+
+    //   const a = (this.$axios.post("/quizz/bookshelf", JSON.stringify(this.answer), {
+    //           headers: { "Content-Type": "application/json" },
+    //         })).data;
+    //       console.log(a)
+    // },  
+    
   },
 
   mounted() {
     this.id = this.$router.currentRoute.params.id;
   },
+}
 };
 </script>
 
@@ -224,7 +230,19 @@ export default {
     width: 90vw !important;
   }
 }
-
+  #oi {
+  padding: 0vh 2vw 0vh 2vw
+}
+.v-application .py-10 {
+    padding-top: 30px !important;
+    padding-bottom: 20px !important;
+    padding-left: 1vh;
+    padding-right: 1vh;
+}
+  #radio {
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+  }
 .question-quizz {
   height: 100vh;
 }
