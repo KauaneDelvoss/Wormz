@@ -27,7 +27,7 @@
           ></v-textarea>
               <v-row style="gap: 2vw">
                 <button type="button" class="btnWormz" @click="$emit('goBack')">VOLTAR</button>
-                <button type="button" class="btnWormz" @click="$emit('resultSecondForm', resultSecondForm)">PRÓXIMO</button>
+                <button type="button" class="btnWormz" @click="$emit('resultSecondForm', resultSecondForm)">CONCLUIR</button>
               </v-row>
           </div>
   </div>

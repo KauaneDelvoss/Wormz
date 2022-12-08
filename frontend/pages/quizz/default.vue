@@ -14,6 +14,7 @@
 import ImgBackground from "~/components/basic/ImgBackground";
 
 export default {
+  middleware: 'auth',
   components: { ImgBackground },
   methods: {
     newQuizz(){

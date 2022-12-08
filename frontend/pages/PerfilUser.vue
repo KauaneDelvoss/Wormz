@@ -94,6 +94,7 @@ import ReviewUser from '~/components/user/ReviewUser'
 
 export default {
   components: { ReviewUser },
+  middleware: 'auth',
   data() {
     return {
       items: ["OVERVIEW", "ESTANTES", "AVALIAÇÕES"],

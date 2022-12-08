@@ -85,6 +85,7 @@ import ReviewView from "~/components/bib/ReviewView";
 
 export default {
   layout: "bib",
+  middleware: 'auth',
   components: { BookShelfDialog, ReviewAction, ReviewView },
   data() {
     return {

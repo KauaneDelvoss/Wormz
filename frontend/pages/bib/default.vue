@@ -17,6 +17,7 @@ import MobileView from "~/pages/bib/homeMobile";
 export default {
   components: { MobileView },
   layout: "bib",
+  middleware: 'auth',
 };
 </script>
 

@@ -86,6 +86,7 @@ import { mapState } from "vuex";
 
 export default {
   components: { ImgBackground },
+  middleware: 'auth',
   data() {
     return {
       contador : 0,

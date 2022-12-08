@@ -48,6 +48,7 @@ import DialogEdit from "~/components/bib/DialogEdit";
 
 export default {
   layout: "bib",
+  middleware: 'auth',
   components: { ImgBookshelf, DialogEdit },
   data() {
     return {
