@@ -40,6 +40,7 @@ urlpatterns = [
 
     path('quizz/create', AnswerAssociativaViewSet.createQuiz, name="createQuiz"),
     path('quizz/bookshelf', AnswerAssociativaViewSet.BookshelfQuiz, name="bookshelfQuiz"),
+    path('quizz/createBookshelfQuiz', BookshelfViewSet.createBookshelfQuiz, name="createBookshelfQuiz"),
 
     path('bookshelf/create', BookshelfViewSet.createBookshelf, name="createBookshelf"),
     path('post/addBookshelf', BookshelfViewSet.addBookshelf, name="addBookshelf"),
