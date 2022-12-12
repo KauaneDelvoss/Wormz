@@ -69,7 +69,7 @@
               type="button"
               v-show="(question_id == 5)"
               class="btnWormz"
-              @click="(proximo(), $router.push('/userBib'))"
+              @click="(proximo(), $router.push('/userBib'),bookshelfQuiz())"
             >
               enviar
             </button>
@@ -184,7 +184,6 @@ export default {
       console.log("Fantasia: " +this.genres[0].contador);
       console.log("Ficção: " + this.genres[1].contador);
       console.log("Filosofia: " + this.genres[2].contador);
-      console.log("O resultado desses contadores fica no componente Vue. O que sobe para o banco é o id_pergunta + id_resposta + cod_form")
       this.enviar()
     },
     async enviar() {
@@ -201,27 +200,28 @@ export default {
       } catch (e) {
         return Promise.reject(e);
       }
+      console.log("O resultado desses contadores fica no componente Vue. O que sobe para o banco é o id_pergunta + id_resposta + cod_form")
       this.question_id += 1; //adicionando contador para mudar de pergunta
     },
     bookshelfQuiz() {
 
-    //   this.answer.cod_answer = this.answer_id;
-    //   this.answer.cod_question = this.question_id;
-    //   this.answer.user = this.user.id;
-    //   // this.answer.genre = this.genres.maxKey()
+      this.answer.cod_answer = this.answer_id;
+      this.answer.cod_question = this.question_id;
+      this.answer.user = this.user.id;
+      this.answer.genre = "fantasia"
 
-    //   const a = (this.$axios.post("/quizz/bookshelf", JSON.stringify(this.answer), {
-    //           headers: { "Content-Type": "application/json" },
-    //         })).data;
-    //       console.log(a)
-    // },  
+      const a = (this.$axios.post("/quizz/bookshelf", JSON.stringify(this.answer), {
+              headers: { "Content-Type": "application/json" },
+            })).data;
+          console.log(a)
+    },  
     
   },
 
   mounted() {
     this.id = this.$router.currentRoute.params.id;
   },
-}
+
 };
 </script>
 

@@ -56,6 +56,7 @@ export default {
   },
   mounted(){
     this.bookshelf_local.id = this.bookshelf.id
+    console.log(this.bookshelf)
   },
   methods:{
     editBookshelf(){
