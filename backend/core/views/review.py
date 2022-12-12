@@ -20,27 +20,27 @@ class ReviewViewSet(ModelViewSet):
         comment = body["text"]
         stars = body["stars"]
 
-        search = Review.objects.get(book = book.id, user = user.id)
+        # search = Review.objects.get(book = book.id, user = user.id)
 
-        if search:
-            search.comment = comment
-            search.stars = stars
+        # if search:
+        #     search.comment = comment
+        #     search.stars = stars
             
-            search.save()
+        #     search.save()
 
-            return HttpResponse("Review atualizada com sucesso!")
+        #     return HttpResponse("Review atualizada com sucesso!")
 
-        else:
-            review = Review.objects.create(
-                user = user,
-                book = book,
-                comment = comment,
-                stars = stars
-            )
+        # else:
+        review = Review.objects.create(
+            user = user,
+            book = book,
+            comment = comment,
+            stars = stars
+        )
 
-            review.save()
+        review.save()
 
-            return HttpResponse("Review cadastrada com sucesso!")
+        return HttpResponse("Review cadastrada com sucesso!")
         
 
     def getReviews(request, id):
