@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -10,10 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-2^*@c)$%s@b9duf+qu2gax@ox6#1z&0t=&(^xmep64+ehr5cea"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in productio
 
 ALLOWED_HOSTS = [
     '*'
@@ -67,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'catalog.wsgi.application'
+WSGI_APPLICATION = 'catalog.wsgi.application'
 
 
 # Database
@@ -140,3 +139,11 @@ MEDIA_URL = "http://localhost:8000/media/"
 MEDIA_ENDPOINT = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_files/")
 FILE_UPLOAD_PERMISSIONS = 0o640
+
+env = environ.Env()
+environ.Env.read_env((os.path.join(BASE_DIR, '.env')))
+
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+DATABASES = {'default': env.db()}
